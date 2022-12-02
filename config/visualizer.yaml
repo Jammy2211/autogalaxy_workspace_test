@@ -1,0 +1,889 @@
+general:
+  analysis:
+    n_cores: 1
+    preload_attempts: 250
+  fits:
+    flip_for_ds9: true
+  grid:
+    remove_projected_centre: false
+  hpc:
+    hpc_mode: false
+    iterations_per_update: 5000
+  hyper:
+    hyper_minimum_percent: 0.01
+    hyper_noise_limit: 100000000.0
+    stochastic_outputs: false
+  model:
+    ignore_prior_limits: false
+  numba:
+    cache: true
+    nopython: true
+    parallel: false
+    use_numba: true
+  output:
+    force_pickle_overwrite: false
+    identifier_version: 4
+    info_whitespace_length: 80
+    log_file: output.log
+    log_level: INFO
+    log_to_file: false
+    model_results_decimal_places: 3
+    remove_files: false
+    samples_to_csv: false
+  parallel:
+    warn_environment_variables: true
+  pixelization:
+    voronoi_nn_max_interpolation_neighbors: 100
+  profiling:
+    parallel_profile: false
+    repeats: 1
+    should_profile: false
+  structures:
+    use_dataset_grids: true
+  test:
+    check_figure_of_merit_sanity: false
+    check_preloads: false
+    disable_positions_lh_inversion_check: false
+grids:
+  radial_minimum:
+    radial_minimum:
+      Chameleon: 1.0e-08
+      ChameleonSph: 1.0e-08
+      DevVaucouleurs: 1.0e-06
+      DevVaucouleursSph: 1.0e-06
+      ElsonFreeFall: 1.0e-08
+      ElsonFreeFallSph: 1.0e-08
+      Exponential: 1.0e-06
+      ExponentialCore: 1.0e-06
+      ExponentialCoreSph: 1.0e-06
+      ExponentialRadialGradient: 1.0e-06
+      ExponentialSph: 1.0e-06
+      ExternalShear: 1.0e-08
+      Gaussian: 1.0e-08
+      GaussianSph: 1.0e-08
+      Isothermal: 1.0e-08
+      IsothermalCore: 1.0e-08
+      IsothermalCoreSph: 1.0e-08
+      IsothermalInitialize: 1.0e-08
+      IsothermalSph: 1.0e-08
+      MassSheet: 1.0e-08
+      Moffat: 1.0e-08
+      MoffatSph: 1.0e-08
+      NFW: 1.0e-06
+      NFWMCRDuffySph: 1.0e-06
+      NFWMCRLudlowSph: 1.0e-06
+      NFWMCRScatterLudlow: 1.0e-06
+      NFWMCRScatterLudlowSph: 1.0e-06
+      NFWSph: 1.0e-06
+      NFWTruncatedMCRDuffySph: 1.0e-06
+      NFWTruncatedMCRLudlowSph: 1.0e-06
+      NFWTruncatedMCRScatterLudlowSph: 1.0e-06
+      NFWTruncatedSph: 1.0e-06
+      PointMass: 1.0e-08
+      PowerLaw: 1.0e-08
+      PowerLawBroken: 1.0e-08
+      PowerLawBrokenSph: 1.0e-08
+      PowerLawCore: 1.0e-08
+      PowerLawCoreSph: 1.0e-08
+      PowerLawSph: 1.0e-08
+      Sersic: 1.0e-06
+      SersicCore: 1.0e-06
+      SersicCoreSph: 1.0e-06
+      SersicRadialGradient: 1.0e-06
+      SersicRadialGradientSph: 1.0e-06
+      SersicSph: 1.0e-06
+      SphExponentialRadialGradient: 1.0e-06
+      gNFW: 1.0e-06
+      gNFWMCRLudlow: 1.0e-06
+      gNFWSph: 1.0e-06
+logging:
+  disable_existing_loggers: false
+  formatters:
+    formatter:
+      format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: formatter
+      level: INFO
+      stream: ext://sys.stdout
+    file:
+      class: logging.FileHandler
+      filename: root.log
+      formatter: formatter
+      level: INFO
+  root:
+    handlers:
+    - console
+    - file
+    level: DEBUG
+  version: 1
+non_linear:
+  GridSearch:
+    general:
+      number_of_cores: 1
+      step_size: 0.1
+  mcmc:
+    Emcee:
+      auto_correlations:
+        change_threshold: 0.01
+        check_for_convergence: true
+        check_size: 100
+        required_length: 50
+      initialize:
+        ball_lower_limit: 0.49
+        ball_upper_limit: 0.51
+        method: ball
+      parallel:
+        number_of_cores: 1
+      printing:
+        silence: false
+      prior_passer:
+        sigma: 3.0
+        use_errors: true
+        use_widths: true
+      run:
+        nsteps: 2000
+      search:
+        nwalkers: 50
+      updates:
+        iterations_per_update: 2500
+        log_every_update: 1
+        model_results_every_update: 1
+        remove_state_files_at_end: true
+        visualize_every_update: 1
+    Zeus:
+      auto_correlations:
+        change_threshold: 0.01
+        check_for_convergence: true
+        check_size: 100
+        required_length: 50
+      initialize:
+        ball_lower_limit: 0.49
+        ball_upper_limit: 0.51
+        method: ball
+      parallel:
+        number_of_cores: 1
+      printing:
+        silence: false
+      prior_passer:
+        sigma: 3.0
+        use_errors: true
+        use_widths: true
+      run:
+        check_walkers: true
+        light_mode: false
+        maxiter: 10000
+        maxsteps: 10000
+        mu: 1.0
+        nsteps: 2000
+        patience: 5
+        shuffle_ensemble: true
+        tolerance: 0.05
+        tune: true
+        vectorize: false
+      search:
+        nwalkers: 50
+      updates:
+        iterations_per_update: 500
+        log_every_update: 1
+        model_results_every_update: 1
+        remove_state_files_at_end: true
+        visualize_every_update: 1
+  nest:
+    DynestyDynamic:
+      initialize:
+        method: prior
+      printing:
+        silence: false
+      run:
+        dlogz_init: 0.01
+        logl_max_init: .inf
+        maxcall: null
+        maxcall_init: null
+        maxiter: null
+        maxiter_init: null
+        n_effective: .inf
+        n_effective_init: .inf
+        nlive_init: 500
+      search:
+        bootstrap: null
+        bound: multi
+        enlarge: null
+        facc: 0.2
+        first_update: null
+        fmove: 0.9
+        max_move: 100
+        sample: rwalk
+        slices: 5
+        update_interval: null
+        walks: 5
+      updates:
+        iterations_per_update: 2500
+        log_every_update: 1
+        model_results_every_update: 1
+        remove_state_files_at_end: true
+        visualize_every_update: 1
+    DynestyStatic:
+      initialize:
+        method: prior
+      printing:
+        silence: false
+      run:
+        dlogz: null
+        logl_max: .inf
+        maxcall: null
+        maxiter: null
+        n_effective: null
+      search:
+        bootstrap: null
+        bound: multi
+        enlarge: null
+        facc: 0.2
+        first_update: null
+        fmove: 0.9
+        max_move: 100
+        nlive: 50
+        sample: rwalk
+        slices: 5
+        update_interval: null
+        walks: 5
+      updates:
+        iterations_per_update: 5000
+        log_every_update: 1
+        model_results_every_update: 1
+        remove_state_files_at_end: true
+        visualize_every_update: 1
+    UltraNest:
+      initialize:
+        method: prior
+      parallel:
+        number_of_cores: 1
+      printing:
+        silence: false
+      prior_passer:
+        sigma: 3.0
+        use_errors: true
+        use_widths: true
+      run:
+        Lepsilon: 0.001
+        cluster_num_live_points: 40
+        dKL: 0.5
+        dlogz: 0.5
+        frac_remain: 0.01
+        insertion_test_window: 10
+        insertion_test_zscore_threshold: 2
+        log_interval: null
+        max_iters: null
+        max_ncalls: null
+        max_num_improvement_loops: -1.0
+        min_ess: 400
+        min_num_live_points: 400
+        show_status: true
+        update_interval_ncall: null
+        update_interval_volume_fraction: 0.8
+        viz_callback: auto
+      search:
+        draw_multiple: true
+        ndraw_max: 65536
+        ndraw_min: 128
+        num_bootstraps: 30
+        num_test_samples: 2
+        resume: true
+        run_num: null
+        storage_backend: hdf5
+        vectorized: false
+        warmstart_max_tau: -1.0
+      stepsampler:
+        adaptive_nsteps: false
+        log: false
+        max_nsteps: 1000
+        nsteps: 25
+        region_filter: false
+        scale: 1.0
+        stepsampler_cls: null
+      updates:
+        iterations_per_update: 5000
+        log_every_update: 1
+        model_results_every_update: 1
+        remove_state_files_at_end: true
+        visualize_every_update: 1
+  optimize:
+    Drawer:
+      initialize:
+        ball_lower_limit: 0.49
+        ball_upper_limit: 0.51
+        method: ball
+      printing:
+        silence: false
+      prior_passer:
+        sigma: 3.0
+        use_errors: true
+        use_widths: true
+      search:
+        total_draws: 50
+      updates:
+        iterations_per_update: 500
+        log_every_update: 1
+        model_results_every_update: 1
+        remove_state_files_at_end: true
+        visualize_every_update: 1
+    PySwarmsGlobal:
+      initialize:
+        ball_lower_limit: 0.49
+        ball_upper_limit: 0.51
+        method: ball
+      parallel:
+        number_of_cores: 1
+      printing:
+        silence: false
+      prior_passer:
+        sigma: 3.0
+        use_errors: true
+        use_widths: true
+      run:
+        iters: 2000
+      search:
+        cognitive: 0.5
+        ftol: -.inf
+        inertia: 0.9
+        n_particles: 50
+        social: 0.3
+      updates:
+        iterations_per_update: 2500
+        log_every_update: 1
+        model_results_every_update: 1
+        remove_state_files_at_end: true
+        visualize_every_update: 1
+    PySwarmsLocal:
+      initialize:
+        ball_lower_limit: 0.49
+        ball_upper_limit: 0.51
+        method: ball
+      parallel:
+        number_of_cores: 1
+      printing:
+        silence: false
+      prior_passer:
+        sigma: 3.0
+        use_errors: true
+        use_widths: true
+      run:
+        iters: 2000
+      search:
+        cognitive: 0.5
+        ftol: -.inf
+        inertia: 0.9
+        minkowski_p_norm: 2
+        n_particles: 50
+        number_of_k_neighbors: 3
+        social: 0.3
+      updates:
+        iterations_per_update: 500
+        log_every_update: 1
+        model_results_every_update: 1
+        remove_state_files_at_end: true
+        visualize_every_update: 1
+notation:
+  label:
+    label:
+      alpha: \alpha
+      beta: \beta
+      break_radius: \theta_{\rm B}
+      centre_0: y
+      centre_1: x
+      coefficient: \lambda
+      contribution_factor: \omega_{\rm 0}
+      core_radius: C_{\rm r}
+      core_radius_0: C_{rm r0}
+      core_radius_1: C_{\rm r1}
+      effective_radius: R_{\rm eff}
+      einstein_radius: \theta_{\rm Ein}
+      ell_comps_0: \epsilon_{\rm 1}
+      ell_comps_1: \epsilon_{\rm 2}
+      flux: F
+      gamma: \gamma
+      inner_coefficient: \lambda_{\rm 1}
+      inner_slope: t_{\rm 1}
+      intensity: I_{\rm b}
+      kappa: \kappa
+      kappa_s: \kappa_{\rm s}
+      mass_at_200: M_{\rm 200}
+      mass_to_light_gradient: \Gamma
+      mass_to_light_ratio: \Psi
+      noise_factor: \omega_{\rm 1}
+      noise_power: \omega{\rm 2}
+      noise_scale: \sigma_{\rm 1}
+      normalization_scale: n
+      outer_coefficient: \lambda_{\rm 2}
+      outer_slope: t_{\rm 2}
+      pixels: N_{\rm pix}
+      radius_break: R_{\rm b}
+      redshift: z
+      redshift_object: z_{\rm obj}
+      redshift_source: z_{\rm src}
+      scale_radius: R_{\rm s}
+      scatter: \sigma
+      sersic_index: n
+      shape_0: y_{\rm pix}
+      shape_1: x_{\rm pix}
+      sigma: \sigma
+      signal_scale: V
+      sky_scale: \sigma_{\rm 0}
+      slope: \gamma
+      truncation_radius: R_{\rm t}
+      weight_floor: W_{\rm f}
+      weight_power: W_{\rm p}
+    superscript:
+      ExternalShear: ext
+      HyperBackgroundNoise: hyper
+      HyperGalaxy: hyper
+      HyperImageSky: hyper
+      InputDeflections: defl
+      Pixelization: pix
+      Point: point
+      Redshift: ''
+      Regularization: reg
+  label_format:
+    format:
+      alpha: '{:.4f}'
+      angular_diameter_distance_to_earth: '{:.4f}'
+      beta: '{:.4f}'
+      centre_0: '{:.4f}'
+      centre_1: '{:.4f}'
+      coefficient: '{:.4f}'
+      concentration: '{:.4f}'
+      contribution_factor: '{:.4f}'
+      core_radius: '{:.4f}'
+      core_radius_0: '{:.4f}'
+      core_radius_1: '{:.4f}'
+      effective_radius: '{:.4f}'
+      einstein_mass: '{:.4e}'
+      einstein_radius: '{:.4f}'
+      ell_comps_0: '{:.4f}'
+      ell_comps_1: '{:.4f}'
+      flux: '{:.4e}'
+      gamma: '{:.4f}'
+      inner_coefficient: '{:.4f}'
+      inner_slope: '{:.4f}'
+      intensity: '{:.4f}'
+      kappa: '{:.4f}'
+      kappa_s: '{:.4f}'
+      kpc_per_arcsec: '{:.4f}'
+      luminosity: '{:.4e}'
+      mass: '{:.4e}'
+      mass_at_200: '{:.4e}'
+      mass_at_truncation_radius: '{:.4e}'
+      mass_to_light_gradient: '{:.4f}'
+      mass_to_light_ratio: '{:.4f}'
+      noise_factor: '{:.3f}'
+      noise_power: '{:.3f}'
+      noise_scale: '{:.3f}'
+      normalization_scale: '{:.4f}'
+      outer_coefficient: '{:.4f}'
+      pixels: '{:.4f}'
+      radius: '{:.4f}'
+      radius_break: '{:.4f}'
+      redshift: '{:.4f}'
+      redshift_object: '{:.4f}'
+      redshift_source: '{:.4f}'
+      rho: '{:.4f}'
+      scale_radius: '{:.4f}'
+      sersic_index: '{:.4f}'
+      shape_0: '{:.4f}'
+      shape_1: '{:.4f}'
+      sigma: '{:.4f}'
+      signal_scale: '{:.4f}'
+      sky_scale: '{:.4f}'
+      slope: '{:.4f}'
+      truncation_radius: '{:.4f}'
+      weight_floor: '{:.4f}'
+      weight_power: '{:.4f}'
+visualize:
+  general:
+    general:
+      backend: default
+      imshow_origin: upper
+      zoom_around_mask: true
+    units:
+      in_kpc: false
+  include:
+    include_1d:
+      einstein_radius: true
+      half_light_radius: true
+    include_2d:
+      border: false
+      caustics: false
+      critical_curves: false
+      grid: false
+      light_profile_centres: true
+      mapper_data_mesh_grid: true
+      mapper_source_grid_slim: false
+      mapper_source_mesh_grid: false
+      mask: true
+      mass_profile_centres: true
+      multiple_images: false
+      origin: false
+      positions: false
+  mat_wrap:
+    Axis:
+      figure: {}
+      subplot: {}
+    Cmap:
+      figure:
+        cmap: default
+        linscale: 0.01
+        linthresh: 0.05
+        norm: linear
+        vmax: null
+        vmin: null
+      subplot:
+        cmap: default
+        linscale: 0.01
+        linthresh: 0.05
+        norm: linear
+        vmax: null
+        vmin: null
+    Colorbar:
+      figure:
+        fraction: 0.047
+        pad: 0.01
+      subplot:
+        fraction: 0.047
+        pad: 0.01
+    ColorbarTickParams:
+      figure:
+        labelsize: 10
+      subplot:
+        labelsize: 10
+    Figure:
+      figure:
+        aspect: square
+        figsize: (7,7)
+      subplot:
+        aspect: square
+        figsize: auto
+    Legend:
+      figure:
+        fontsize: 12
+        include_2d: true
+      subplot:
+        fontsize: 12
+        include_2d: true
+    TickParams:
+      figure:
+        labelsize: 16
+      subplot:
+        labelsize: 10
+    Title:
+      figure:
+        fontsize: 16
+      subplot:
+        fontsize: 10
+    XLabel:
+      figure:
+        fontsize: 16
+      subplot:
+        fontsize: 10
+    XTicks:
+      figure:
+        fontsize: 16
+      subplot:
+        fontsize: 10
+    YLabel:
+      figure:
+        fontsize: 16
+      subplot:
+        fontsize: 10
+    YTicks:
+      figure:
+        fontsize: 16
+      subplot:
+        fontsize: 10
+  mat_wrap_1d:
+    EinsteinRadiusAXVLine:
+      figure: {}
+      subplot: {}
+    FillBetween:
+      figure:
+        alpha: 0.7
+        color: k
+      subplot:
+        alpha: 0.7
+        color: k
+    HalfLightRadiusAXVLine:
+      figure: {}
+      subplot: {}
+    YXPlot:
+      figure:
+        c: k
+      subplot:
+        c: k
+    YXScatter:
+      figure:
+        c: k
+      subplot:
+        c: k
+  mat_wrap_2d:
+    ArrayOverlay:
+      figure:
+        alpha: 0.5
+      subplot:
+        alpha: 0.5
+    BorderScatter:
+      figure:
+        c: r
+        marker: .
+        s: 30
+      subplot:
+        c: r
+        marker: .
+        s: 30
+    CausticsPlot:
+      figure:
+        c: k,r,g,b,m,y
+        linestyle: '-'
+        linewidth: 2
+      subplot:
+        c: k,r,g,b,m,y
+        linestyle: '-'
+        linewidth: 2
+    CriticalCurvesPlot:
+      figure:
+        c: k,r,g,b,m,y
+        linestyle: '-'
+        linewidth: 2
+      subplot:
+        c: k,r,g,b,m,y
+        linestyle: '-'
+        linewidth: 2
+    GridPlot:
+      figure:
+        c: k
+      subplot:
+        c: k
+    GridScatter:
+      figure:
+        c: k
+        marker: .
+        s: 1
+      subplot:
+        c: k
+        marker: .
+        s: 1
+    IndexScatter:
+      figure:
+        c: r,g,b,m,y,k
+        marker: .
+        s: 20
+      subplot:
+        c: r,g,b,m,y,k
+        marker: .
+        s: 20
+    LightProfileCentresScatter:
+      figure:
+        c: k,r,g,b,m,y
+        marker: +
+        s: 20
+      subplot:
+        c: r,g,b,m,y,k
+        marker: +
+        s: 26
+    MaskScatter:
+      figure:
+        c: k
+        marker: x
+        s: 10
+      subplot:
+        c: k
+        marker: x
+        s: 10
+    MassProfileCentresScatter:
+      figure:
+        c: k,r,g,b,m,y
+        marker: x
+        s: 20
+      subplot:
+        c: r,g,b,m,y,k
+        marker: x
+        s: 26
+    MultipleImagesScatter:
+      figure:
+        c: k,r,g,b,m,y
+        marker: o
+        s: 16
+      subplot:
+        c: r,g,b,m,y,k
+        marker: o
+        s: 16
+    OriginScatter:
+      figure:
+        c: k
+        marker: x
+        s: 80
+      subplot:
+        c: k
+        marker: x
+        s: 80
+    PatchOverlay:
+      figure:
+        edgecolor: c
+        facecolor: null
+      subplot:
+        edgecolor: c
+        facecolor: null
+    PixelizationGridScatter:
+      figure:
+        c: c
+        marker: .
+        s: 1
+      subplot:
+        c: c
+        marker: .
+        s: 1
+    PositionsScatter:
+      figure:
+        c: k,m,y,b,r,g
+        marker: '*'
+        s: 80
+      subplot:
+        c: k,m,y,b,r,g
+        marker: '*'
+        s: 80
+    VectorYXQuiver:
+      figure:
+        alpha: 1.0
+        angles: xy
+        headlength: 0
+        headwidth: 1
+        linewidth: 5
+        pivot: middle
+        units: xy
+      subplot:
+        alpha: 1.0
+        angles: xy
+        headlength: 0
+        headwidth: 1
+        linewidth: 5
+        pivot: middle
+        units: xy
+    VoronoiDrawer:
+      figure:
+        alpha: 0.7
+        edgecolor: k
+        linewidth: 0.3
+      subplot:
+        alpha: 0.7
+        edgecolor: k
+        linewidth: 0.3
+  plots:
+    dataset:
+      absolute_signal_to_noise_map: true
+      data: true
+      inverse_noise_map: true
+      noise_map: true
+      potential_chi_squared_map: true
+      signal_to_noise_map: true
+      subplot_dataset: true
+    fit:
+      all_at_end_fits: true
+      all_at_end_png: true
+      chi_squared_map: true
+      data: true
+      model_data: true
+      model_images_of_galaxies: true
+      noise_map: true
+      normalized_residual_map: true
+      residual_map: true
+      signal_to_noise_map: true
+      subplot_fit: true
+      subplot_of_galaxies: true
+      subtracted_images_of_galaxies: true
+    fit_imaging: {}
+    fit_interferometer:
+      amplitudes_vs_uv_distances: true
+      dirty_chi_squared_map: true
+      dirty_image: true
+      dirty_inverse_noise_map: true
+      dirty_noise_map: true
+      dirty_normalized_residual_map: true
+      dirty_residual_map: true
+      dirty_signal_to_noise_map: true
+      phases_vs_uv_distances: true
+      uv_wavelengths: true
+    fit_quantity:
+      all_at_end_fits: true
+      all_at_end_png: true
+      chi_squared_map: true
+      image: true
+      model_image: true
+      noise_map: true
+      residual_map: true
+      subplot_fit: true
+    galaxies:
+      convergence: false
+      image: false
+      potential: false
+    hyper:
+      contribution_map_list: true
+      fit_no_hyper: true
+      images_of_galaxies: true
+      model_image: true
+    imaging:
+      psf: true
+    interferometer:
+      amplitudes_vs_uv_distances: true
+      dirty_image: true
+      dirty_inverse_noise_map: true
+      dirty_noise_map: true
+      dirty_signal_to_noise_map: true
+      phases_vs_uv_distances: true
+      uv_wavelengths: true
+    inversion:
+      all_at_end_png: true
+      chi_squared_map: true
+      errors: true
+      normalized_residual_map: true
+      reconstructed_image: true
+      reconstruction: true
+      regularization_weights: true
+      residual_map: true
+      subplot_inversion: true
+    other:
+      stochastic_histogram: true
+    plane:
+      all_at_end_fits: true
+      all_at_end_png: true
+      convergence: true
+      deflections: true
+      image: true
+      magnification: true
+      potential: true
+      source_plane_image: true
+      subplot_galaxy_images: true
+      subplot_plane: true
+    positions:
+      image_with_positions: true
+  plots_search:
+    dynesty:
+      cornerplot: true
+      cornerpoints: true
+      runplot: true
+      traceplot: true
+    emcee:
+      corner: true
+      time_series: true
+      trajectory: true
+    pyswarms:
+      contour: true
+      cost_history: true
+      time_series: true
+      trajectory: true
+    ultranest:
+      cornerplot: true
+      runplot: true
+      traceplot: true
+    zeus:
+      corner: true
+      time_series: true
+      trajectory: true

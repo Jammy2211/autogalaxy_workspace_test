@@ -1,0 +1,499 @@
+2022-05-03 10:49:31,494 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 12256 image-pixels
+2022-05-03 10:49:32,930 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(62500,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-03 10:49:32,953 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 62500 image-pixels
+2022-05-03 10:49:33,638 - analysis_process_0 - INFO - Created
+2022-05-03 10:49:33,724 - analysis_process_1 - INFO - Created
+2022-05-03 10:49:34,026 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-03 10:49:34,028 - overview_example_multiwavelength - INFO - Starting search
+2022-05-03 10:49:34,038 - overview_example_multiwavelength - INFO - Saving path info
+2022-05-03 10:49:34,190 - overview_example_multiwavelength - INFO - Not complete. Starting non-linear search.
+2022-05-03 10:49:34,191 - overview_example_multiwavelength - INFO - number_of_cores == 1...
+2022-05-03 10:49:34,191 - overview_example_multiwavelength - INFO - ...not using pool
+2022-05-03 10:49:34,191 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-05-03 10:49:39,316 - overview_example_multiwavelength - INFO - No Dynesty samples found, beginning new non-linear search. 
+2022-05-03 10:54:41,614 - overview_example_multiwavelength - INFO - 5000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 10:59:35,476 - overview_example_multiwavelength - INFO - 10000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:04:08,812 - overview_example_multiwavelength - INFO - 15000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:08:44,642 - overview_example_multiwavelength - INFO - 20000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:13:12,943 - overview_example_multiwavelength - INFO - 25000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:17:37,922 - overview_example_multiwavelength - INFO - 30000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:21:59,433 - overview_example_multiwavelength - INFO - 35000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:26:31,229 - overview_example_multiwavelength - INFO - 40000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:31:09,406 - overview_example_multiwavelength - INFO - 45000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:35:42,892 - overview_example_multiwavelength - INFO - 50000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:40:34,636 - overview_example_multiwavelength - INFO - 55000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:44:30,527 - overview_example_multiwavelength - INFO - 60000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:48:11,931 - overview_example_multiwavelength - INFO - 65000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:51:50,100 - overview_example_multiwavelength - INFO - 70000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:55:34,279 - overview_example_multiwavelength - INFO - 75000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:55:56,725 - overview_example_multiwavelength - INFO - 80000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:56:18,712 - overview_example_multiwavelength - INFO - 85000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:56:38,239 - overview_example_multiwavelength - INFO - 90000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-03 11:57:19,709 - overview_example_multiwavelength - INFO - Removing zip file
+2022-05-03 12:05:52,157 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 12256 image-pixels
+2022-05-03 12:05:53,099 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(62500,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-03 12:05:53,115 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 62500 image-pixels
+2022-05-03 12:05:53,548 - analysis_process_0 - INFO - Created
+2022-05-03 12:05:53,606 - analysis_process_1 - INFO - Created
+2022-05-03 12:05:53,846 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-03 12:05:53,847 - overview_example_multiwavelength - INFO - Starting search
+2022-05-03 12:05:54,106 - overview_example_multiwavelength - INFO - Already completed, skipping non-linear search.
+2022-05-03 12:05:54,426 - overview_example_multiwavelength - INFO - Removing zip file
+2022-05-03 12:15:49,690 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 12256 image-pixels
+2022-05-03 12:15:50,643 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(62500,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-03 12:15:50,660 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 62500 image-pixels
+2022-05-03 12:15:51,092 - analysis_process_0 - INFO - Created
+2022-05-03 12:15:51,147 - analysis_process_1 - INFO - Created
+2022-05-03 12:15:51,402 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-03 12:15:51,403 - overview_example_multiwavelength - INFO - Starting search
+2022-05-03 12:15:51,673 - overview_example_multiwavelength - INFO - Already completed, skipping non-linear search.
+2022-05-03 12:15:52,001 - overview_example_multiwavelength - INFO - Removing zip file
+2022-05-10 10:18:20,430 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 31428 image-pixels
+2022-05-10 10:19:25,660 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 6278 image-pixels
+2022-05-10 10:19:37,671 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 12582 image-pixels
+2022-05-10 10:19:50,474 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 18846 image-pixels
+2022-05-10 10:20:20,151 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 18846 image-pixels
+2022-05-10 10:20:38,590 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 18846 image-pixels
+2022-05-10 10:21:21,454 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 52376 image-pixels
+2022-05-10 10:21:43,515 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 134036 image-pixels
+2022-05-10 10:22:03,851 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(169656,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 10:22:03,862 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 169656 image-pixels
+2022-05-10 10:22:19,815 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(141384,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 10:22:19,824 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 141384 image-pixels
+2022-05-10 10:22:43,553 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 10:22:43,561 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 10:23:46,994 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 10:23:47,019 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 10:23:47,665 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 10:23:47,665 - light[bulge_disk] - INFO - Starting search
+2022-05-10 10:23:48,753 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 10:23:51,588 - light[bulge_disk] - INFO - Saving path info
+2022-05-10 10:23:51,640 - light[bulge_disk] - INFO - Not complete. Starting non-linear search.
+2022-05-10 10:23:51,641 - light[bulge_disk] - INFO - number_of_cores == 1...
+2022-05-10 10:23:51,641 - light[bulge_disk] - INFO - ...not using pool
+2022-05-10 10:23:51,642 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-05-10 10:23:56,150 - light[bulge_disk] - INFO - No Dynesty samples found, beginning new non-linear search. 
+2022-05-10 10:27:20,932 - light[bulge_disk] - INFO - 5000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 10:31:08,293 - light[bulge_disk] - INFO - 10000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 10:35:02,757 - light[bulge_disk] - INFO - 15000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 10:55:46,107 - light[bulge_disk] - INFO - 20000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 10:59:40,783 - light[bulge_disk] - INFO - 25000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 11:03:58,609 - light[bulge_disk] - INFO - 30000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 11:08:51,435 - light[bulge_disk] - INFO - 35000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 11:13:31,914 - light[bulge_disk] - INFO - 40000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 11:17:34,445 - light[bulge_disk] - INFO - 45000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 11:21:32,020 - light[bulge_disk] - INFO - 50000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 11:25:29,493 - light[bulge_disk] - INFO - 55000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 12:06:38,113 - light[bulge_disk] - INFO - 60000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 12:07:11,064 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:07:11,094 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:07:11,831 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:07:11,832 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:07:11,835 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:07:14,942 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:09:23,665 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:09:23,694 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:09:50,552 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:09:50,582 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:09:51,341 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:09:51,342 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:10:04,836 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:10:04,877 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:10:06,036 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:10:06,036 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:10:06,217 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:10:11,223 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:10:12,252 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:10:12,253 - light[bulge_disk]_inversion - INFO - Starting search
+2022-05-10 12:10:14,698 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 12:10:14,701 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-05-10 12:11:21,951 - light[bulge_disk] - INFO - 65000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 12:11:43,393 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:11:43,428 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:11:44,216 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:11:44,216 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:11:44,364 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:11:48,113 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:11:48,722 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:11:48,723 - light[bulge_disk]_inversion - INFO - Starting search
+2022-05-10 12:11:49,950 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 12:11:49,953 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-05-10 12:12:32,226 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:12:32,256 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:12:32,990 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:12:32,991 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:12:33,124 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:12:36,203 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:12:36,816 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:12:36,817 - light[bulge_disk]_inversion - INFO - Starting search
+2022-05-10 12:12:38,069 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 12:12:38,072 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-05-10 12:15:48,018 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:15:48,055 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:15:48,853 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:15:48,853 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:15:48,995 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:15:52,274 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:15:52,917 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:15:52,917 - light[bulge_disk]_inversion_no_w - INFO - Starting search
+2022-05-10 12:15:54,271 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 12:15:54,273 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-05-10 12:16:05,511 - light[bulge_disk] - INFO - 70000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 12:17:36,959 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:17:36,993 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:17:37,775 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:17:37,775 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:17:37,956 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:17:41,313 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:17:41,965 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:17:41,965 - light[bulge_disk]_inversion_no_w - INFO - Starting search
+2022-05-10 12:17:43,296 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 12:17:43,298 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-05-10 12:18:13,296 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:18:13,325 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:18:14,132 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:18:14,133 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:18:14,326 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:18:17,577 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:18:18,220 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:18:18,221 - light[bulge_disk]_inversion_no_w - INFO - Starting search
+2022-05-10 12:18:19,537 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 12:18:19,539 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-05-10 12:19:08,872 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:19:08,902 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:19:09,686 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:19:09,687 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:19:09,846 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:19:13,306 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:19:13,952 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:19:13,953 - light[bulge_disk]_inversion_no_w - INFO - Starting search
+2022-05-10 12:19:15,300 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 12:21:05,959 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:21:05,986 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:21:06,707 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:21:06,707 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:21:06,767 - light[bulge_disk] - INFO - 75000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 12:21:06,895 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:21:09,871 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:21:10,460 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:21:10,461 - light[bulge_disk]_inversion_no_w - INFO - Starting search
+2022-05-10 12:21:11,658 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 12:22:10,856 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:22:10,885 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:22:11,598 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:22:11,598 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:22:11,727 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:22:14,802 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:22:15,390 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:22:15,391 - light[bulge_disk]_inversion_no_w - INFO - Starting search
+2022-05-10 12:22:16,610 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 12:22:38,005 - autogalaxy.analysis.preloads - INFO - PRELOADS - Blurred image (e.g. the image of all light profiles) is preloaded for this model-fit.
+2022-05-10 12:22:41,155 - autoarray.preloads - INFO - PRELOADS - Mappers of planes preloaded for this model-fit.
+2022-05-10 12:22:42,986 - autoarray.preloads - INFO - PRELOADS - LEq linear algebra quantities preloaded for this model-fit.
+2022-05-10 12:22:48,337 - autoarray.preloads - INFO - PRELOADS - LEq Curvature Matrix preloaded for this model-fit.
+2022-05-10 12:23:16,996 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:23:17,027 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:23:17,749 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:23:17,750 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:23:17,878 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:23:20,870 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:23:21,466 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:23:21,467 - light[bulge_disk]_inversion_no_w - INFO - Starting search
+2022-05-10 12:23:22,702 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 12:23:22,704 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-05-10 12:24:05,973 - autogalaxy.analysis.preloads - INFO - PRELOADS - Blurred image (e.g. the image of all light profiles) is preloaded for this model-fit.
+2022-05-10 12:24:10,012 - autoarray.preloads - INFO - PRELOADS - Mappers of planes preloaded for this model-fit.
+2022-05-10 12:24:12,554 - autoarray.preloads - INFO - PRELOADS - LEq linear algebra quantities preloaded for this model-fit.
+2022-05-10 12:24:19,554 - autoarray.preloads - INFO - PRELOADS - LEq Curvature Matrix preloaded for this model-fit.
+2022-05-10 12:24:35,828 - light[bulge_disk]_inversion_no_w - INFO - Saving path info
+2022-05-10 12:24:35,876 - light[bulge_disk]_inversion_no_w - INFO - Not complete. Starting non-linear search.
+2022-05-10 12:24:35,878 - light[bulge_disk]_inversion_no_w - INFO - number_of_cores == 1...
+2022-05-10 12:24:35,878 - light[bulge_disk]_inversion_no_w - INFO - ...not using pool
+2022-05-10 12:24:35,878 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-05-10 12:25:45,215 - light[bulge_disk] - INFO - 80000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 12:30:03,591 - light[bulge_disk] - INFO - 85000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 12:30:08,992 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:30:09,019 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:30:09,755 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:30:09,755 - light[bulge_disk]_fin - INFO - Starting search
+2022-05-10 12:30:09,900 - light[bulge_disk]_fin - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:30:13,367 - light[bulge_disk]_fin - INFO - Removing zip file
+2022-05-10 12:30:13,957 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:30:13,957 - light[bulge_disk]_inversion_no_w - INFO - Starting search
+2022-05-10 12:30:15,170 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 12:30:15,173 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-05-10 12:34:17,618 - light[bulge_disk] - INFO - 90000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 12:37:26,428 - light[bulge_disk] - INFO - 95000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 12:37:38,970 - light[bulge_disk] - INFO - 100000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 12:37:50,066 - light[bulge_disk] - INFO - 105000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 12:38:15,426 - light[bulge_disk] - INFO - Removing zip file
+2022-05-10 12:49:06,928 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:49:06,929 - light[bulge_disk] - INFO - Starting search
+2022-05-10 12:49:07,051 - light[bulge_disk] - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:50:01,748 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:50:01,756 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:50:01,904 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:50:01,904 - light[bulge_disk] - INFO - Starting search
+2022-05-10 12:50:01,905 - light[bulge_disk] - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:50:04,977 - light[bulge_disk] - INFO - Removing zip file
+2022-05-10 12:50:57,038 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:50:57,046 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:50:57,196 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:50:57,197 - light[bulge_disk] - INFO - Starting search
+2022-05-10 12:53:06,783 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:53:06,793 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:53:06,977 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:53:06,978 - light[bulge_disk] - INFO - Starting search
+2022-05-10 12:53:07,106 - light[bulge_disk] - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:53:10,363 - light[bulge_disk] - INFO - Removing zip file
+2022-05-10 12:53:35,332 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:53:35,342 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:53:35,544 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:53:35,545 - light[bulge_disk] - INFO - Starting search
+2022-05-10 12:57:19,936 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:57:19,944 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:57:20,097 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:57:20,098 - light[bulge_disk] - INFO - Starting search
+2022-05-10 12:57:20,202 - light[bulge_disk] - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:57:23,202 - light[bulge_disk] - INFO - Removing zip file
+2022-05-10 12:57:48,778 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:57:48,786 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:57:48,935 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:57:48,936 - light[bulge_disk] - INFO - Starting search
+2022-05-10 12:58:45,048 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:58:45,060 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:58:45,283 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:58:45,283 - light[bulge_disk] - INFO - Starting search
+2022-05-10 12:58:45,432 - light[bulge_disk] - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:58:50,009 - light[bulge_disk] - INFO - Removing zip file
+2022-05-10 12:59:21,187 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(113102,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 12:59:21,200 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 113102 image-pixels
+2022-05-10 12:59:21,426 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 12:59:21,426 - light[bulge_disk] - INFO - Starting search
+2022-05-10 12:59:21,570 - light[bulge_disk] - INFO - Already completed, skipping non-linear search.
+2022-05-10 12:59:25,763 - light[bulge_disk] - INFO - Removing zip file
+2022-05-10 13:34:10,740 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(169656,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 13:34:10,751 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 169656 image-pixels
+2022-05-10 13:34:28,443 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(197916,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 13:34:28,455 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 197916 image-pixels
+2022-05-10 13:34:46,728 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(186606,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 13:34:46,741 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 186606 image-pixels
+2022-05-10 13:34:59,119 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(180948,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 13:34:59,131 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 180948 image-pixels
+2022-05-10 13:35:49,180 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(180948,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 13:35:49,218 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 180948 image-pixels
+2022-05-10 13:35:49,920 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 13:35:49,921 - light[bulge_disk]_2 - INFO - Starting search
+2022-05-10 13:35:51,020 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 13:36:15,350 - autoarray.dataset.imaging - INFO - The image and noise map of the `Imaging` objected have been padded to the dimensions(180948,). This is because the blurring region around the mask (which defines wherePSF flux may be convolved into the masked region) extended beyond the edge of the image.This can be prevented by using a smaller mask, smaller PSF kernel size or manually paddingthe image and noise-map yourself.
+2022-05-10 13:36:15,400 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 180948 image-pixels
+2022-05-10 13:36:16,135 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-10 13:36:16,136 - light[bulge_disk]_2 - INFO - Starting search
+2022-05-10 13:36:17,334 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-10 13:36:21,905 - light[bulge_disk]_2 - INFO - Saving path info
+2022-05-10 13:36:21,962 - light[bulge_disk]_2 - INFO - Not complete. Starting non-linear search.
+2022-05-10 13:36:21,964 - light[bulge_disk]_2 - INFO - number_of_cores == 1...
+2022-05-10 13:36:21,964 - light[bulge_disk]_2 - INFO - ...not using pool
+2022-05-10 13:36:21,964 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-05-10 13:36:32,577 - light[bulge_disk]_2 - INFO - No Dynesty samples found, beginning new non-linear search. 
+2022-05-10 13:44:44,215 - light[bulge_disk]_2 - INFO - 5000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 13:51:24,911 - light[bulge_disk]_2 - INFO - 10000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 13:58:09,555 - light[bulge_disk]_2 - INFO - 15000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 14:04:52,817 - light[bulge_disk]_2 - INFO - 20000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 14:11:28,878 - light[bulge_disk]_2 - INFO - 25000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 14:19:18,619 - light[bulge_disk]_2 - INFO - 30000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 14:26:50,761 - light[bulge_disk]_2 - INFO - 35000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 14:34:57,631 - light[bulge_disk]_2 - INFO - 40000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 14:41:32,103 - light[bulge_disk]_2 - INFO - 45000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 14:49:04,391 - light[bulge_disk]_2 - INFO - 50000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 14:56:01,679 - light[bulge_disk]_2 - INFO - 55000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 15:03:06,580 - light[bulge_disk]_2 - INFO - 60000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 15:10:08,398 - light[bulge_disk]_2 - INFO - 65000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 15:17:55,159 - light[bulge_disk]_2 - INFO - 70000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 15:25:21,078 - light[bulge_disk]_2 - INFO - 75000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 15:32:22,572 - light[bulge_disk]_2 - INFO - 80000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 15:39:37,283 - light[bulge_disk]_2 - INFO - 85000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 15:46:22,873 - light[bulge_disk]_2 - INFO - 90000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 15:53:10,687 - light[bulge_disk]_2 - INFO - 95000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 15:59:44,488 - light[bulge_disk]_2 - INFO - 100000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 16:06:21,346 - light[bulge_disk]_2 - INFO - 105000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 16:13:19,127 - light[bulge_disk]_2 - INFO - 110000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 16:19:40,397 - light[bulge_disk]_2 - INFO - 115000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 16:19:57,844 - light[bulge_disk]_2 - INFO - 120000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 16:20:11,555 - light[bulge_disk]_2 - INFO - 125000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-10 16:20:41,988 - light[bulge_disk]_2 - INFO - Removing zip file
+2022-05-27 12:52:37,424 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 2828 image-pixels
+2022-05-27 12:52:38,093 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-27 12:52:38,094 - search[1] - INFO - Starting search
+2022-05-27 12:52:39,257 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-27 12:52:39,470 - search[1] - INFO - Saving path info
+2022-05-27 12:52:39,550 - search[1] - INFO - Not complete. Starting non-linear search.
+2022-05-27 12:52:39,552 - search[1] - INFO - number_of_cores == 1...
+2022-05-27 12:52:39,553 - search[1] - INFO - ...not using pool
+2022-05-27 12:52:39,553 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-05-27 12:52:40,286 - search[1] - INFO - No Dynesty samples found, beginning new non-linear search. 
+2022-05-27 12:53:12,891 - search[1] - INFO - 5000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 12:53:58,475 - search[1] - INFO - 10000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 12:54:42,227 - search[1] - INFO - 15000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 12:55:21,249 - search[1] - INFO - 20000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 12:56:00,805 - search[1] - INFO - 25000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 12:56:41,853 - search[1] - INFO - 30000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 12:57:19,774 - search[1] - INFO - 35000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 12:57:43,605 - search[1] - INFO - 40000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 12:58:08,363 - search[1] - INFO - 45000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 12:58:33,983 - search[1] - INFO - 50000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 12:59:05,446 - search[1] - INFO - 55000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 12:59:32,492 - search[1] - INFO - 60000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 13:00:01,752 - search[1] - INFO - 65000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 13:00:32,233 - search[1] - INFO - 70000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 13:01:02,756 - search[1] - INFO - 75000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 13:01:34,564 - search[1] - INFO - 80000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 13:02:06,469 - search[1] - INFO - 85000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 13:02:16,700 - search[1] - INFO - 90000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 13:02:25,689 - search[1] - INFO - 95000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 13:02:32,557 - search[1] - INFO - 100000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-27 13:02:56,282 - search[1] - INFO - Removing zip file
+2022-05-27 13:02:57,543 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-27 13:02:57,544 - search[2] - INFO - Starting search
+2022-05-27 13:02:58,365 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-27 13:02:58,394 - search[2] - INFO - Saving path info
+2022-05-27 13:02:58,444 - search[2] - INFO - Not complete. Starting non-linear search.
+2022-05-27 13:02:58,445 - search[2] - INFO - number_of_cores == 1...
+2022-05-27 13:02:58,445 - search[2] - INFO - ...not using pool
+2022-05-27 13:02:58,446 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-05-27 13:02:58,994 - search[2] - INFO - No Dynesty samples found, beginning new non-linear search. 
+2022-05-30 09:54:26,165 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 2828 image-pixels
+2022-05-30 09:54:26,662 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-30 09:54:26,663 - search[1] - INFO - Starting search
+2022-05-30 09:54:26,817 - search[1] - INFO - Already completed, skipping non-linear search.
+2022-05-30 09:54:27,035 - search[1] - INFO - Removing zip file
+2022-05-30 09:54:28,375 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-05-30 09:54:28,376 - search[2] - INFO - Starting search
+2022-05-30 09:54:29,296 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-05-30 09:54:29,329 - search[2] - INFO - Saving path info
+2022-05-30 09:54:29,383 - search[2] - INFO - Not complete. Starting non-linear search.
+2022-05-30 09:54:29,385 - search[2] - INFO - number_of_cores == 1...
+2022-05-30 09:54:29,386 - search[2] - INFO - ...not using pool
+2022-05-30 09:54:29,386 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-05-30 09:54:29,802 - search[2] - INFO - No Dynesty samples found, beginning new non-linear search. 
+2022-05-30 09:54:44,777 - search[2] - INFO - 5000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-30 09:55:10,712 - search[2] - INFO - 10000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-30 09:55:35,990 - search[2] - INFO - 15000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-30 09:56:01,204 - search[2] - INFO - 20000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-30 09:56:25,060 - search[2] - INFO - 25000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-30 09:56:51,166 - search[2] - INFO - 30000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-30 09:57:17,180 - search[2] - INFO - 35000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-30 09:57:33,801 - search[2] - INFO - 40000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-30 09:57:39,947 - search[2] - INFO - 45000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-30 09:57:46,006 - search[2] - INFO - 50000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-05-30 09:58:05,686 - search[2] - INFO - Removing zip file
+2022-07-17 12:27:55,912 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 2828 image-pixels
+2022-07-17 12:28:28,292 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 2828 image-pixels
+2022-07-17 12:28:28,926 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-07-17 12:28:28,928 - imaging - INFO - Starting search
+2022-07-17 12:28:42,915 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 2828 image-pixels
+2022-07-17 12:28:43,459 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-07-17 12:28:43,460 - imaging - INFO - Starting search
+2022-07-17 12:28:45,754 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-07-17 12:28:45,880 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-07-17 12:28:47,145 - autoarray.preloads - INFO - PRELOADS - Computing W-Tilde... May take a moment.
+2022-07-17 12:28:47,365 - autoarray.preloads - INFO - PRELOADS - W-Tilde preloaded for this model-fit.
+2022-07-17 12:28:47,375 - autogalaxy.analysis.preloads - INFO - PRELOADS - Blurred image (e.g. the image of all light profiles) is preloaded for this model-fit.
+2022-07-17 12:28:47,483 - autoarray.preloads - INFO - PRELOADS - Mappers of planes preloaded for this model-fit.
+2022-07-17 12:28:48,369 - autoarray.preloads - INFO - PRELOADS - LEq linear algebra quantities preloaded for this model-fit.
+2022-07-17 12:28:48,518 - autoarray.preloads - INFO - PRELOADS - LEq Curvature Matrix preloaded for this model-fit.
+2022-07-17 12:28:49,079 - imaging - INFO - Saving path info
+2022-07-17 12:28:49,146 - imaging - INFO - Not complete. Starting non-linear search.
+2022-07-17 12:28:49,148 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-07-17 12:29:01,333 - imaging - INFO - No Dynesty samples found, beginning new non-linear search. 
+2022-07-17 12:30:20,479 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 2828 image-pixels
+2022-07-17 12:30:21,144 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-07-17 12:30:21,145 - imaging - INFO - Starting search
+2022-07-17 12:30:23,713 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-07-17 12:30:23,818 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-07-17 12:30:24,670 - autoarray.preloads - INFO - PRELOADS - Computing W-Tilde... May take a moment.
+2022-07-17 12:30:24,840 - autoarray.preloads - INFO - PRELOADS - W-Tilde preloaded for this model-fit.
+2022-07-17 12:30:24,847 - autogalaxy.analysis.preloads - INFO - PRELOADS - Blurred image (e.g. the image of all light profiles) is preloaded for this model-fit.
+2022-07-17 12:30:24,903 - autoarray.preloads - INFO - PRELOADS - Mappers of planes preloaded for this model-fit.
+2022-07-17 12:30:25,487 - autoarray.preloads - INFO - PRELOADS - LEq linear algebra quantities preloaded for this model-fit.
+2022-07-17 12:30:25,564 - autoarray.preloads - INFO - PRELOADS - LEq Curvature Matrix preloaded for this model-fit.
+2022-07-17 12:30:25,930 - imaging - INFO - Saving path info
+2022-07-17 12:30:25,976 - imaging - INFO - Not complete. Starting non-linear search.
+2022-07-17 12:30:25,978 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-07-17 12:30:38,652 - imaging - INFO - No Dynesty samples found, beginning new non-linear search. 
+2022-07-17 12:30:50,998 - imaging - INFO - 5000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-07-17 12:31:41,736 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-07-17 12:31:41,737 - interferometer - INFO - Starting search
+2022-07-17 12:31:43,667 - autogalaxy.interferometer.model.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-07-17 12:31:43,668 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-07-17 12:31:43,724 - autoarray.dataset.interferometer - INFO - INTERFEROMETER - Computing W-Tilde... May take a moment.
+2022-07-17 12:33:46,078 - autoarray.preloads - INFO - PRELOADS - Mappers of planes preloaded for this model-fit.
+2022-07-17 12:33:46,080 - autoarray.preloads - INFO - PRELOADS - LEq linear algebra quantities preloaded for this model-fit.
+2022-07-17 12:35:41,348 - interferometer - INFO - Saving path info
+2022-07-17 12:35:41,397 - interferometer - INFO - Not complete. Starting non-linear search.
+2022-07-17 12:35:41,399 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-07-17 14:41:57,712 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 2828 image-pixels
+2022-07-17 14:41:58,234 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-07-17 14:41:58,235 - imaging - INFO - Starting search
+2022-07-17 14:42:00,231 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-07-17 14:42:00,327 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-07-17 14:42:01,136 - autoarray.preloads - INFO - PRELOADS - Computing W-Tilde... May take a moment.
+2022-07-17 14:42:01,276 - autoarray.preloads - INFO - PRELOADS - W-Tilde preloaded for this model-fit.
+2022-07-17 14:42:01,282 - autogalaxy.analysis.preloads - INFO - PRELOADS - Blurred image (e.g. the image of all light profiles) is preloaded for this model-fit.
+2022-07-17 14:42:01,336 - autoarray.preloads - INFO - PRELOADS - Mappers of planes preloaded for this model-fit.
+2022-07-17 14:42:01,871 - autoarray.preloads - INFO - PRELOADS - LEq linear algebra quantities preloaded for this model-fit.
+2022-07-17 14:42:01,952 - autoarray.preloads - INFO - PRELOADS - LEq Curvature Matrix preloaded for this model-fit.
+2022-07-17 14:42:02,304 - imaging - INFO - Saving path info
+2022-07-17 14:42:02,344 - imaging - INFO - Not complete. Starting non-linear search.
+2022-07-17 14:42:02,349 - imaging - INFO - Existing Dynesty samples found, resuming non-linear search.
+2022-07-17 14:42:02,380 - imaging - INFO - 5000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-07-17 14:44:48,138 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 2828 image-pixels
+2022-07-17 14:44:48,626 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-07-17 14:44:48,627 - imaging - INFO - Starting search
+2022-07-17 14:44:50,634 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-07-17 14:44:50,730 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-07-17 14:44:51,477 - autoarray.preloads - INFO - PRELOADS - Computing W-Tilde... May take a moment.
+2022-07-17 14:44:51,614 - autoarray.preloads - INFO - PRELOADS - W-Tilde preloaded for this model-fit.
+2022-07-17 14:44:51,620 - autogalaxy.analysis.preloads - INFO - PRELOADS - Blurred image (e.g. the image of all light profiles) is preloaded for this model-fit.
+2022-07-17 14:44:51,671 - autoarray.preloads - INFO - PRELOADS - Mappers of planes preloaded for this model-fit.
+2022-07-17 14:44:52,186 - autoarray.preloads - INFO - PRELOADS - LEq linear algebra quantities preloaded for this model-fit.
+2022-07-17 14:44:52,257 - autoarray.preloads - INFO - PRELOADS - LEq Curvature Matrix preloaded for this model-fit.
+2022-07-17 14:44:52,579 - imaging - INFO - Saving path info
+2022-07-17 14:44:52,619 - imaging - INFO - Not complete. Starting non-linear search.
+2022-07-17 14:44:52,623 - imaging - INFO - Existing Dynesty samples found, resuming non-linear search.
+2022-07-17 14:44:52,652 - imaging - INFO - 5000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-07-17 14:46:21,499 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 2828 image-pixels
+2022-07-17 14:46:22,213 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-07-17 14:46:22,215 - imaging - INFO - Starting search
+2022-07-17 14:46:24,938 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-07-17 14:46:25,032 - autoarray.dataset.imaging - INFO - IMAGING - Computing W-Tilde... May take a moment.
+2022-07-17 14:46:25,875 - autoarray.preloads - INFO - PRELOADS - Computing W-Tilde... May take a moment.
+2022-07-17 14:46:26,014 - autoarray.preloads - INFO - PRELOADS - W-Tilde preloaded for this model-fit.
+2022-07-17 14:46:26,021 - autogalaxy.analysis.preloads - INFO - PRELOADS - Blurred image (e.g. the image of all light profiles) is preloaded for this model-fit.
+2022-07-17 14:46:26,579 - imaging - INFO - Saving path info
+2022-07-17 14:46:26,628 - imaging - INFO - Not complete. Starting non-linear search.
+2022-07-17 14:46:26,629 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-07-17 14:46:52,011 - imaging - INFO - No Dynesty samples found, beginning new non-linear search. 
+2022-07-17 14:47:12,694 - imaging - INFO - 5000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-07-17 14:48:22,980 - imaging - INFO - 10000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-07-17 14:49:45,673 - imaging - INFO - 15000 Iterations: Performing update (Visualization, outputting samples, etc.).
+2022-07-17 14:51:39,959 - imaging - INFO - Removing zip file
+2022-07-17 14:58:04,310 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-07-17 14:58:04,311 - interferometer - INFO - Starting search
+2022-07-17 14:58:06,680 - autogalaxy.interferometer.model.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-07-17 14:58:06,680 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-07-17 14:58:06,740 - autoarray.dataset.interferometer - INFO - INTERFEROMETER - Computing W-Tilde... May take a moment.
+2022-07-17 15:02:26,826 - interferometer - INFO - Saving path info
+2022-07-17 15:02:26,869 - interferometer - INFO - Not complete. Starting non-linear search.
+2022-07-17 15:02:26,871 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-07-17 15:25:55,799 - interferometer - INFO - No Dynesty samples found, beginning new non-linear search. 
+2022-09-27 10:16:11,414 - autoarray.dataset.imaging - INFO - IMAGING - Data masked, contains a total of 2828 image-pixels
+2022-09-27 10:16:12,119 - autofit.non_linear.abstract_search - INFO - Creating search
+2022-09-27 10:16:12,121 - imaging - INFO - Starting search
+2022-09-27 10:16:14,376 - autogalaxy.analysis.analysis - INFO - PRELOADS - Setting up preloads, may take a few minutes for fits using an inversion.
+2022-09-27 10:16:14,538 - autogalaxy.analysis.preloads - INFO - PRELOADS - Blurred image (e.g. the image of all light profiles) is preloaded for this model-fit.
+2022-09-27 10:16:14,555 - imaging - INFO - Saving path info
+2022-09-27 10:16:14,607 - imaging - INFO - Not complete. Starting non-linear search.
+2022-09-27 10:16:14,609 - autofit.non_linear.initializer - INFO - Generating initial samples of model, which are subject to prior limits and other constraints.
+2022-09-27 10:16:15,525 - imaging - INFO - No Dynesty samples found, beginning new non-linear search. 
+2022-09-27 10:16:16,317 - imaging - INFO - 5000 Iterations: Performing update (Visualization, outputting samples, etc.).
