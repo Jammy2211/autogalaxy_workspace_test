@@ -69,7 +69,8 @@ grids:
       MassSheet: 1.0e-08
       Moffat: 1.0e-08
       MoffatSph: 1.0e-08
-      NFW: 1.0e-06
+    MultipolePowerLawM4: 1.0e-08
+    NFW: 1.0e-06
       NFWMCRDuffySph: 1.0e-06
       NFWMCRLudlowSph: 1.0e-06
       NFWMCRScatterLudlow: 1.0e-06
@@ -147,11 +148,8 @@ non_linear:
       search:
         nwalkers: 50
       updates:
-        iterations_per_update: 2500
-        log_every_update: 1
-        model_results_every_update: 1
-        remove_state_files_at_end: true
-        visualize_every_update: 1
+      iterations_per_update: 2500
+      remove_state_files_at_end: true
     Zeus:
       auto_correlations:
         change_threshold: 0.01
@@ -186,10 +184,7 @@ non_linear:
         nwalkers: 50
       updates:
         iterations_per_update: 500
-        log_every_update: 1
-        model_results_every_update: 1
-        remove_state_files_at_end: true
-        visualize_every_update: 1
+    remove_state_files_at_end: true
   nest:
     DynestyDynamic:
       initialize:
@@ -219,11 +214,8 @@ non_linear:
         update_interval: null
         walks: 5
       updates:
-        iterations_per_update: 2500
-        log_every_update: 1
-        model_results_every_update: 1
-        remove_state_files_at_end: true
-        visualize_every_update: 1
+      iterations_per_update: 2500
+      remove_state_files_at_end: true
     DynestyStatic:
       initialize:
         method: prior
@@ -324,10 +316,7 @@ non_linear:
         total_draws: 50
       updates:
         iterations_per_update: 500
-        log_every_update: 1
-        model_results_every_update: 1
-        remove_state_files_at_end: true
-        visualize_every_update: 1
+    remove_state_files_at_end: true
     PySwarmsGlobal:
       initialize:
         ball_lower_limit: 0.49
@@ -350,11 +339,8 @@ non_linear:
         n_particles: 50
         social: 0.3
       updates:
-        iterations_per_update: 2500
-        log_every_update: 1
-        model_results_every_update: 1
-        remove_state_files_at_end: true
-        visualize_every_update: 1
+      iterations_per_update: 2500
+      remove_state_files_at_end: true
     PySwarmsLocal:
       initialize:
         ball_lower_limit: 0.49
@@ -380,13 +366,11 @@ non_linear:
         social: 0.3
       updates:
         iterations_per_update: 500
-        log_every_update: 1
-        model_results_every_update: 1
-        remove_state_files_at_end: true
-        visualize_every_update: 1
+    remove_state_files_at_end: true
 notation:
   label:
     label:
+      sigma: \sigma
       alpha: \alpha
       beta: \beta
       break_radius: \theta_{\rm B}
@@ -401,7 +385,9 @@ notation:
       einstein_radius: \theta_{\rm Ein}
       ell_comps_0: \epsilon_{\rm 1}
       ell_comps_1: \epsilon_{\rm 2}
-      flux: F
+    ell_comps_multipole_0: M_{\rm 1}
+    ell_comps_multipole_1: M_{\rm 2}
+    flux: F
       gamma: \gamma
       inner_coefficient: \lambda_{\rm 1}
       inner_slope: t_{\rm 1}
@@ -427,7 +413,6 @@ notation:
       sersic_index: n
       shape_0: y_{\rm pix}
       shape_1: x_{\rm pix}
-      sigma: \sigma
       signal_scale: V
       sky_scale: \sigma_{\rm 0}
       slope: \gamma
@@ -446,6 +431,7 @@ notation:
       Regularization: reg
   label_format:
     format:
+      sigma: '{:.4f}'
       alpha: '{:.4f}'
       angular_diameter_distance_to_earth: '{:.4f}'
       beta: '{:.4f}'
@@ -462,7 +448,9 @@ notation:
       einstein_radius: '{:.4f}'
       ell_comps_0: '{:.4f}'
       ell_comps_1: '{:.4f}'
-      flux: '{:.4e}'
+    ell_comps_multipole_0: '{:.4f}'
+    ell_comps_multipole_1: '{:.4f}'
+    flux: '{:.4e}'
       gamma: '{:.4f}'
       inner_coefficient: '{:.4f}'
       inner_slope: '{:.4f}'
@@ -492,7 +480,6 @@ notation:
       sersic_index: '{:.4f}'
       shape_0: '{:.4f}'
       shape_1: '{:.4f}'
-      sigma: '{:.4f}'
       signal_scale: '{:.4f}'
       sky_scale: '{:.4f}'
       slope: '{:.4f}'
