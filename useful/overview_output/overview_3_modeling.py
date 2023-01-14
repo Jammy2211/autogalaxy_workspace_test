@@ -82,9 +82,7 @@ In this example we fit a model where:
  
 Note how we can easily extend the model below to include extra light profiles in the galaxy.
 """
-galaxy = af.Model(
-    ag.Galaxy, redshift=0.5, bulge=ag.lp.Sersic, disk=ag.lp.Exponential
-)
+galaxy = af.Model(ag.Galaxy, redshift=0.5, bulge=ag.lp.Sersic, disk=ag.lp.Exponential)
 
 """
 We put the model galaxy above into a `Collection`, which is the model we will fit. Note how we could easily 

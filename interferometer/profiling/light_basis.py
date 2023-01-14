@@ -290,7 +290,7 @@ for i in range(repeats):
         dataset=interferometer,
         plane=plane,
         settings_inversion=ag.SettingsInversion(
-            use_w_tilde=use_w_tilde, 
+            use_w_tilde=use_w_tilde,
         ),
     )
     fit.figure_of_merit
@@ -304,9 +304,7 @@ Apply mask, settings and profiling dict to fit, such that timings of every indiv
 """
 profiling_dict = {}
 
-plane = ag.Plane(
-    galaxies=[galaxy], profiling_dict=profiling_dict
-)
+plane = ag.Plane(galaxies=[galaxy], profiling_dict=profiling_dict)
 
 fit = ag.FitInterferometer(
     dataset=interferometer,

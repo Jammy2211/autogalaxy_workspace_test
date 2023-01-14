@@ -49,7 +49,7 @@ mat_plot_2d = aplt.MatPlot2D(cmap=cmap)
 # array_plotter.figure_2d()
 
 image_2d = image_2d.native[5540:6140, 3740:4340]
-image_2d = ag.Array2D.manual_native(array=image_2d, pixel_scales=0.03)
+image_2d = ag.Array2D.no_mask(values=image_2d, pixel_scales=0.03)
 
 """
 There are numerous reasons why the image below is a good data-set for modeling. I strongly recommend 
@@ -98,7 +98,7 @@ noise_map_2d = ag.preprocess.noise_map_via_data_eps_exposure_time_map_and_backgr
     background_noise_map=background_noise_map_2d.native,
 )
 
-noise_map_2d = ag.Array2D.manual_native(array=noise_map_2d, pixel_scales=0.03)
+noise_map_2d = ag.Array2D.no_mask(values=noise_map_2d, pixel_scales=0.03)
 
 
 array_plotter = aplt.Array2DPlotter(array=noise_map_2d, mat_plot_2d=mat_plot_2d)
@@ -109,8 +109,8 @@ noise_map_2d.output_to_fits(
 )
 
 
-signal_to_noise_map_2d = ag.Array2D.manual_native(
-    array=image_2d.native / noise_map_2d.native, pixel_scales=0.03
+signal_to_noise_map_2d = ag.Array2D.no_mask(
+    values=image_2d.native / noise_map_2d.native, pixel_scales=0.03
 )
 
 array_plotter = aplt.Array2DPlotter(

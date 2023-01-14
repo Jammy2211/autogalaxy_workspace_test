@@ -77,14 +77,10 @@ galaxy = af.Model(ag.Galaxy, redshift=0.5, bulge=bulge, disk=disk)
 pixelization = af.Model(
     ag.Pixelization,
     mesh=ag.mesh.DelaunayMagnification(shape=(30, 30)),
-    regularization=ag.reg.ConstantSplit
+    regularization=ag.reg.ConstantSplit,
 )
 
-galaxy_pix = af.Model(
-    ag.Galaxy,
-    redshift=0.5,
-    pixelization=pixelization
-)
+galaxy_pix = af.Model(ag.Galaxy, redshift=0.5, pixelization=pixelization)
 
 
 model = af.Collection(galaxies=af.Collection(galaxy=galaxy, galaxy_pix=galaxy_pix))
