@@ -35,6 +35,7 @@ from os import path
 import autofit as af
 import autogalaxy as ag
 import autogalaxy.plot as aplt
+from autoconf import conf
 
 """
 __Dataset__
@@ -42,6 +43,9 @@ __Dataset__
 Load and plot the galaxy dataset `operated` via .fits files, which we will fit with 
 the model.
 """
+
+conf.instance["general"]["model"]["ignore_prior_limits"] = True
+
 dataset_name = "operated"
 dataset_path = path.join("dataset", "imaging", dataset_name)
 
@@ -109,7 +113,7 @@ search = af.DynestyStatic(
     walks=10,
     iterations_per_update=25000,
     number_of_cores=1,
-  #  use_gradient=False
+    #  use_gradient=False
 )
 
 """
