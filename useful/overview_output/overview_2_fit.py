@@ -32,8 +32,8 @@ demonstrate fitting.
 dataset_name = "light_sersic"
 dataset_path = path.join("dataset", "imaging", dataset_name)
 
-imaging = ag.Imaging.from_fits(
-    image_path=path.join(dataset_path, "image.fits"),
+dataset = ag.Imaging.from_fits(
+    data_path=path.join(dataset_path, "data.fits"),
     psf_path=path.join(dataset_path, "psf.fits"),
     noise_map_path=path.join(dataset_path, "noise_map.fits"),
     pixel_scales=0.1,
@@ -49,7 +49,7 @@ until a fractional accuracy of 99.99% is met.
 This ensures that the divergent and bright central regions of the galaxy are fully resolved when determining the
 total flux emitted within a pixel.
 """
-imaging = imaging.apply_settings(
+dataset = dataset.apply_settings(
     ag.SettingsImaging(
         grid_class=ag.Grid2DIterate,
         fractional_accuracy=0.9999,
@@ -60,43 +60,43 @@ imaging = imaging.apply_settings(
 """
 We can use the `ImagingPlotter` to plot the image, noise-map and psf of the dataset.
 """
-imaging_plotter = aplt.ImagingPlotter(
-    imaging=imaging,
+dataset_plotter = aplt.ImagingPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="image", format="png")
     ),
 )
-imaging_plotter.figures_2d(image=True)
-imaging_plotter = aplt.ImagingPlotter(
-    imaging=imaging,
+dataset_plotter.figures_2d(data=True)
+dataset_plotter = aplt.ImagingPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="noise_map", format="png")
     ),
 )
-imaging_plotter.figures_2d(noise_map=True)
-imaging_plotter = aplt.ImagingPlotter(
-    imaging=imaging,
+dataset_plotter.figures_2d(noise_map=True)
+dataset_plotter = aplt.ImagingPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="psf", format="png")
     ),
 )
-imaging_plotter.figures_2d(psf=True)
+dataset_plotter.figures_2d(psf=True)
 
 """
 The `ImagingPlotter` also contains a subplot which plots all these properties simultaneously.
 """
-imaging_plotter = aplt.ImagingPlotter(imaging=imaging)
-imaging_plotter.subplot_imaging()
+dataset_plotter = aplt.ImagingPlotter(dataset=dataset)
+dataset_plotter.subplot_dataset()
 
 """
-__Masking__
+__Mask__
 
 We next mask the data, so that regions where there is no signal (e.g. the edges) are omitted from the fit.
 
 To do this we can use a ``Mask2D`` object, which for this example we'll create as a 3.0" circle.
 """
 mask_2d = ag.Mask2D.circular(
-    shape_native=imaging.shape_native, pixel_scales=imaging.pixel_scales, radius=3.0
+    shape_native=dataset.shape_native, pixel_scales=dataset.pixel_scales, radius=3.0
 )
 
 """
@@ -105,22 +105,22 @@ We now combine the imaging dataset with the mask.
 Here, the mask is also used to compute the `Grid2D` we used in the previous overview to compute the light profile 
 emission, where this grid has the mask applied to it.
 """
-imaging = imaging.apply_mask(mask=mask_2d)
+dataset = dataset.apply_mask(mask=mask_2d)
 
-grid_2d_plotter = aplt.Grid2DPlotter(grid=imaging.grid)
+grid_2d_plotter = aplt.Grid2DPlotter(grid=dataset.grid)
 grid_2d_plotter.figure_2d()
 
 """
 Here is what our image looks like with the mask applied, where PyAutoGalaxy has automatically zoomed around the mask
 to make the lensed source appear bigger.
 """
-imaging_plotter = aplt.ImagingPlotter(
-    imaging=imaging,
+dataset_plotter = aplt.ImagingPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="masked_image", format="png")
     ),
 )
-imaging_plotter.figures_2d(image=True)
+dataset_plotter.figures_2d(data=True)
 
 """
 __Fitting__
@@ -150,7 +150,7 @@ plane = ag.Plane(galaxies=[galaxy])
 
 plane_plotter = aplt.PlanePlotter(
     plane=plane,
-    grid=imaging.grid,
+    grid=dataset.grid,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="plane_image", format="png")
     ),
@@ -168,15 +168,15 @@ convolved) and the fit`s model image (which is).
 [For those not familiar with Astronomy data, the PSF describes how the observed emission of the galaxy is blurred by
 the telescope optics when it is observed. It mimicks this blurring effect via a 2D convolution operation].
 """
-fit = ag.FitImaging(dataset=imaging, plane=plane)
+fit = ag.FitImaging(dataset=dataset, plane=plane)
 
-fit_imaging_plotter = aplt.FitImagingPlotter(
+fit_plotter = aplt.FitImagingPlotter(
     fit=fit,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="model_image", format="png")
     ),
 )
-fit_imaging_plotter.figures_2d(model_image=True)
+fit_plotter.figures_2d(model_image=True)
 
 """
 The fit creates the following:
@@ -190,15 +190,15 @@ we'll plot all 3 of these, alongside a subplot containing them all.
 For a good model where the model image and plane are representative of the galaxy system the
 residuals, normalized residuals and chi-squared are minimized:
 """
-fit_imaging_plotter = aplt.FitImagingPlotter(
+fit_plotter = aplt.FitImagingPlotter(
     fit=fit,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="residual_map", format="png")
     ),
 )
-fit_imaging_plotter.figures_2d(residual_map=True)
+fit_plotter.figures_2d(residual_map=True)
 
-fit_imaging_plotter = aplt.FitImagingPlotter(
+fit_plotter = aplt.FitImagingPlotter(
     fit=fit,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(
@@ -206,9 +206,9 @@ fit_imaging_plotter = aplt.FitImagingPlotter(
         )
     ),
 )
-fit_imaging_plotter.figures_2d(normalized_residual_map=True)
+fit_plotter.figures_2d(normalized_residual_map=True)
 
-fit_imaging_plotter = aplt.FitImagingPlotter(
+fit_plotter = aplt.FitImagingPlotter(
     fit=fit,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(
@@ -216,7 +216,7 @@ fit_imaging_plotter = aplt.FitImagingPlotter(
         )
     ),
 )
-fit_imaging_plotter.figures_2d(chi_squared_map=True)
+fit_plotter.figures_2d(chi_squared_map=True)
 
 
 """
@@ -247,12 +247,12 @@ galaxy = ag.Galaxy(
 
 plane = ag.Plane(galaxies=[galaxy])
 
-fit_bad = ag.FitImaging(dataset=imaging, plane=plane)
+fit_bad = ag.FitImaging(dataset=dataset, plane=plane)
 
 """
 A new fit using this plane shows residuals, normalized residuals and chi-squared which are non-zero. 
 """
-fit_imaging_plotter = aplt.FitImagingPlotter(
+fit_plotter = aplt.FitImagingPlotter(
     fit=fit_bad,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(
@@ -260,9 +260,9 @@ fit_imaging_plotter = aplt.FitImagingPlotter(
         )
     ),
 )
-fit_imaging_plotter.figures_2d(residual_map=True)
+fit_plotter.figures_2d(residual_map=True)
 
-fit_imaging_plotter = aplt.FitImagingPlotter(
+fit_plotter = aplt.FitImagingPlotter(
     fit=fit_bad,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(
@@ -270,9 +270,9 @@ fit_imaging_plotter = aplt.FitImagingPlotter(
         )
     ),
 )
-fit_imaging_plotter.figures_2d(normalized_residual_map=True)
+fit_plotter.figures_2d(normalized_residual_map=True)
 
-fit_imaging_plotter = aplt.FitImagingPlotter(
+fit_plotter = aplt.FitImagingPlotter(
     fit=fit_bad,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(
@@ -280,7 +280,7 @@ fit_imaging_plotter = aplt.FitImagingPlotter(
         )
     ),
 )
-fit_imaging_plotter.figures_2d(chi_squared_map=True)
+fit_plotter.figures_2d(chi_squared_map=True)
 
 
 """

@@ -32,7 +32,7 @@ __Loading Data From Individual Fits Files__
 
 First, lets load an image as an `Array2D`.
 
-This image represents a good data-reduction that conforms to the formatting standards I describe in this tutorial!
+This image represents a good data-reduction that conforms **PyAutoLens** formatting standards!
 """
 image_2d = ag.Array2D.from_fits(
     file_path=path.join(
@@ -124,7 +124,7 @@ signal_to_noise_map_2d.output_to_fits(
 )
 
 
-psf_2d = ag.Kernel2D.from_gaussian(shape_native=(11, 11), sigma=0.05, pixel_scales=0.03)
-psf_2d.output_to_fits(
+psf = ag.Kernel2D.from_gaussian(shape_native=(11, 11), sigma=0.05, pixel_scales=0.03)
+psf.output_to_fits(
     file_path=path.join(dataset_path, "psf_hdf_example.fits"), overwrite=True
 )

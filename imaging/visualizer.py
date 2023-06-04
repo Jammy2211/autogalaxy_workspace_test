@@ -5,7 +5,7 @@ Viusalize: Imaging
 This script performs an imaging model fit, where all images are output during visualization as .png and .fits
 files.
 
-This tests all visualization outputs in **PyAutoLens** for imaging data.
+This tests all visualization outputs in **PyAutoLens** for dataset data.
 """
 # %matplotlib inline
 # from pyprojroot import here
@@ -35,24 +35,24 @@ the model.
 dataset_name = "light_sersic_exp"
 dataset_path = path.join("dataset", "imaging", dataset_name)
 
-imaging = ag.Imaging.from_fits(
-    image_path=path.join(dataset_path, "image.fits"),
+dataset = ag.Imaging.from_fits(
+    data_path=path.join(dataset_path, "data.fits"),
     psf_path=path.join(dataset_path, "psf.fits"),
     noise_map_path=path.join(dataset_path, "noise_map.fits"),
     pixel_scales=0.1,
 )
 
 """
-__Masking__
+__Mask__
 """
 mask_2d = ag.Mask2D.circular(
-    shape_native=imaging.shape_native, pixel_scales=imaging.pixel_scales, radius=3.0
+    shape_native=dataset.shape_native, pixel_scales=dataset.pixel_scales, radius=3.0
 )
 
-imaging = imaging.apply_mask(mask=mask_2d)
+dataset = dataset.apply_mask(mask=mask_2d)
 
-imaging_plotter = aplt.ImagingPlotter(imaging=imaging)
-imaging_plotter.subplot_imaging()
+dataset_plotter = aplt.ImagingPlotter(dataset=dataset)
+dataset_plotter.subplot_dataset()
 
 """
 __Model__
@@ -99,7 +99,7 @@ search = af.DynestyStatic(
 """
 __Analysis__
 """
-analysis = ag.AnalysisImaging(dataset=imaging)
+analysis = ag.AnalysisImaging(dataset=dataset)
 
 """
 __Model-Fit__

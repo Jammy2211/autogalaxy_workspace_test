@@ -28,7 +28,7 @@ import autogalaxy.plot as aplt
 import numpy as np
 
 """
-__Masking__
+__Mask__
 
 We define the ‘real_space_mask’ which defines the grid the image the galaxy is evaluated using.
 """
@@ -45,16 +45,14 @@ with the model.
 dataset_name = "light_sersic_exp"
 dataset_path = path.join("dataset", "interferometer", dataset_name)
 
-interferometer = ag.Interferometer.from_fits(
-    visibilities_path=path.join(dataset_path, "visibilities.fits"),
+dataset = ag.Interferometer.from_fits(
+    data_path=path.join(dataset_path, "data.fits"),
     noise_map_path=path.join(dataset_path, "noise_map.fits"),
     uv_wavelengths_path=path.join(dataset_path, "uv_wavelengths.fits"),
     real_space_mask=real_space_mask_2d,
 )
 
-settings_interferometer = ag.SettingsInterferometer(
-    transformer_class=ag.TransformerNUFFT
-)
+settings_dataset = ag.SettingsInterferometer(transformer_class=ag.TransformerNUFFT)
 
 """
 __Model__
@@ -101,7 +99,7 @@ search = af.DynestyStatic(
 """
 __Analysis__
 """
-analysis = ag.AnalysisInterferometer(dataset=interferometer)
+analysis = ag.AnalysisInterferometer(dataset=dataset)
 
 """
 __Model-Fit__

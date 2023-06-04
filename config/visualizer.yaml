@@ -9,9 +9,9 @@ general:
   hpc:
     hpc_mode: false
     iterations_per_update: 5000
-  hyper:
-    hyper_minimum_percent: 0.01
-    hyper_noise_limit: 100000000.0
+  adapt:
+    adapt_minimum_percent: 0.01
+    adapt_noise_limit: 100000000.0
     stochastic_outputs: false
   model:
     ignore_prior_limits: false
@@ -22,7 +22,6 @@ general:
     use_numba: true
   output:
     force_pickle_overwrite: false
-    identifier_version: 4
     info_whitespace_length: 80
     log_file: output.log
     log_level: INFO
@@ -42,7 +41,9 @@ general:
     use_dataset_grids: true
   test:
     check_figure_of_merit_sanity: false
+    bypass_figure_of_merit_sanity: false
     check_preloads: false
+    preloads_check_threshold: 0.1     # If the figure of merit of a fit with and without preloads is greater than this threshold, the check preload test fails and an exception raised for a model-fit.
     disable_positions_lh_inversion_check: false
 grids:
   radial_minimum:
@@ -69,8 +70,8 @@ grids:
       MassSheet: 1.0e-08
       Moffat: 1.0e-08
       MoffatSph: 1.0e-08
-    MultipolePowerLawM4: 1.0e-08
-    NFW: 1.0e-06
+      PowerLawMultipole: 1.0e-08
+      NFW: 1.0e-06
       NFWMCRDuffySph: 1.0e-06
       NFWMCRLudlowSph: 1.0e-06
       NFWMCRScatterLudlow: 1.0e-06
@@ -92,8 +93,13 @@ grids:
       SersicCoreSph: 1.0e-06
       SersicRadialGradient: 1.0e-06
       SersicRadialGradientSph: 1.0e-06
+      ShapeletCartesian: 1.0e-8
+      ShapeletCartesianEll: 1.0e-8
+      ShapeletPolar: 1.0e-8
+      ShapeletPolarEll: 1.0e-8
+      ShapeletExponential: 1.0e-8
+      ShapeletExponentialEll: 1.0e-8
       SersicSph: 1.0e-06
-      SphExponentialRadialGradient: 1.0e-06
       gNFW: 1.0e-06
       gNFWMCRLudlow: 1.0e-06
       gNFWSph: 1.0e-06
@@ -183,7 +189,7 @@ non_linear:
       search:
         nwalkers: 50
       updates:
-        iterations_per_update: 500
+        iterations_per_update: 2500
     remove_state_files_at_end: true
   nest:
     DynestyDynamic:
@@ -241,7 +247,7 @@ non_linear:
         update_interval: null
         walks: 5
       updates:
-        iterations_per_update: 5000
+        iterations_per_update: 25000
         log_every_update: 1
         model_results_every_update: 1
         remove_state_files_at_end: true
@@ -295,7 +301,7 @@ non_linear:
         scale: 1.0
         stepsampler_cls: null
       updates:
-        iterations_per_update: 5000
+        iterations_per_update: 25000
         log_every_update: 1
         model_results_every_update: 1
         remove_state_files_at_end: true
@@ -315,8 +321,8 @@ non_linear:
       search:
         total_draws: 50
       updates:
-        iterations_per_update: 500
-    remove_state_files_at_end: true
+        iterations_per_update: 2500
+        remove_state_files_at_end: true
     PySwarmsGlobal:
       initialize:
         ball_lower_limit: 0.49
@@ -365,8 +371,8 @@ non_linear:
         number_of_k_neighbors: 3
         social: 0.3
       updates:
-        iterations_per_update: 500
-    remove_state_files_at_end: true
+        iterations_per_update: 2500
+        remove_state_files_at_end: true
 notation:
   label:
     label:
@@ -385,10 +391,12 @@ notation:
       einstein_radius: \theta_{\rm Ein}
       ell_comps_0: \epsilon_{\rm 1}
       ell_comps_1: \epsilon_{\rm 2}
-    ell_comps_multipole_0: M_{\rm 1}
-    ell_comps_multipole_1: M_{\rm 2}
-    flux: F
+      ell_comps_multipole_0: M_{\rm 1}
+      ell_comps_multipole_1: M_{\rm 2}
+      flux: F
       gamma: \gamma
+      gamma_1: \gamma
+      gamma_2: \gamma
       inner_coefficient: \lambda_{\rm 1}
       inner_slope: t_{\rm 1}
       intensity: I_{\rm b}
@@ -448,9 +456,9 @@ notation:
       einstein_radius: '{:.4f}'
       ell_comps_0: '{:.4f}'
       ell_comps_1: '{:.4f}'
-    ell_comps_multipole_0: '{:.4f}'
-    ell_comps_multipole_1: '{:.4f}'
-    flux: '{:.4e}'
+      ell_comps_multipole_0: '{:.4f}'
+      ell_comps_multipole_1: '{:.4f}'
+      flux: '{:.4e}'
       gamma: '{:.4f}'
       inner_coefficient: '{:.4f}'
       inner_slope: '{:.4f}'
@@ -464,6 +472,8 @@ notation:
       mass_at_truncation_radius: '{:.4e}'
       mass_to_light_gradient: '{:.4f}'
       mass_to_light_ratio: '{:.4f}'
+      n_x: '{:.1d}'
+      n_y: '{:.1d}'
       noise_factor: '{:.3f}'
       noise_power: '{:.3f}'
       noise_scale: '{:.3f}'
@@ -500,8 +510,10 @@ visualize:
       half_light_radius: true
     include_2d:
       border: false
-      caustics: false
-      critical_curves: false
+      tangential_caustics: false
+      radial_caustics: false
+      tangential_critical_curves: false
+      radial_critical_curves: false
       grid: false
       light_profile_centres: true
       mapper_image_plane_mesh_grid: true
@@ -784,8 +796,8 @@ visualize:
       residual_map: true
       signal_to_noise_map: true
       subplot_fit: true
-      subplot_of_galaxies: true
-      subtracted_images_of_galaxies: true
+      subplot_of_galaxies: false
+      subtracted_images_of_galaxies: false
     fit_imaging: {}
     fit_interferometer:
       amplitudes_vs_uv_distances: true
@@ -811,9 +823,9 @@ visualize:
       convergence: false
       image: false
       potential: false
-    hyper:
+    adapt:
       contribution_map_list: true
-      fit_no_hyper: true
+      fit_no_adapt: true
       images_of_galaxies: true
       model_image: true
     imaging:
@@ -847,7 +859,7 @@ visualize:
       magnification: true
       potential: true
       source_plane_image: true
-      subplot_galaxy_images: true
+      subplot_galaxy_images: false
       subplot_plane: true
     positions:
       image_with_positions: true

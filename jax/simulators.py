@@ -52,7 +52,7 @@ grid_2d = ag.Grid2DIterate.uniform(
 """
 Simulate a simple Gaussian PSF for the image.
 """
-psf_2d = ag.Kernel2D.from_gaussian(
+psf = ag.Kernel2D.from_gaussian(
     shape_native=(11, 11), sigma=0.1, pixel_scales=grid_2d.pixel_scales
 )
 
@@ -61,7 +61,7 @@ To simulate the `Imaging` dataset we first create a simulator, which defines the
 noise levels and psf of the dataset that is simulated.
 """
 simulator = ag.SimulatorImaging(
-    exposure_time=300.0, psf=psf_2d, background_sky_level=0.1, add_poisson_noise=True
+    exposure_time=300.0, psf=psf, background_sky_level=0.1, add_poisson_noise=True
 )
 
 """
@@ -72,7 +72,7 @@ Setup the galaxy with a bulge (elliptical Sersic) for this simulation.
 This includes an operated `Gaussian` component which represents the PSF convolved emission of a point-source 
 emission at the galaxy's centre. 
 
-It uses the same parameters as the `psf_2d` defined above.
+It uses the same parameters as the `psf` defined above.
 """
 galaxy = ag.Galaxy(
     redshift=0.5,
@@ -95,21 +95,21 @@ plane_plotter.figures_2d(image=True)
 """
 Pass the simulator a plane, which creates the image which is simulated as an imaging dataset.
 """
-imaging = simulator.via_plane_from(plane=plane, grid=grid_2d)
+dataset = simulator.via_plane_from(plane=plane, grid=grid_2d)
 
 """
 Plot the simulated `Imaging` dataset before outputting it to fits.
 """
-imaging_plotter = aplt.ImagingPlotter(imaging=imaging)
-imaging_plotter.subplot_dataset()
+dataset_plotter = aplt.ImagingPlotter(dataset=dataset)
+dataset_plotter.subplot_dataset()
 
 """
 __Output__
 
 Output the simulated dataset to the dataset path as .fits files.
 """
-imaging.output_to_fits(
-    data_path=path.join(dataset_path, "image.fits"),
+dataset.output_to_fits(
+    data_path=path.join(dataset_path, "data.fits"),
     psf_path=path.join(dataset_path, "psf.fits"),
     noise_map_path=path.join(dataset_path, "noise_map.fits"),
     overwrite=True,
@@ -122,9 +122,9 @@ Output a subplot of the simulated dataset, the image and the plane's quantities 
 """
 mat_plot_2d = aplt.MatPlot2D(output=aplt.Output(path=dataset_path, format="png"))
 
-imaging_plotter = aplt.ImagingPlotter(imaging=imaging, mat_plot_2d=mat_plot_2d)
-imaging_plotter.subplot_dataset()
-imaging_plotter.figures_2d(data=True)
+dataset_plotter = aplt.ImagingPlotter(dataset=dataset, mat_plot_2d=mat_plot_2d)
+dataset_plotter.subplot_dataset()
+dataset_plotter.figures_2d(data=True)
 
 plane_plotter = aplt.PlanePlotter(plane=plane, grid=grid_2d, mat_plot_2d=mat_plot_2d)
 plane_plotter.subplot()

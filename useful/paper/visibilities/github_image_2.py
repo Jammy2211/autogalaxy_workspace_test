@@ -19,7 +19,7 @@ import autogalaxy.plot as aplt
 import numpy as np
 
 """
-__Masking__
+__Mask__
 
 We define the ‘real_space_mask’ which defines the grid the image the galaxy is evaluated using.
 """
@@ -36,8 +36,8 @@ with the model.
 dataset_name = "visibilities"
 dataset_path = path.join("paper", dataset_name)
 
-interferometer = ag.Interferometer.from_fits(
-    visibilities_path=path.join(dataset_path, "visibilities.fits"),
+dataset = ag.Interferometer.from_fits(
+    data_path=path.join(dataset_path, "data.fits"),
     noise_map_path=path.join(dataset_path, "noise_map.fits"),
     uv_wavelengths_path=path.join(dataset_path, "uv_wavelengths.fits"),
     real_space_mask=real_space_mask_2d,
@@ -48,8 +48,8 @@ xticks = aplt.XTicks(
     manual_units='%.1f"', manual_values=[-2.8, -1.4, 0.0, 1.4, 2.8], fontsize=20
 )
 yticks = aplt.YTicks(manual_units='%.1f"', fontsize=20)
-xlabel = aplt.XLabel(label="")
-ylabel = aplt.YLabel(label="")
+xlabel = aplt.XLabel(xlabel="")
+ylabel = aplt.YLabel(ylabel="")
 cmap = aplt.Cmap(cmap="inferno")
 tickparams = aplt.TickParams(labelleft=False)
 
@@ -71,10 +71,10 @@ mat_plot_2d = aplt.MatPlot2D(
 
 include_2d = aplt.Include2D(mask=False, border=False)
 
-interferometer_plotter = aplt.InterferometerPlotter(
-    interferometer=interferometer, mat_plot_2d=mat_plot_2d, include_2d=include_2d
+dataset_plotter = aplt.InterferometerPlotter(
+    dataset=dataset, mat_plot_2d=mat_plot_2d, include_2d=include_2d
 )
-interferometer_plotter.figures_2d(dirty_image=True)
+dataset_plotter.figures_2d(dirty_image=True)
 
 
 galaxy = ag.Galaxy(
@@ -90,7 +90,7 @@ galaxy = ag.Galaxy(
 
 plane = ag.Plane(galaxies=[galaxy])
 
-fit = ag.FitInterferometer(dataset=interferometer, plane=plane)
+fit = ag.FitInterferometer(dataset=dataset, plane=plane)
 
 
 title = aplt.Title(label="Model Dirty Image via Fourier Transform", fontsize=18)
@@ -119,9 +119,9 @@ fit_plotter = aplt.FitInterferometerPlotter(
 fit_plotter.figures_2d(dirty_model_image=True)
 
 
-no_visibilities = interferometer.visibilities.shape[0]
+no_visibilities = dataset.data.shape[0]
 
-interferometer.data = interferometer.visibilities[0 : int(no_visibilities / 50)]
+dataset.data = dataset.data[0 : int(no_visibilities / 50)]
 
 size = 0.4
 axis = aplt.Axis(extent=[-size, size, -size, size])
@@ -149,13 +149,11 @@ mat_plot_2d = aplt.MatPlot2D(
     output=output,
 )
 
-interferometer_plotter = aplt.InterferometerPlotter(
-    interferometer=interferometer, mat_plot_2d=mat_plot_2d
-)
-interferometer_plotter.figures_2d(visibilities=True)
+dataset_plotter = aplt.InterferometerPlotter(dataset=dataset, mat_plot_2d=mat_plot_2d)
+dataset_plotter.figures_2d(data=True)
 
 
-# visibilities = interferometer.visibilities
+# visibilities = dataset.data
 #
 # size = 0.7
 # axis = aplt.Axis(extent=[-size, size, -size, size])

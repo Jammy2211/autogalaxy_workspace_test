@@ -53,10 +53,10 @@ Hubble Space Telescope goes through to observe a galaxy. This includes accountin
 determine the signal-to-noise of the data, blurring the observed light of the galaxy with the telescope optics 
 and accounting for the background sky in the exposure which adds Poisson noise.
 """
-psf_2d = ag.Kernel2D.from_gaussian(shape_native=(11, 11), sigma=0.1, pixel_scales=0.05)
+psf = ag.Kernel2D.from_gaussian(shape_native=(11, 11), sigma=0.1, pixel_scales=0.05)
 
 simulator = ag.SimulatorImaging(
-    exposure_time=300.0, background_sky_level=1.0, psf=psf_2d, add_poisson_noise=True
+    exposure_time=300.0, background_sky_level=1.0, psf=psf, add_poisson_noise=True
 )
 
 """
@@ -66,33 +66,33 @@ Point Spread Function (PSF) by passing it a plane and grid.
 This uses the plane above to create the image of the galaxy and then add the effects that occur during data
 acquisition.
 """
-imaging = simulator.via_plane_from(plane=plane, grid=grid_2d)
+dataset = simulator.via_plane_from(plane=plane, grid=grid_2d)
 
 """
 By plotting a subplot of the `Imaging` dataset, we can see this object includes the observed image of the galaxy
 (which has had noise and other instrumental effects added to it) as well as a noise-map and PSF:
 """
-imaging_plotter = aplt.ImagingPlotter(
-    imaging=imaging,
+dataset_plotter = aplt.ImagingPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="image", format="png")
     ),
 )
-imaging_plotter.figures_2d(image=True)
-imaging_plotter = aplt.ImagingPlotter(
-    imaging=imaging,
+dataset_plotter.figures_2d(data=True)
+dataset_plotter = aplt.ImagingPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="noise_map", format="png")
     ),
 )
-imaging_plotter.figures_2d(noise_map=True)
-imaging_plotter = aplt.ImagingPlotter(
-    imaging=imaging,
+dataset_plotter.figures_2d(noise_map=True)
+dataset_plotter = aplt.ImagingPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="psf", format="png")
     ),
 )
-imaging_plotter.figures_2d(psf=True)
+dataset_plotter.figures_2d(psf=True)
 
 """
 __Wrap Up__

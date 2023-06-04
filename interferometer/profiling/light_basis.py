@@ -144,7 +144,6 @@ sigma_list = [
 gaussian_dict = {}
 
 for gaussian_index in range(len(centre_x_list)):
-
     gaussian = ag.lp_linear.Gaussian(
         centre=(centre_y_list[gaussian_index], centre_x_list[gaussian_index]),
         ell_comps=(
@@ -165,7 +164,6 @@ gaussian_c = 1.0
 gaussians = [ag.lp_linear.Gaussian() for i in range(10)]
 
 for i, gaussian in enumerate(gaussians):
-
     gaussian.centre = gaussians[0].centre
     gaussian.ell_comps = gaussians[0].ell_comps
     gaussian.sigma = (gaussian_m * i) + gaussian_c
@@ -185,7 +183,6 @@ instrument = "sma"
 # instrument = "alma_high_res"
 
 if instrument == "sma":
-
     real_shape_native = (64, 64)
     pixel_scales = (0.15625, 0.15625)
 
@@ -198,7 +195,6 @@ if instrument == "sma":
     )
 
 elif instrument == "alma_low_res":
-
     real_shape_native = (256, 256)
     pixel_scales = (0.0390625, 0.0390625)
 
@@ -212,7 +208,6 @@ elif instrument == "alma_low_res":
     )
 
 elif instrument == "alma_high_res":
-
     # real_shape_native = (1024, 1024)
     # pixel_scales = (0.0048828125, 0.0048828125)
 
@@ -234,7 +229,6 @@ elif instrument == "alma_high_res":
     )
 
 else:
-
     raise Exception
 
 """
@@ -247,8 +241,8 @@ instrument = "sma"
 dataset_name = "light_asymmetric"
 dataset_path = path.join("dataset", "interferometer", dataset_name)
 
-interferometer = ag.Interferometer.from_fits(
-    visibilities_path=path.join(dataset_path, "visibilities.fits"),
+dataset = ag.Interferometer.from_fits(
+    data_path=path.join(dataset_path, "data.fits"),
     noise_map_path=path.join(dataset_path, "noise_map.fits"),
     uv_wavelengths_path=path.join(dataset_path, "uv_wavelengths.fits"),
     real_space_mask=real_space_mask,
@@ -259,7 +253,7 @@ These settings control the run-time of the `Inversion` performed on the `Interfe
 """
 transformer_class = ag.TransformerNUFFT
 
-interferometer = interferometer.apply_settings(
+dataset = dataset.apply_settings(
     settings=ag.SettingsInterferometer(transformer_class=transformer_class)
 )
 
@@ -271,7 +265,7 @@ Call FitInterferometer once to get all numba functions initialized.
 plane = ag.Plane(galaxies=[galaxy])
 
 fit = ag.FitInterferometer(
-    dataset=interferometer,
+    dataset=dataset,
     plane=plane,
     settings_inversion=ag.SettingsInversion(
         use_w_tilde=use_w_tilde,
@@ -287,7 +281,7 @@ Time FitInterferometer by itself, to compare to profiling dict call.
 start = time.time()
 for i in range(repeats):
     fit = ag.FitInterferometer(
-        dataset=interferometer,
+        dataset=dataset,
         plane=plane,
         settings_inversion=ag.SettingsInversion(
             use_w_tilde=use_w_tilde,
@@ -307,7 +301,7 @@ profiling_dict = {}
 plane = ag.Plane(galaxies=[galaxy], profiling_dict=profiling_dict)
 
 fit = ag.FitInterferometer(
-    dataset=interferometer,
+    dataset=dataset,
     plane=plane,
     settings_inversion=ag.SettingsInversion(
         use_w_tilde=use_w_tilde,
@@ -325,8 +319,8 @@ These two numbers are the primary driver of run time. More pixels = longer run t
 """
 
 print(f"Inversion fit run times for image type {instrument} \n")
-print(f"Number of pixels = {interferometer.grid.shape_slim} \n")
-print(f"Number of sub-pixels = {interferometer.grid.sub_shape_slim} \n")
+print(f"Number of pixels = {dataset.grid.shape_slim} \n")
+print(f"Number of sub-pixels = {dataset.grid.sub_shape_slim} \n")
 
 """
 Print the profiling results of every step of the fit for command line output when running profiling scripts.
@@ -385,23 +379,21 @@ Output an image of the fit, so that we can inspect that it fits the data as expe
 mat_plot_2d = aplt.MatPlot2D(
     output=aplt.Output(
         path=file_path,
-        filename=f"{instrument}_subplot_fit_interferometer",
+        filename=f"{instrument}_subplot_fit",
         format="png",
     )
 )
-fit_interferometer_plotter = aplt.FitInterferometerPlotter(
-    fit=fit, mat_plot_2d=mat_plot_2d
-)
-fit_interferometer_plotter.subplot_fit_interferometer()
-fit_interferometer_plotter.subplot_fit_dirty_images()
-fit_interferometer_plotter.subplot_fit_real_space()
+fit_plotter = aplt.FitInterferometerPlotter(fit=fit, mat_plot_2d=mat_plot_2d)
+fit_plotter.subplot_fit()
+fit_plotter.subplot_fit_dirty_images()
+fit_plotter.subplot_fit_real_space()
 
 """
 The `info_dict` contains all the key information of the analysis which describes its run times.
 """
 info_dict = {}
 info_dict["repeats"] = repeats
-info_dict["image_pixels"] = interferometer.grid.sub_shape_slim
+info_dict["image_pixels"] = dataset.grid.sub_shape_slim
 info_dict["sub_size"] = sub_size
 info_dict["mask_radius"] = mask_radius
 # info_dict["source_pixels"] = len(reconstruction)

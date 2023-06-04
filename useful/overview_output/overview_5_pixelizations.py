@@ -38,31 +38,31 @@ represent using `LightProfile`'s!
 dataset_name = "light_complex"
 dataset_path = path.join("dataset", "imaging", dataset_name)
 
-imaging = ag.Imaging.from_fits(
-    image_path=path.join(dataset_path, "image.fits"),
+dataset = ag.Imaging.from_fits(
+    data_path=path.join(dataset_path, "data.fits"),
     psf_path=path.join(dataset_path, "psf.fits"),
     noise_map_path=path.join(dataset_path, "noise_map.fits"),
     pixel_scales=0.1,
 )
 
 """
-__Masking__
+__Mask__
 
 We are going to fit this data, so we must create `Mask2D` and `Imaging` objects.
 """
 mask_2d = ag.Mask2D.circular(
-    shape_native=imaging.shape_native, pixel_scales=imaging.pixel_scales, radius=2.5
+    shape_native=dataset.shape_native, pixel_scales=dataset.pixel_scales, radius=2.5
 )
 
-imaging = imaging.apply_mask(mask=mask_2d)
+dataset = dataset.apply_mask(mask=mask_2d)
 
-imaging_plotter = aplt.ImagingPlotter(
-    imaging=imaging,
+dataset_plotter = aplt.ImagingPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="image", format="png")
     ),
 )
-imaging_plotter.figures_2d(image=True)
+dataset_plotter.figures_2d(data=True)
 
 """
 __Pixelization + Regularization__
@@ -88,23 +88,23 @@ object.
 """
 plane = ag.Plane(galaxies=[galaxy])
 
-fit = ag.FitImaging(dataset=imaging, plane=plane)
+fit = ag.FitImaging(dataset=dataset, plane=plane)
 
 """
-__Inversion__
+__Pixelization__
 
 The fit has been performed using an `Inversion` for the galaxy.
 
 We can see that the `model_image` of the fit subplot shows a reconstruction of the observed galaxy that is close 
 to the data.
 """
-fit_imaging_plotter = aplt.FitImagingPlotter(
+fit_plotter = aplt.FitImagingPlotter(
     fit=fit,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="rectangular", format="png")
     ),
 )
-fit_imaging_plotter.figures_2d_of_galaxies(galaxy_index=0, model_image=True)
+fit_plotter.figures_2d_of_galaxies(galaxy_index=0, model_image=True)
 
 """
 __Why Use Pixelizations?__
@@ -125,7 +125,7 @@ The workspace contains examples of how to do this, as well as other uses for pix
 
 __Wrap Up__
 
-This script gives a brief overview of pixelizations with **PyAutoGalaxy**. 
+This script gives a brief overview of pixelizations. 
 
 However, there is a lot more to using *Inversions* then presented here. 
 

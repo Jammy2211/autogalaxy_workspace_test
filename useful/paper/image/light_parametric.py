@@ -29,34 +29,34 @@ the model.
 """
 dataset_path = path.join("paper_image")
 
-imaging = ag.Imaging.from_fits(
-    image_path=path.join(dataset_path, "image_hdf_example.fits"),
+dataset = ag.Imaging.from_fits(
+    data_path=path.join(dataset_path, "image_hdf_example.fits"),
     psf_path=path.join(dataset_path, "psf_hdf_example.fits"),
     noise_map_path=path.join(dataset_path, "noise_map_hdf_example.fits"),
     pixel_scales=0.03,
 )
 
-imaging_plotter = aplt.ImagingPlotter(imaging=imaging, mat_plot_2d=mat_plot_2d)
-imaging_plotter.subplot_imaging()
+dataset_plotter = aplt.ImagingPlotter(dataset=dataset, mat_plot_2d=mat_plot_2d)
+dataset_plotter.subplot_dataset()
 
 """
-__Masking__
+__Mask__
 
 The model-fit requires a `Mask2D` defining the regions of the image we fit the model to the data, which we define
 and use to set up the `Imaging` object that the model fits.
 """
 mask_2d = ag.Mask2D.elliptical(
-    shape_native=imaging.shape_native,
-    pixel_scales=imaging.pixel_scales,
+    shape_native=dataset.shape_native,
+    pixel_scales=dataset.pixel_scales,
     major_axis_radius=9.0,
     angle=-10.0,
     axis_ratio=0.64,
 )
 
-imaging = imaging.apply_mask(mask=mask_2d)
+dataset = dataset.apply_mask(mask=mask_2d)
 
-imaging_plotter = aplt.ImagingPlotter(imaging=imaging, mat_plot_2d=mat_plot_2d)
-imaging_plotter.subplot_imaging()
+dataset_plotter = aplt.ImagingPlotter(dataset=dataset, mat_plot_2d=mat_plot_2d)
+dataset_plotter.subplot_dataset()
 
 """
 __Model__
@@ -155,7 +155,7 @@ __Analysis__
 The `AnalysisImaging` object defines the `log_likelihood_function` used by the non-linear search to fit the model to 
 the `Imaging` dataset.
 """
-analysis = ag.AnalysisImaging(dataset=imaging)
+analysis = ag.AnalysisImaging(dataset=dataset)
 
 """
 __Model-Fit__
@@ -184,11 +184,11 @@ plane_plotter = aplt.PlanePlotter(
 )
 plane_plotter.subplot()
 
-fit_imaging_plotter = aplt.FitImagingPlotter(fit=result.max_log_likelihood_fit)
-fit_imaging_plotter.subplot_fit_imaging()
+fit_plotter = aplt.FitImagingPlotter(fit=result.max_log_likelihood_fit)
+fit_plotter.subplot_fit()
 
-dynesty_plotter = aplt.DynestyPlotter(samples=result.samples)
-dynesty_plotter.cornerplot()
+search_plotter = aplt.DynestyPlotter(samples=result.samples)
+search_plotter.cornerplot()
 
 """
 Checkout `autogalaxy_workspace/*/imaging/modeling/results.py` for a full description of the result object.

@@ -57,8 +57,8 @@ cmap = aplt.Cmap(
 
 xticks = aplt.XTicks(manual_units='%d"', fontsize=20)
 yticks = aplt.YTicks(manual_units='%d"', fontsize=20)
-xlabel = aplt.XLabel(label="")
-ylabel = aplt.YLabel(label="")
+xlabel = aplt.XLabel(xlabel="")
+ylabel = aplt.YLabel(ylabel="")
 title = aplt.Title(label="Hubble Space Telescope Galaxy Imaging", fontsize=18)
 output = aplt.Output(path=dataset_path, filename="observed", format=["png", "pdf"])
 

@@ -44,8 +44,8 @@ object.
 dataset_name = "light_sersic"
 dataset_path = path.join("dataset", "interferometer", dataset_name)
 
-interferometer = ag.Interferometer.from_fits(
-    visibilities_path=path.join(dataset_path, "visibilities.fits"),
+dataset = ag.Interferometer.from_fits(
+    data_path=path.join(dataset_path, "data.fits"),
     noise_map_path=path.join(dataset_path, "noise_map.fits"),
     uv_wavelengths_path=path.join(dataset_path, "uv_wavelengths.fits"),
     real_space_mask=real_space_mask,
@@ -57,36 +57,36 @@ and uv wavelength which represent the interferometer`s baselines.
 
 The data used in this tutorial contains 1 million visibilities and is representative of an ALMA dataset:
 """
-interferometer_plotter = aplt.InterferometerPlotter(
-    interferometer=interferometer,
+dataset_plotter = aplt.InterferometerPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="visibilities", format="png")
     ),
 )
-interferometer_plotter.figures_2d(visibilities=True)
+dataset_plotter.figures_2d(data=True)
 
-interferometer_plotter = aplt.InterferometerPlotter(
-    interferometer=interferometer,
+dataset_plotter = aplt.InterferometerPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="uv_wavelengths", format="png")
     ),
 )
-interferometer_plotter.figures_2d(uv_wavelengths=True)
+dataset_plotter.figures_2d(uv_wavelengths=True)
 
 """
 This can also plot the dataset in real-space, using the fast Fourier transforms described below.
 """
-interferometer_plotter = aplt.InterferometerPlotter(
-    interferometer=interferometer,
+dataset_plotter = aplt.InterferometerPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="dirty_image", format="png")
     ),
 )
 
-interferometer_plotter.figures_2d(dirty_image=True)
+dataset_plotter.figures_2d(dirty_image=True)
 
-interferometer_plotter = aplt.InterferometerPlotter(
-    interferometer=interferometer,
+dataset_plotter = aplt.InterferometerPlotter(
+    dataset=dataset,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(
             path=workspace_path, filename="dirty_signal_to_noise", format="png"
@@ -94,7 +94,7 @@ interferometer_plotter = aplt.InterferometerPlotter(
     ),
 )
 
-interferometer_plotter.figures_2d(dirty_signal_to_noise_map=True)
+dataset_plotter.figures_2d(dirty_signal_to_noise_map=True)
 
 """
 __Plane__
@@ -148,7 +148,7 @@ transformer_class = ag.TransformerNUFFT
 """
 The use this transformer in a fit, we use the `apply_settings` method.
 """
-interferometer = interferometer.apply_settings(
+dataset = dataset.apply_settings(
     settings=ag.SettingsInterferometer(transformer_class=transformer_class)
 )
 
@@ -157,25 +157,23 @@ __Fitting__
 
 The interferometer can now be used with a `FitInterferometer` object to fit it to a dataset:
 """
-fit = ag.FitInterferometer(dataset=interferometer, plane=plane)
+fit = ag.FitInterferometer(dataset=dataset, plane=plane)
 
-fit_interferometer_plotter = aplt.FitInterferometerPlotter(fit=fit)
+fit_plotter = aplt.FitInterferometerPlotter(fit=fit)
 
 """
 Visualization of the fit can be performed in the uv-plane or in real-space. 
 
 Note that the fit is not performed in real-space, but plotting it in real-space is often more informative.
 """
-fit_interferometer_plotter = aplt.FitInterferometerPlotter(
+fit_plotter = aplt.FitInterferometerPlotter(
     fit=fit,
     mat_plot_2d=aplt.MatPlot2D(
-        output=aplt.Output(
-            path=workspace_path, filename="model_visibilities", format="png"
-        )
+        output=aplt.Output(path=workspace_path, filename="model_data", format="png")
     ),
 )
-fit_interferometer_plotter.figures_2d(model_visibilities=True)
-fit_interferometer_plotter = aplt.FitInterferometerPlotter(
+fit_plotter.figures_2d(model_data=True)
+fit_plotter = aplt.FitInterferometerPlotter(
     fit=fit,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(
@@ -183,7 +181,7 @@ fit_interferometer_plotter = aplt.FitInterferometerPlotter(
         )
     ),
 )
-fit_interferometer_plotter.subplot_fit_dirty_images()
+fit_plotter.subplot_fit_dirty_images()
 """
 Interferometer data can also be modeled using pixelizations, which again perform the galaxy reconstruction by
 directly fitting the visibilities in the uv-plane. 
@@ -199,15 +197,15 @@ galaxy = ag.Galaxy(
 plane = ag.Plane(galaxies=[galaxy])
 
 fit = ag.FitInterferometer(
-    dataset=interferometer,
+    dataset=dataset,
     plane=plane,
     settings_inversion=ag.SettingsInversion(use_linear_operators=True),
 )
 
-fit_interferometer_plotter = aplt.FitInterferometerPlotter(fit=fit)
-fit_interferometer_plotter.subplot_fit_interferometer()
-fit_interferometer_plotter.subplot_fit_dirty_images()
-fit_interferometer_plotter.subplot_fit_real_space()
+fit_plotter = aplt.FitInterferometerPlotter(fit=fit)
+fit_plotter.subplot_fit()
+fit_plotter.subplot_fit_dirty_images()
+fit_plotter.subplot_fit_real_space()
 
 """
 The combination of pixelizations with interferometer datasets therefore offers a compelling way to reconstruct
@@ -258,7 +256,7 @@ the model in the correct way for an interferometer dataset.
 
 This includes mapping the model from real-space to the uv-plane via the Fourier transform discussed above.
 """
-analysis = ag.AnalysisInterferometer(dataset=interferometer)
+analysis = ag.AnalysisInterferometer(dataset=dataset)
 
 """
 __Model-Fit__
@@ -276,11 +274,9 @@ __Result__
 The **PyAutoGalaxy** visualization library and `FitInterferometer` object includes specific methods for plotting the 
 results.
 """
-fit_interferometer_plotter = aplt.FitInterferometerPlotter(
-    fit=result.max_log_likelihood_fit
-)
-fit_interferometer_plotter.subplot_fit_interferometer()
-fit_interferometer_plotter.subplot_fit_dirty_images()
+fit_plotter = aplt.FitInterferometerPlotter(fit=result.max_log_likelihood_fit)
+fit_plotter.subplot_fit()
+fit_plotter.subplot_fit_dirty_images()
 
 """
 __Simulation__
@@ -289,14 +285,14 @@ Simulated interferometer datasets can be generated using the ``SimulatorInterfer
 Gaussian noise to the visibilities:
 """
 simulator = ag.SimulatorInterferometer(
-    uv_wavelengths=interferometer.uv_wavelengths, exposure_time=300.0, noise_sigma=0.01
+    uv_wavelengths=dataset.uv_wavelengths, exposure_time=300.0, noise_sigma=0.01
 )
 
 real_space_grid_2d = ag.Grid2D.uniform(
     shape_native=real_space_mask.shape_native, pixel_scales=real_space_mask.pixel_scales
 )
 
-interferometer = simulator.via_plane_from(plane=plane, grid=real_space_grid_2d)
+dataset = simulator.via_plane_from(plane=plane, grid=real_space_grid_2d)
 
 """
 __Wrap Up__

@@ -68,9 +68,9 @@ dataset_name = "light_sersic_exp"
 
 dataset_path = path.join("dataset", dataset_type, dataset_label, dataset_name)
 
-imaging_list = [
+dataset_list = [
     ag.Imaging.from_fits(
-        image_path=path.join(dataset_path, f"{color}_image.fits"),
+        data_path=path.join(dataset_path, f"{color}_image.fits"),
         psf_path=path.join(dataset_path, f"{color}_psf.fits"),
         noise_map_path=path.join(dataset_path, f"{color}_noise_map.fits"),
         pixel_scales=pixel_scales,
@@ -86,8 +86,7 @@ Note how in the r-band the galaxy bulge is brighter than the disk, whereas in th
 The different variation of the colors of the galaxy is a powerful tool for galaxy modeling as it provides a lot more
 information on the galaxy's morphology.
 """
-for imaging, color in zip(imaging_list, color_list):
-
+for imaging, color in zip(dataset_list, color_list):
     mat_plot_2d = aplt.MatPlot2D(
         title=aplt.Title(label=f"{color}-band Image"),
         output=aplt.Output(
@@ -95,11 +94,11 @@ for imaging, color in zip(imaging_list, color_list):
         ),
     )
 
-    imaging_plotter = aplt.ImagingPlotter(imaging=imaging, mat_plot_2d=mat_plot_2d)
-    imaging_plotter.figures_2d(image=True)
+    dataset_plotter = aplt.ImagingPlotter(dataset=dataset, mat_plot_2d=mat_plot_2d)
+    dataset_plotter.figures_2d(data=True)
 
 """
-__Masking__
+__Mask__
 
 The model-fit requires a `Mask2D` defining the regions of the image we fit the galaxy model to the data, which we 
 define and use to set up the `Imaging` object that the galaxy model fits.
@@ -109,19 +108,18 @@ necessary, but provides a more reliable analysis.
 """
 mask_2d_list = [
     ag.Mask2D.circular(
-        shape_native=imaging.shape_native, pixel_scales=imaging.pixel_scales, radius=5.0
+        shape_native=dataset.shape_native, pixel_scales=dataset.pixel_scales, radius=5.0
     )
-    for imaging in imaging_list
+    for dataset in dataset_list
 ]
 
 
-imaging_list = [
-    imaging.apply_mask(mask=mask_2d)
-    for imaging, mask_2d in zip(imaging_list, mask_2d_list)
+dataset_list = [
+    dataset.apply_mask(mask=mask_2d)
+    for imaging, mask_2d in zip(dataset_list, mask_2d_list)
 ]
 
-for imaging in imaging_list:
-
+for dataset in dataset_list:
     mat_plot_2d = aplt.MatPlot2D(
         title=aplt.Title(label=f"{color}-band Image"),
         output=aplt.Output(
@@ -129,15 +127,15 @@ for imaging in imaging_list:
         ),
     )
 
-    imaging_plotter = aplt.ImagingPlotter(imaging=imaging, mat_plot_2d=mat_plot_2d)
-    imaging_plotter.figures_2d(image=True)
+    dataset_plotter = aplt.ImagingPlotter(dataset=dataset, mat_plot_2d=mat_plot_2d)
+    dataset_plotter.figures_2d(data=True)
 
 """
 __Analysis__
 
 We create a list of `AnalysisImaging` objects for every dataset.
 """
-analysis_list = [ag.AnalysisImaging(dataset=imaging) for imaging in imaging_list]
+analysis_list = [ag.AnalysisImaging(dataset=dataset) for dataset in dataset_list]
 
 """
 We now introduce the key new aspect to the **PyAutoGalaxy** multi-dataset API, which is critical to fitting multiple 
@@ -214,7 +212,6 @@ Plotting each result's galaxies shows that the bulge and disk appear different i
 different intensities.
 """
 for result, color in zip(result_list, color_list):
-
     mat_plot_2d = aplt.MatPlot2D(
         title=aplt.Title(label=f"bulge and disk {color}-band Images"),
         output=aplt.Output(
@@ -253,12 +250,11 @@ analysis_list = []
 bulge_m = af.UniformPrior(lower_limit=-0.1, upper_limit=0.1)
 bulge_c = af.UniformPrior(lower_limit=-10.0, upper_limit=10.0)
 
-for wavelength, imaging in zip(wavelength_list, imaging_list):
-
+for wavelength, imaging in zip(wavelength_list, dataset_list):
     bulge_intensity = (wavelength * bulge_m) + bulge_c
 
     analysis_list.append(
-        ag.AnalysisImaging(dataset=imaging).with_model(
+        ag.AnalysisImaging(dataset=dataset).with_model(
             model.replacing({model.galaxies.galaxy.bulge.intensity: bulge_intensity})
         )
     )
@@ -309,8 +305,8 @@ dataset_label = "interferometer"
 dataset_name = "light_sersic_exp"
 dataset_path = path.join("dataset", dataset_type, dataset_label, dataset_name)
 
-interferometer = ag.Interferometer.from_fits(
-    visibilities_path=path.join(dataset_path, "visibilities.fits"),
+dataset = ag.Interferometer.from_fits(
+    data_path=path.join(dataset_path, "data.fits"),
     noise_map_path=path.join(dataset_path, "noise_map.fits"),
     uv_wavelengths_path=path.join(dataset_path, "uv_wavelengths.fits"),
     real_space_mask=real_space_mask,
@@ -321,7 +317,5 @@ mat_plot_2d = aplt.MatPlot2D(
     output=aplt.Output(path=workspace_path, filename=f"dirty_image", format="png"),
 )
 
-interferometer_plotter = aplt.InterferometerPlotter(
-    interferometer=interferometer, mat_plot_2d=mat_plot_2d
-)
-interferometer_plotter.figures_2d(dirty_image=True)
+dataset_plotter = aplt.InterferometerPlotter(dataset=dataset, mat_plot_2d=mat_plot_2d)
+dataset_plotter.figures_2d(dirty_image=True)

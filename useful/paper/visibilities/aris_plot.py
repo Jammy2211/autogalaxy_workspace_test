@@ -101,7 +101,6 @@ def fit_subplots_without_lensing(
         axes[i].set_yticks([])
 
     if xlim_image_plane is not None and ylim_image_plane is not None:
-
         ylim_image_plane_shifted = (
             ylim_image_plane[0] + centre_from_mask[0],
             ylim_image_plane[1] + centre_from_mask[0],

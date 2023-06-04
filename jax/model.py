@@ -45,8 +45,8 @@ the model.
 dataset_name = "operated"
 dataset_path = path.join("dataset", "imaging", dataset_name)
 
-imaging = ag.Imaging.from_fits(
-    image_path=path.join(dataset_path, "image.fits"),
+dataset = ag.Imaging.from_fits(
+    data_path=path.join(dataset_path, "data.fits"),
     psf_path=path.join(dataset_path, "psf.fits"),
     noise_map_path=path.join(dataset_path, "noise_map.fits"),
     pixel_scales=0.1,
@@ -59,10 +59,10 @@ The model-fit requires a `Mask2D` defining the regions of the image we fit the m
 and use to set up the `Imaging` object that the model fits.
 """
 mask_2d = ag.Mask2D.circular(
-    shape_native=imaging.shape_native, pixel_scales=imaging.pixel_scales, radius=3.0
+    shape_native=dataset.shape_native, pixel_scales=dataset.pixel_scales, radius=3.0
 )
 
-imaging = imaging.apply_mask(mask=mask_2d)
+dataset = dataset.apply_mask(mask=mask_2d)
 
 """
 __Model__
@@ -102,14 +102,13 @@ A full description of the settings below is given in the beginner modeling scrip
 """
 search = af.DynestyStatic(
     path_prefix=path.join("imaging", "modeling"),
-    name="jax",
+    name="hslice_grad",
     sample="hslice",
     unique_tag=dataset_name,
     nlive=100,
-    walks=10,
     iterations_per_update=25000,
     number_of_cores=1,
-  #  use_gradient=False
+    #  use_gradient=False
 )
 
 """
@@ -118,7 +117,7 @@ __Analysis__
 The `AnalysisImaging` object defines the `log_likelihood_function` used by the non-linear search to fit the model to 
 the `Imaging` dataset. 
 """
-analysis = ag.AnalysisImaging(dataset=imaging)
+analysis = ag.AnalysisImaging(dataset=dataset)
 
 """
 __Model-Fit__
@@ -152,11 +151,11 @@ plane_plotter = aplt.PlanePlotter(
 )
 plane_plotter.subplot()
 
-fit_imaging_plotter = aplt.FitImagingPlotter(fit=result.max_log_likelihood_fit)
-fit_imaging_plotter.subplot_fit()
+fit_plotter = aplt.FitImagingPlotter(fit=result.max_log_likelihood_fit)
+fit_plotter.subplot_fit()
 
-dynesty_plotter = aplt.DynestyPlotter(samples=result.samples)
-dynesty_plotter.cornerplot()
+search_plotter = aplt.DynestyPlotter(samples=result.samples)
+search_plotter.cornerplot()
 
 """
 Checkout `autogalaxy_workspace/*/imaging/modeling/results.py` for a full description of the result object.
