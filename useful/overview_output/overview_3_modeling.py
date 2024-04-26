@@ -150,17 +150,17 @@ In fact, the result contains the full posterior information of our non-linear se
 parameter samples, log likelihood values and tools to compute the errors on the model. **PyAutoGalaxy** includes
 visualization tools for plotting this.
 """
-search_plotter = aplt.DynestyPlotter(
+plotter = aplt.NestPlotter(
     samples=result.samples,
-    output=aplt.Output(path=workspace_path, filename="cornerplot", format="png"),
+    output=aplt.Output(path=workspace_path, filename="corner", format="png"),
 )
-search_plotter.cornerplot()
+plotter.corner_cornerpy()
 
 """
 The result also contains the maximum log likelihood `Plane` and `FitImaging` objects which can easily be plotted.
 """
-plane_plotter = aplt.PlanePlotter(
-    plane=result.max_log_likelihood_plane, grid=dataset.grid
+plane_plotter = aplt.GalaxiesPlotter(
+    galaxies=result.max_log_likelihood_galaxies, grid=dataset.grid
 )
 plane_plotter.subplot()
 

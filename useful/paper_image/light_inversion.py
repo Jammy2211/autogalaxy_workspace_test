@@ -183,7 +183,7 @@ We use the results of search 1 to create the model fitted in search 2, where:
 
 The number of free parameters and therefore the dimensionality of non-linear parameter space is N=1.
 
-This search allows us to very efficiently set up the resolution of the pixelization and regularization coefficient 
+This search allows us to very efficiently set up the resolution of the mesh and regularization coefficient 
 of the regularization scheme, before using these models to refit the lens mass model.
 
 The term `model` below passes the source model as model-components that are to be fitted for by the 
@@ -208,7 +208,7 @@ We now create the non-linear search and perform the model-fit using this model.
 """
 analysis_2 = ag.AnalysisImaging(
     dataset=dataset,
-    settings_pixelization=ag.SettingsPixelization(use_border=True),
+    settings_inversion=ag.SettingsInversion(use_border_relocator=True),
     settings_inversion=ag.SettingsInversion(use_w_tilde=False),
 )
 

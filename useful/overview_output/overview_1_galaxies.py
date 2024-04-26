@@ -129,7 +129,7 @@ galaxy_plotter = aplt.GalaxyPlotter(
 galaxy_plotter.figures_2d(image=True)
 
 """
-__Plane__
+__Galaxies__
 
 If our observation contains multiple galaxies, we create a `Plane` object to represent all galaxies.
 
@@ -166,7 +166,7 @@ The image of the plane consists of all galaxies.
 """
 image_2d = plane.image_2d_from(grid=grid_2d)
 
-plane_plotter = aplt.PlanePlotter(
+plane_plotter = aplt.GalaxiesPlotter(
     plane=plane,
     grid=grid_2d,
     mat_plot_2d=aplt.MatPlot2D(
@@ -174,7 +174,7 @@ plane_plotter = aplt.PlanePlotter(
     ),
 )
 plane_plotter.figures_2d(image=True)
-plane_plotter = aplt.PlanePlotter(
+plane_plotter = aplt.GalaxiesPlotter(
     plane=plane,
     grid=grid_2d,
     mat_plot_2d=aplt.MatPlot2D(
@@ -230,7 +230,7 @@ plane = ag.Plane(galaxies=[galaxy_0, galaxy_1])
 """
 This is what the merging galaxies look like:
 """
-plane_plotter = aplt.PlanePlotter(
+plane_plotter = aplt.GalaxiesPlotter(
     plane=plane,
     grid=grid_2d,
     mat_plot_2d=aplt.MatPlot2D(

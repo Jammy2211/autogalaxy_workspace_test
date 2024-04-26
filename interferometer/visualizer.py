@@ -33,7 +33,7 @@ __Mask__
 We define the ‘real_space_mask’ which defines the grid the image the galaxy is evaluated using.
 """
 real_space_mask_2d = ag.Mask2D.circular(
-    shape_native=(400, 400), pixel_scales=0.2, radius=4.0, sub_size=1
+    shape_native=(400, 400), pixel_scales=0.2, radius=4.0
 )
 
 """
@@ -74,7 +74,8 @@ galaxy = af.Model(ag.Galaxy, redshift=0.5, bulge=bulge, disk=disk)
 
 pixelization = af.Model(
     ag.Pixelization,
-    mesh=ag.mesh.DelaunayMagnification(shape=(30, 30)),
+    image_mesh=ag.image_mesh.Overlay(shape=(30, 30)),
+    mesh=ag.mesh.Delaunay(),
     regularization=ag.reg.ConstantSplit,
 )
 

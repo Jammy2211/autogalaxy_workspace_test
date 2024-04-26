@@ -42,11 +42,12 @@ __Simulate__
 
 For simulating an image of a galaxy, we use a Grid2DIterate object.
 """
-grid_2d = ag.Grid2DIterate.uniform(
+grid = ag.Grid2D.uniform(
     shape_native=(100, 100),
     pixel_scales=0.1,
-    fractional_accuracy=0.9999,
-    sub_steps=[2, 4, 8, 16, 24],
+    over_sampling=ag.OverSamplingIterate(
+        fractional_accuracy=0.9999, sub_steps=[2, 4, 8, 16]
+    ),
 )
 
 """
@@ -65,7 +66,7 @@ simulator = ag.SimulatorImaging(
 )
 
 """
-__Plane__
+__Galaxies__
 
 Setup the galaxy with a bulge (elliptical Sersic) for this simulation.
 
@@ -89,13 +90,13 @@ galaxy = ag.Galaxy(
 Use these galaxies to setup a plane, which generates the image for the simulated `Imaging` dataset.
 """
 plane = ag.Plane(galaxies=[galaxy])
-plane_plotter = aplt.PlanePlotter(plane=plane, grid=grid_2d)
+plane_plotter = aplt.GalaxiesPlotter(plane=plane, grid=grid_2d)
 plane_plotter.figures_2d(image=True)
 
 """
 Pass the simulator a plane, which creates the image which is simulated as an imaging dataset.
 """
-dataset = simulator.via_plane_from(plane=plane, grid=grid_2d)
+dataset = simulator.via_galaxies_from(plane=plane, grid=grid_2d)
 
 """
 Plot the simulated `Imaging` dataset before outputting it to fits.
@@ -126,7 +127,7 @@ dataset_plotter = aplt.ImagingPlotter(dataset=dataset, mat_plot_2d=mat_plot_2d)
 dataset_plotter.subplot_dataset()
 dataset_plotter.figures_2d(data=True)
 
-plane_plotter = aplt.PlanePlotter(plane=plane, grid=grid_2d, mat_plot_2d=mat_plot_2d)
+plane_plotter = aplt.GalaxiesPlotter(plane=plane, grid=grid_2d, mat_plot_2d=mat_plot_2d)
 plane_plotter.subplot()
 
 """
@@ -135,9 +136,12 @@ __Plane Output__
 Save the `Plane` in the dataset folder as a .json file, ensuring the true light profiles and galaxies
 are safely stored and available to check how the dataset was simulated in the future. 
 
-This can be loaded via the method `Plane.from_json`.
+This can be loaded via the method `plane = ag.from_json()`.
 """
-plane.output_to_json(file_path=path.join(dataset_path, "plane.json"))
+ag.output_to_json(
+    obj=plane,
+    file_path=path.join(dataset_path, "plane.json"),
+)
 
 """
 The dataset can be viewed in the folder `autogalaxy_workspace/imaging/simple__sersic`.

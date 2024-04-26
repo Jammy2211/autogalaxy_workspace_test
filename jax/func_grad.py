@@ -1,11 +1,9 @@
 """
-Modeling: Light Parametric Operated
-===================================
+Func Grad: Light Parametric Operated
+====================================
 
-This script fits an `Imaging` dataset of a galaxy with a model where:
-
- - The galaxy's light is a parametric `Sersic` bulge.
- - The galaxy includes a parametric `Gaussian` psf.
+This script test if JAX can successfully compute the gradient of the log likelihood of an `Imaging` dataset with a
+model which uses operated light profiles.
 
  __Operated Fitting__
 
@@ -31,11 +29,16 @@ discussed above shows the PSF features.
 # %cd $workspace_path
 # print(f"Working Directory has been set to `{workspace_path}`")
 
+import jax
+from jax import grad
 from os import path
+
 import autofit as af
 import autogalaxy as ag
 import autogalaxy.plot as aplt
 from autoconf import conf
+
+conf.instance["general"]["model"]["ignore_prior_limits"] = True
 
 """
 __Dataset__
@@ -43,9 +46,6 @@ __Dataset__
 Load and plot the galaxy dataset `operated` via .fits files, which we will fit with 
 the model.
 """
-
-conf.instance["general"]["model"]["ignore_prior_limits"] = True
-
 dataset_name = "operated"
 dataset_path = path.join("dataset", "imaging", dataset_name)
 
@@ -78,12 +78,6 @@ example we fit a model where:
  - The galaxy's point source emission is a parametric operated `Gaussian` centred on the bulge [4 parameters].
 
 The number of free parameters and therefore the dimensionality of non-linear parameter space is N=11.
-
-The prior on the operated `Gaussian`'s `sigma` value is very important, as it often the case that this is a
-very small value (e.g. ~0.1). 
-
-By default, **PyAutoGalaxy** assumes a `UniformPrior` from 0.0 to 5.0, but the scale of this value depends on 
-resolution of the data. I therefore recommend you set it manually below, using your knowledge of the PSF size.
 """
 bulge = af.Model(ag.lp_operated.Sersic)
 
@@ -97,68 +91,48 @@ The `info` attribute shows the model in a readable format.
 print(model.info)
 
 """
-__Search__
-
-The model is fitted to the data using a non-linear search. In this example, we use the nested sampling algorithm 
-Dynesty (https://dynesty.readthedocs.io/en/latest/).
-
-A full description of the settings below is given in the beginner modeling scripts, if anything is unclear.
-"""
-search = af.DynestyStatic(
-    path_prefix=path.join("imaging", "modeling"),
-    name="hslice_grad",
-    sample="hslice",
-    unique_tag=dataset_name,
-    nlive=100,
-    iterations_per_update=25000,
-    number_of_cores=1,
-    use_gradient=True
-)
-
-"""
 __Analysis__
 
-The `AnalysisImaging` object defines the `log_likelihood_function` used by the non-linear search to fit the model to 
-the `Imaging` dataset. 
+The `AnalysisImaging` object defines the `log_likelihood_function` which will be used to determine if JAX
+can compute its gradient.
 """
 analysis = ag.AnalysisImaging(dataset=dataset)
 
 """
-__Model-Fit__
+The analysis and `log_likelihood_function` are internally wrapped into a `Fitness` class in **PyAutoFit**, which pairs
+the model with likelihood.
 
-We can now begin the model-fit by passing the model and analysis object to the search, which performs a non-linear
-search to find which models fit the data with the highest likelihood.
-
-Checkout the output folder for live outputs of the results of the fit, including on-the-fly visualization of the best 
-fit model!
+This is the function on which JAX gradients are computed, so we create this class here.
 """
-result = search.fit(model=model, analysis=analysis)
+from autofit.non_linear.fitness import Fitness
 
-"""
-__Result__
-
-The search returns a result object, which whose `info` attribute shows the result in a readable format:
-"""
-print(result.info)
-
-"""
-The `Result` object also contains:
-
- - The model corresponding to the maximum log likelihood solution in parameter space.
- - The corresponding maximum log likelihood `Plane` and `FitImaging` objects.Information on the posterior as estimated by the `Dynesty` non-linear search. 
-"""
-print(result.max_log_likelihood_instance)
-
-plane_plotter = aplt.GalaxiesPlotter(
-    galaxies=result.max_log_likelihood_galaxies, grid=result.grid
+fitness = Fitness(
+    model=model,
+    analysis=analysis,
+    fom_is_log_likelihood=True,
+    resample_figure_of_merit=-1.0e99,
 )
-plane_plotter.subplot()
 
-fit_plotter = aplt.FitImagingPlotter(fit=result.max_log_likelihood_fit)
-fit_plotter.subplot_fit()
+"""
+We now compile the gradient of the fitness function via JAX.
+"""
+grad = jax.jit(grad(fitness))
 
-plotter = aplt.NestPlotter(samples=result.samples)
-plotter.corner_cornerpy()
+"""
+Create a list of input parameters, which are representative of the parameters a non-linear search would input
+to the `log_likelihood_function` during sampling.
+"""
+parameters = model.physical_values_from_prior_medians
+
+"""
+Combine the gradient and these parameters, to therefore infer the gradient of the model and log likelihood via
+JAX.
+
+This gradient would be used by a model fit to speed up the non-linear search.
+
+This is also the function we need to confirm runs on GPU with significant speed-up.
+"""
+print(grad(parameters))
 
 """
 Checkout `autogalaxy_workspace/*/imaging/modeling/results.py` for a full description of the result object.

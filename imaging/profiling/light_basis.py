@@ -230,19 +230,19 @@ __Profiling Dict__
 
 Apply mask, settings and profiling dict to fit, such that timings of every individiual function are provided.
 """
-profiling_dict = {}
+run_time_dict = {}
 
-plane = ag.Plane(galaxies=[galaxy], profiling_dict=profiling_dict)
+plane = ag.Plane(galaxies=[galaxy], run_time_dict=run_time_dict)
 
 fit = ag.FitImaging(
     dataset=masked_dataset,
     plane=plane,
     settings_inversion=ag.SettingsInversion(use_w_tilde=False),
-    profiling_dict=profiling_dict,
+    run_time_dict=run_time_dict,
 )
 fit.figure_of_merit
 
-profiling_dict = fit.profiling_dict
+run_time_dict = fit.run_time_dict
 
 """
 __Results__
@@ -256,7 +256,7 @@ print(f"Number of sub-pixels = {masked_dataset.grid.sub_shape_slim} \n")
 """
 Print the profiling results of every step of the fit for command line output when running profiling scripts.
 """
-for key, value in profiling_dict.items():
+for key, value in run_time_dict.items():
     print(key, value)
 
 """
@@ -268,7 +268,7 @@ The excess time is the difference of this value from the fit time, and it indici
 has missed expensive steps.
 """
 predicted_time = 0.0
-predicted_time = sum(profiling_dict.values())
+predicted_time = sum(run_time_dict.values())
 excess_time = fit_time - predicted_time
 
 print(f"\nExcess Time = {excess_time} \n")
@@ -285,13 +285,13 @@ This is stored in a folder using the **PyAutoGalaxy** version number so that pro
 if not os.path.exists(file_path):
     os.makedirs(file_path)
 
-filename = f"profiling_dict.json"
+filename = f"run_time_dict.json"
 
 if os.path.exists(path.join(file_path, filename)):
     os.remove(path.join(file_path, filename))
 
 with open(path.join(file_path, filename), "w") as outfile:
-    json.dump(profiling_dict, outfile)
+    json.dump(run_time_dict, outfile)
 
 """
 Output the profiling run time of the entire fit.

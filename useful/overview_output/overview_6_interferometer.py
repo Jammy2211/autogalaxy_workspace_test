@@ -97,7 +97,7 @@ dataset_plotter = aplt.InterferometerPlotter(
 dataset_plotter.figures_2d(dirty_signal_to_noise_map=True)
 
 """
-__Plane__
+__Galaxies__
 
 To perform uv-plane modeling, **PyAutoGalaxy** generates an image of the galaxy system in real-space via a `Plane`. 
 
@@ -116,9 +116,9 @@ galaxy = ag.Galaxy(
 
 plane = ag.Plane(galaxies=[galaxy])
 
-plane_plotter = aplt.PlanePlotter(
+plane_plotter = aplt.GalaxiesPlotter(
     plane=plane,
-    grid=real_space_mask.derive_grid.unmasked_sub_1,
+    grid=real_space_mask.derive_grid.unmasked,
     mat_plot_2d=aplt.MatPlot2D(
         output=aplt.Output(path=workspace_path, filename="image_pre_ft", format="png")
     ),
@@ -292,7 +292,7 @@ real_space_grid_2d = ag.Grid2D.uniform(
     shape_native=real_space_mask.shape_native, pixel_scales=real_space_mask.pixel_scales
 )
 
-dataset = simulator.via_plane_from(plane=plane, grid=real_space_grid_2d)
+dataset = simulator.via_galaxies_from(plane=plane, grid=real_space_grid_2d)
 
 """
 __Wrap Up__

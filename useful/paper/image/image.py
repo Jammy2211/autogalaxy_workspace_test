@@ -88,7 +88,7 @@ exposure_time_map = ag.Array2D.full(
     fill_value=322944, shape_native=image_2d.shape_native, pixel_scales=0.03
 )
 
-background_noise_map_2d = ag.preprocess.background_noise_map_via_edges_of_image_from(
+background_noise_map_2d = ag.preprocess.background_noise_map_via_edges_from(
     image=image_2d.native, no_edges=2
 )
 

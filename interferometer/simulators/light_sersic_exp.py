@@ -65,7 +65,7 @@ simulator = ag.SimulatorInterferometer(
 )
 
 """
-__Plane__
+__Galaxies__
 
 Setup the galaxy with a bulge (elliptical Sersic) for this simulation.
 
@@ -102,14 +102,14 @@ plane = ag.Plane(galaxies=[galaxy])
 """
 Lets look at the plane`s image, this is the image we'll be simulating.
 """
-plane_plotter = aplt.PlanePlotter(plane=plane, grid=grid_2d)
+plane_plotter = aplt.GalaxiesPlotter(plane=plane, grid=grid_2d)
 plane_plotter.figures_2d(image=True)
 
 """
 We can now pass this simulator a plane, which creates the image plotted above and simulates it as an
 interferometer dataset.
 """
-dataset = simulator.via_plane_from(plane=plane, grid=grid_2d)
+dataset = simulator.via_galaxies_from(plane=plane, grid=grid_2d)
 
 """
 Lets plot the simulated interferometer dataset before we output it to fits.
@@ -143,7 +143,7 @@ dataset_plotter.subplot_dataset()
 dataset_plotter.subplot_dirty_images()
 dataset_plotter.figures_2d(data=True)
 
-plane_plotter = aplt.PlanePlotter(plane=plane, grid=grid_2d, mat_plot_2d=mat_plot_2d)
+plane_plotter = aplt.GalaxiesPlotter(plane=plane, grid=grid_2d, mat_plot_2d=mat_plot_2d)
 plane_plotter.subplot()
 
 """
@@ -152,9 +152,12 @@ __Plane Output__
 Save the `Plane` in the dataset folder as a .json file, ensuring the true light profiles and galaxies
 are safely stored and available to check how the dataset was simulated in the future. 
 
-This can be loaded via the method `Plane.from_json`.
+This can be loaded via the method `plane = ag.from_json()`.
 """
-plane.output_to_json(file_path=path.join(dataset_path, "plane.json"))
+ag.output_to_json(
+    obj=plane,
+    file_path=path.join(dataset_path, "plane.json"),
+)
 
 """
 The dataset can be viewed in the folder `autogalaxy_workspace/imaging/light_sersic_exp`.

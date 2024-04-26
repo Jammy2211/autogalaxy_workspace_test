@@ -53,7 +53,7 @@ dataset = dataset.apply_settings(
     ag.SettingsImaging(
         grid_class=ag.Grid2DIterate,
         fractional_accuracy=0.9999,
-        sub_steps=[2, 4, 8, 16, 24],
+        sub_steps=[2, 4, 8, 16],
     )
 )
 
@@ -148,7 +148,7 @@ galaxy = ag.Galaxy(
 
 plane = ag.Plane(galaxies=[galaxy])
 
-plane_plotter = aplt.PlanePlotter(
+plane_plotter = aplt.GalaxiesPlotter(
     plane=plane,
     grid=dataset.grid,
     mat_plot_2d=aplt.MatPlot2D(

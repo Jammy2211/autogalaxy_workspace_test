@@ -220,7 +220,7 @@ for result, color in zip(result_list, color_list):
     )
 
     galaxy_plotter = aplt.GalaxyPlotter(
-        galaxy=result.max_log_likelihood_plane.galaxies[0],
+        galaxy=result.max_log_likelihood_galaxies.galaxies[0],
         grid=result.grid,
         mat_plot_2d=mat_plot_2d,
     )
@@ -291,7 +291,7 @@ __Interferometer Masking__
 We define the ‘real_space_mask’ which defines the grid the image the strong lens is evaluated using.
 """
 real_space_mask = ag.Mask2D.circular(
-    shape_native=(800, 800), pixel_scales=0.05, radius=4.0, sub_size=1
+    shape_native=(800, 800), pixel_scales=0.05, radius=4.0
 )
 
 """

@@ -32,18 +32,18 @@ general:
   parallel:
     warn_environment_variables: true
   pixelization:
-    voronoi_nn_max_interpolation_neighbors: 100
+    voronoi_nn_max_interpolation_neighbors: 300
   profiling:
     parallel_profile: false
     repeats: 1
     should_profile: false
   structures:
-    use_dataset_grids: true
+    native_binned_only: false           # If True, data structures are only stored in their native and binned format. This is used to reduce memory usage in autocti.
   test:
-    check_figure_of_merit_sanity: false
+    check_likelihood_function: false
     bypass_figure_of_merit_sanity: false
     check_preloads: false
-    preloads_check_threshold: 0.1     # If the figure of merit of a fit with and without preloads is greater than this threshold, the check preload test fails and an exception raised for a model-fit.
+    preloads_check_threshold: 1.0     # If the figure of merit of a fit with and without preloads is greater than this threshold, the check preload test fails and an exception raised for a model-fit.
     disable_positions_lh_inversion_check: false
 grids:
   radial_minimum:
@@ -93,12 +93,12 @@ grids:
       SersicCoreSph: 1.0e-06
       SersicRadialGradient: 1.0e-06
       SersicRadialGradientSph: 1.0e-06
+      ShapeletCartesianSph: 1.0e-8
       ShapeletCartesian: 1.0e-8
-      ShapeletCartesianEll: 1.0e-8
+      ShapeletPolarSph: 1.0e-8
       ShapeletPolar: 1.0e-8
-      ShapeletPolarEll: 1.0e-8
+      ShapeletExponentialSph: 1.0e-8
       ShapeletExponential: 1.0e-8
-      ShapeletExponentialEll: 1.0e-8
       SersicSph: 1.0e-06
       gNFW: 1.0e-06
       gNFWMCRLudlow: 1.0e-06
@@ -123,7 +123,7 @@ logging:
     handlers:
     - console
     - file
-    level: DEBUG
+    level: INFO
   version: 1
 non_linear:
   GridSearch:
@@ -145,10 +145,6 @@ non_linear:
         number_of_cores: 1
       printing:
         silence: false
-      prior_passer:
-        sigma: 3.0
-        use_errors: true
-        use_widths: true
       run:
         nsteps: 2000
       search:
@@ -170,10 +166,6 @@ non_linear:
         number_of_cores: 1
       printing:
         silence: false
-      prior_passer:
-        sigma: 3.0
-        use_errors: true
-        use_widths: true
       run:
         check_walkers: true
         light_mode: false
@@ -259,10 +251,6 @@ non_linear:
         number_of_cores: 1
       printing:
         silence: false
-      prior_passer:
-        sigma: 3.0
-        use_errors: true
-        use_widths: true
       run:
         Lepsilon: 0.001
         cluster_num_live_points: 40
@@ -314,10 +302,6 @@ non_linear:
         method: ball
       printing:
         silence: false
-      prior_passer:
-        sigma: 3.0
-        use_errors: true
-        use_widths: true
       search:
         total_draws: 50
       updates:
@@ -332,10 +316,6 @@ non_linear:
         number_of_cores: 1
       printing:
         silence: false
-      prior_passer:
-        sigma: 3.0
-        use_errors: true
-        use_widths: true
       run:
         iters: 2000
       search:
@@ -356,10 +336,6 @@ non_linear:
         number_of_cores: 1
       printing:
         silence: false
-      prior_passer:
-        sigma: 3.0
-        use_errors: true
-        use_widths: true
       run:
         iters: 2000
       search:
@@ -391,8 +367,8 @@ notation:
       einstein_radius: \theta_{\rm Ein}
       ell_comps_0: \epsilon_{\rm 1}
       ell_comps_1: \epsilon_{\rm 2}
-      ell_comps_multipole_0: M_{\rm 1}
-      ell_comps_multipole_1: M_{\rm 2}
+      multipole_comps_0: M_{\rm 1}
+      multipole_comps_1: M_{\rm 2}
       flux: F
       gamma: \gamma
       gamma_1: \gamma
@@ -456,8 +432,8 @@ notation:
       einstein_radius: '{:.4f}'
       ell_comps_0: '{:.4f}'
       ell_comps_1: '{:.4f}'
-      ell_comps_multipole_0: '{:.4f}'
-      ell_comps_multipole_1: '{:.4f}'
+      multipole_comps_0: '{:.4f}'
+      multipole_comps_1: '{:.4f}'
       flux: '{:.4e}'
       gamma: '{:.4f}'
       inner_coefficient: '{:.4f}'
@@ -516,7 +492,7 @@ visualize:
       radial_critical_curves: false
       grid: false
       light_profile_centres: true
-      mapper_image_plane_mesh_grid: true
+      mapper_image_plane_mesh_grid: false
       mapper_source_plane_data_grid: false
       mapper_source_plane_mesh_grid: false
       mask: true
@@ -860,12 +836,12 @@ visualize:
       potential: true
       source_plane_image: true
       subplot_galaxy_images: false
-      subplot_plane: true
+      subplot_galaxies: true
     positions:
       image_with_positions: true
   plots_search:
     dynesty:
-      cornerplot: true
+      corner: true
       cornerpoints: true
       runplot: true
       traceplot: true
@@ -879,7 +855,7 @@ visualize:
       time_series: true
       trajectory: true
     ultranest:
-      cornerplot: true
+      corner: true
       runplot: true
       traceplot: true
     zeus:

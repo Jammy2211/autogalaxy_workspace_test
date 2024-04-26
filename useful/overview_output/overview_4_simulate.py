@@ -42,7 +42,7 @@ galaxy = ag.Galaxy(
 
 plane = ag.Plane(galaxies=[galaxy])
 
-plane_plotter = aplt.PlanePlotter(plane=plane, grid=grid_2d)
+plane_plotter = aplt.GalaxiesPlotter(plane=plane, grid=grid_2d)
 plane_plotter.figures_2d(image=True)
 
 """
@@ -66,7 +66,7 @@ Point Spread Function (PSF) by passing it a plane and grid.
 This uses the plane above to create the image of the galaxy and then add the effects that occur during data
 acquisition.
 """
-dataset = simulator.via_plane_from(plane=plane, grid=grid_2d)
+dataset = simulator.via_galaxies_from(plane=plane, grid=grid_2d)
 
 """
 By plotting a subplot of the `Imaging` dataset, we can see this object includes the observed image of the galaxy
