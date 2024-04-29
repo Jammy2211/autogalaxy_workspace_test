@@ -29,13 +29,10 @@ discussed above shows the PSF features.
 # %cd $workspace_path
 # print(f"Working Directory has been set to `{workspace_path}`")
 
-import jax
-from jax import grad
 from os import path
 
 import autofit as af
 import autogalaxy as ag
-import autogalaxy.plot as aplt
 from autoconf import conf
 
 conf.instance["general"]["model"]["ignore_prior_limits"] = True
@@ -117,11 +114,6 @@ fitness = Fitness(
 )
 
 """
-We now compile the gradient of the fitness function via JAX.
-"""
-# grad = jax.jit(grad(fitness))
-
-"""
 Create a list of input parameters, which are representative of the parameters a non-linear search would input
 to the `log_likelihood_function` during sampling.
 """
@@ -138,7 +130,6 @@ This is also the function we need to confirm runs on GPU with significant speed-
 print(parameters)
 print(fitness(parameters))
 
-# print(grad(parameters))
 
 """
 Checkout `autogalaxy_workspace/*/imaging/modeling/results.py` for a full description of the result object.
