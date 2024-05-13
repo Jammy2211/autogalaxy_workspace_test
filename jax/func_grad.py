@@ -119,7 +119,7 @@ fitness = Fitness(
 """
 We now compile the gradient of the fitness function via JAX.
 """
-# grad = jax.jit(grad(fitness))
+grad = jax.jit(grad(fitness))
 
 """
 Create a list of input parameters, which are representative of the parameters a non-linear search would input
@@ -137,8 +137,7 @@ This is also the function we need to confirm runs on GPU with significant speed-
 """
 print(parameters)
 print(fitness(parameters))
-
-# print(grad(parameters))
+print(grad(parameters))
 
 """
 Checkout `autogalaxy_workspace/*/imaging/modeling/results.py` for a full description of the result object.

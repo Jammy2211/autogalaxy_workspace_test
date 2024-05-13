@@ -109,10 +109,16 @@ can compute its gradient.
 analysis = ag.AnalysisImaging(dataset=dataset)
 
 """
-We are now going to mauall write the `log_likelihood_function` that we will use JAX to compute the gradient of.
+We are now going to maually write the `log_likelihood_function` that we will use JAX to compute the gradient of.
 
 We from here on import JAX numpy, so that all array-like structures used in the log likelihood function come from
 JAX and are therefore compatible with JAX operations.
+
+This is what makes JAX actually get used in the function, so this import is very important. The source code
+has a wrapper which automatically switches between JAX and NumPy, depending on whether JAX is installed
+and the `USE_JAX` environment variable is set to `1`:
+
+
 """
 from jax import numpy as np
 
