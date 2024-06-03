@@ -143,7 +143,7 @@ def log_likelihood_function(instance):
     The calculation uses the `Grid2D` object contained in the `Imaging` dataset, which is a Numpy array of
     shape (total_masked_pixels, 2).
     """
-    grid = dataset.grid
+    grid = np.array(dataset.grid)
 
     """
     The code below performs the steps in the function:    
@@ -171,19 +171,19 @@ def log_likelihood_function(instance):
     understanding how this works, and I will get Rich to look in more detail next week.
     """
 
-    # shifted_grid_2d = grid_2d - bulge.centre
+    shifted_grid_2d = np.subtract(grid, bulge.centre)
 
-    # shifted_grid_2d = grid_2d
-    #
-    # radius = np.sqrt(np.sum(shifted_grid_2d**2.0, 1))
-    # theta_coordinate_to_profile = np.arctan2(
-    #     shifted_grid_2d[:, 0], shifted_grid_2d[:, 1]
-    #
-    # ) - np.radians(bulge.angle)
-    # grid = np.vstack(
-    #     radius
-    #     * (np.sin(theta_coordinate_to_profile), np.cos(theta_coordinate_to_profile))
-    # ).T
+    # shifted_grid_2d = grid
+
+    radius = np.sqrt(np.sum(shifted_grid_2d**2.0, 1))
+    theta_coordinate_to_profile = np.arctan2(
+        shifted_grid_2d[:, 0], shifted_grid_2d[:, 1]
+
+    ) - np.radians(bulge.angle)
+    grid = np.vstack(
+        radius
+        * (np.sin(theta_coordinate_to_profile), np.cos(theta_coordinate_to_profile))
+    ).T
 
     axis_ratio, angle = ag.convert.axis_ratio_and_angle_from(
         ell_comps=bulge.ell_comps

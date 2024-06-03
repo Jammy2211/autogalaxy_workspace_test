@@ -220,7 +220,7 @@ for result, color in zip(result_list, color_list):
     )
 
     galaxy_plotter = aplt.GalaxyPlotter(
-        galaxy=result.max_log_likelihood_galaxies.galaxies[0],
+        galaxy=result.max_log_likelihood_galaxies[0],
         grid=result.grid,
         mat_plot_2d=mat_plot_2d,
     )
