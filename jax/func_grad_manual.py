@@ -144,8 +144,7 @@ def log_likelihood_function(instance):
     The calculation uses the `Grid2D` object contained in the `Imaging` dataset, which is a Numpy array of
     shape (total_masked_pixels, 2).
     """
-    # This should np.array(dataset.grid) but we currently have a weird bug
-    grid = dataset.grid._array
+    grid = np.array(dataset.grid)
 
     """
     The code below performs the steps in the function:    
