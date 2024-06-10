@@ -126,8 +126,9 @@ from jax import numpy as np
 This is the simplest possible log likelihood function extracted from PyAutoGalaxy, which fits an image of a 
 galaxy with a Sersic bulge.
 """
-def log_likelihood_function(instance):
 
+
+def log_likelihood_function(instance):
     """
     For the input instance, consiting of a Sersic bulge with the 7 free parameters listed by `model.info` above,
     convert this instance in a list of galaxies (a `Galaxies` object).
@@ -143,7 +144,8 @@ def log_likelihood_function(instance):
     The calculation uses the `Grid2D` object contained in the `Imaging` dataset, which is a Numpy array of
     shape (total_masked_pixels, 2).
     """
-    grid = np.array(dataset.grid)
+    # This should np.array(dataset.grid) but we currently have a weird bug
+    grid = dataset.grid._array
 
     """
     The code below performs the steps in the function:    
@@ -170,24 +172,22 @@ def log_likelihood_function(instance):
     these types of issues (e.g. make it work with tuple subtraction). This is worth a look in order to start
     understanding how this works, and I will get Rich to look in more detail next week.
     """
-
-    shifted_grid_2d = np.subtract(grid, bulge.centre)
+    shifted_grid_2d = np.subtract(grid, np.array(bulge.centre))
 
     # shifted_grid_2d = grid
 
     radius = np.sqrt(np.sum(shifted_grid_2d**2.0, 1))
     theta_coordinate_to_profile = np.arctan2(
         shifted_grid_2d[:, 0], shifted_grid_2d[:, 1]
-
     ) - np.radians(bulge.angle)
     grid = np.vstack(
         radius
-        * (np.sin(theta_coordinate_to_profile), np.cos(theta_coordinate_to_profile))
+        * np.array(
+            (np.sin(theta_coordinate_to_profile), np.cos(theta_coordinate_to_profile))
+        )
     ).T
 
-    axis_ratio, angle = ag.convert.axis_ratio_and_angle_from(
-        ell_comps=bulge.ell_comps
-    )
+    axis_ratio, angle = ag.convert.axis_ratio_and_angle_from(ell_comps=bulge.ell_comps)
 
     """
     The code below performs the steps in the function:   
@@ -205,10 +205,8 @@ def log_likelihood_function(instance):
     q is the axis ratio of the bulge.
     """
     grid_radii = np.sqrt(
-            np.add(
-                np.square(grid[:, 1]), np.square(np.divide(grid[:, 0], axis_ratio))
-            )
-        )
+        np.add(np.square(grid[:, 1]), np.square(np.divide(grid[:, 0], axis_ratio)))
+    )
 
     """
     The code below performs the steps in the function:   
@@ -243,20 +241,20 @@ def log_likelihood_function(instance):
     """
 
     image_2d = np.multiply(
-            bulge._intensity,
-            np.exp(
-                np.multiply(
-                    -bulge.sersic_constant,
-                    np.add(
-                        np.power(
-                            np.divide(grid_radii, bulge.effective_radius),
-                            1.0 / bulge.sersic_index,
-                        ),
-                        -1,
+        bulge._intensity,
+        np.exp(
+            np.multiply(
+                -bulge.sersic_constant,
+                np.add(
+                    np.power(
+                        np.divide(grid_radii, bulge.effective_radius),
+                        1.0 / bulge.sersic_index,
                     ),
-                )
-            ),
-        )
+                    -1,
+                ),
+            )
+        ),
+    )
 
     """
     The code below computes the log likelihood of the model image, given the dataset and noise-map. This is done
@@ -321,7 +319,6 @@ print(instance_grad.galaxies.galaxy.bulge.intensity)
 print(instance_grad.galaxies.galaxy.bulge.effective_radius)
 print(instance_grad.galaxies.galaxy.bulge.sersic_index)
 print(dir(instance_grad))
-
 
 
 """
