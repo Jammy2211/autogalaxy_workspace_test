@@ -88,7 +88,7 @@ galaxy = ag.Galaxy(
     ),
 )
 
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 
 fit = ag.FitInterferometer(dataset=dataset, plane=plane)
 

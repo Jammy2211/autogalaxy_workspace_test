@@ -114,7 +114,7 @@ galaxy = ag.Galaxy(
     ),
 )
 
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 
 plane_plotter = aplt.GalaxiesPlotter(
     plane=plane,
@@ -194,7 +194,7 @@ galaxy = ag.Galaxy(
     regularization=ag.reg.Constant(coefficient=1.0),
 )
 
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 
 fit = ag.FitInterferometer(
     dataset=dataset,

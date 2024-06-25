@@ -157,7 +157,7 @@ galaxy_1 = ag.Galaxy(
     ),
 )
 
-plane = ag.Plane(galaxies=[galaxy_0, galaxy_1])
+galaxies = ag.Galaxies(galaxies=[galaxy_0, galaxy_1])
 
 """
 The image of the plane consists of all galaxies. 
@@ -225,7 +225,7 @@ galaxy_1 = ag.Galaxy(
     clump_2=ag.lp.Sersic(centre=(1.7, 1.3), intensity=0.5, effective_radius=0.2),
 )
 
-plane = ag.Plane(galaxies=[galaxy_0, galaxy_1])
+galaxies = ag.Galaxies(galaxies=[galaxy_0, galaxy_1])
 
 """
 This is what the merging galaxies look like:

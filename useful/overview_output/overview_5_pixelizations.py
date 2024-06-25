@@ -86,7 +86,7 @@ Now that our galaxy has a `Pixelization`, we are able to fit the data using it i
 same way as before, by simply passing the galaxy to a `Plane` and using this `Plane` to create a `FitImaging`
 object.
 """
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 
 fit = ag.FitImaging(dataset=dataset, plane=plane)
 

@@ -40,7 +40,7 @@ galaxy = ag.Galaxy(
 )
 
 
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 
 plane_plotter = aplt.GalaxiesPlotter(plane=plane, grid=grid_2d)
 plane_plotter.figures_2d(image=True)

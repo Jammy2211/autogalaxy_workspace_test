@@ -262,7 +262,7 @@ __Numba Caching__
 
 Call FitInterferometer once to get all numba functions initialized.
 """
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 
 fit = ag.FitInterferometer(
     dataset=dataset,
@@ -298,7 +298,7 @@ Apply mask, settings and profiling dict to fit, such that timings of every indiv
 """
 run_time_dict = {}
 
-plane = ag.Plane(galaxies=[galaxy], run_time_dict=run_time_dict)
+galaxies = ag.Galaxies(galaxies=[galaxy], run_time_dict=run_time_dict)
 
 fit = ag.FitInterferometer(
     dataset=dataset,

@@ -97,7 +97,7 @@ galaxy = ag.Galaxy(
 """
 Use these galaxies to setup a plane, which will generate the image for the simulated interferometer dataset.
 """
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 
 """
 Lets look at the plane`s image, this is the image we'll be simulating.

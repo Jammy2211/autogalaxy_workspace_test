@@ -103,7 +103,7 @@ galaxy = ag.Galaxy(
 """
 Use these galaxies to setup a plane, which generates the image for the simulated `Imaging` dataset.
 """
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 plane_plotter = aplt.GalaxiesPlotter(plane=plane, grid=grid_2d)
 plane_plotter.figures_2d(image=True)
 

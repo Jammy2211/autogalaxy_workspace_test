@@ -15,6 +15,7 @@ from autoconf import conf
 
 conf.instance.push(new_path=path.join(cwd, "config", "profiling"))
 
+import numpy as np
 import time
 import json
 
@@ -39,133 +40,34 @@ print()
 """
 These settings control various aspects of how long a fit takes. The values below are default PyAutoGalaxy values.
 """
-sub_size = 4
 mask_radius = 3.5
 psf_shape_2d = (21, 21)
 
 
-print(f"sub grid size = {sub_size}")
 print(f"circular mask mask_radius = {mask_radius}")
 print(f"psf shape = {psf_shape_2d}")
 
 """
 The lens galaxy used to fit the data, which is identical to the lens galaxy used to simulate the data. 
 """
-centre_y_list = [
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-    -0.00361289,
-]
+total_gaussians = 30
 
-centre_x_list = [
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-    -0.00636064,
-]
+log10_sigma_list = np.linspace(-2, mask_radius, total_gaussians)
 
-ell_comps_0_list = [
-    0.05843285,
-    0.0,
-    0.05368621,
-    0.05090395,
-    0.0,
-    0.25367341,
-    0.01677313,
-    0.03626733,
-    0.15887384,
-    0.02790297,
-    0.12368768,
-    0.38624915,
-    -0.10490247,
-    0.0385585,
-]
+bulge_gaussian_list = []
 
-ell_comps_1_list = [
-    0.05932136,
-    0.0,
-    0.04267542,
-    -0.06920487,
-    -0.0,
-    -0.15141799,
-    0.01464508,
-    0.03084128,
-    -0.17983965,
-    0.02215257,
-    -0.16271084,
-    -0.15945967,
-    -0.3969543,
-    -0.03808391,
-]
-
-sigma_list = [
-    0.01607907,
-    0.04039063,
-    0.06734373,
-    0.08471335,
-    0.16048498,
-    0.13531624,
-    0.25649938,
-    0.46096968,
-    0.34492195,
-    0.92418119,
-    0.71803244,
-    1.23547346,
-    1.2574071,
-    2.69979461,
-]
-
-gaussian_dict = {}
-
-for gaussian_index in range(len(centre_x_list)):
-    gaussian = ag.lp_linear.Gaussian(
-        centre=(centre_y_list[gaussian_index], centre_x_list[gaussian_index]),
-        ell_comps=(
-            ell_comps_0_list[gaussian_index],
-            ell_comps_1_list[gaussian_index],
-        ),
-        sigma=sigma_list[gaussian_index],
+for i in range(total_gaussians):
+    gaussian = ag.lp.Gaussian(
+        centre=(0.1, 0.1),
+        ell_comps=ag.convert.ell_comps_from(axis_ratio=0.8, angle=60.0),
+        sigma=10 ** log10_sigma_list[i],
     )
 
-    gaussian_dict[f"gaussian_{gaussian_index}"] = gaussian
+    bulge_gaussian_list.append(gaussian)
 
-galaxy = ag.Galaxy(redshift=0.5, **gaussian_dict)
+bulge = ag.lp_basis.Basis(profile_list=bulge_gaussian_list)
 
-
-gaussian_m = 1.0
-gaussian_c = 1.0
-
-gaussians = [ag.lp_linear.Gaussian() for i in range(10)]
-
-for i, gaussian in enumerate(gaussians):
-    gaussian.centre = gaussians[0].centre
-    gaussian.ell_comps = gaussians[0].ell_comps
-    gaussian.sigma = (gaussian_m * i) + gaussian_c
-
-gaussian_dict = {f"gaussian_{i}": gaussian for i, gaussian in enumerate(gaussians)}
-
-galaxy = ag.Galaxy(redshift=0.5, **gaussian_dict)
+galaxy = ag.Galaxy(redshift=0.5, bulge=bulge)
 
 
 """
@@ -173,7 +75,7 @@ __Dataset__
 
 Load and plot the galaxy dataset `light_asymmetric` via .fits files, which we will fit with the model.
 """
-dataset_name = "light_asymmetric"
+dataset_name = "light_mge"
 dataset_path = path.join("dataset", "imaging", dataset_name)
 
 dataset = ag.Imaging.from_fits(
@@ -189,34 +91,21 @@ Apply the 2D mask, which for the settings above is representative of the masks w
 mask = ag.Mask2D.circular(
     shape_native=dataset.shape_native,
     pixel_scales=dataset.pixel_scales,
-    sub_size=sub_size,
     radius=mask_radius,
 )
 
-# mask = ag.Mask2D.circular_annular(
-#     shape_native=dataset.shape_native,
-#     pixel_scales=dataset.pixel_scales,
-#     sub_size=sub_size,
-#     inner_radius=1.5,
-#     outer_radius=2.5,
-# )
-
 masked_dataset = dataset.apply_mask(mask=mask)
-
-masked_dataset = masked_dataset.apply_settings(
-    settings=ag.SettingsImaging(sub_size=sub_size)
-)
 
 """
 __Numba Caching__
 
 Call FitImaging once to get all numba functions initialized.
 """
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 
 fit = ag.FitImaging(
     dataset=masked_dataset,
-    plane=plane,
+    galaxies=galaxies,
     settings_inversion=ag.SettingsInversion(use_w_tilde=False),
 )
 print(fit.figure_of_merit)
@@ -230,10 +119,10 @@ start = time.time()
 for i in range(repeats):
     fit = ag.FitImaging(
         dataset=masked_dataset,
-        plane=plane,
+        galaxies=galaxies,
         settings_inversion=ag.SettingsInversion(use_w_tilde=False),
     )
-    fit.log_evidence
+    print(fit.figure_of_merit)
 fit_time = (time.time() - start) / repeats
 print(f"Fit Time = {fit_time} \n")
 
@@ -245,11 +134,11 @@ Apply mask, settings and profiling dict to fit, such that timings of every indiv
 """
 run_time_dict = {}
 
-plane = ag.Plane(galaxies=[galaxy], run_time_dict=run_time_dict)
+galaxies = ag.Galaxies(galaxies=[galaxy], run_time_dict=run_time_dict)
 
 fit = ag.FitImaging(
     dataset=masked_dataset,
-    plane=plane,
+    galaxies=galaxies,
     settings_inversion=ag.SettingsInversion(use_w_tilde=False),
     run_time_dict=run_time_dict,
 )
@@ -338,7 +227,6 @@ The `info_dict` contains all the key information of the analysis which describes
 info_dict = {}
 info_dict["repeats"] = repeats
 info_dict["image_pixels"] = masked_dataset.grid.sub_shape_slim
-info_dict["sub_size"] = sub_size
 info_dict["mask_radius"] = mask_radius
 info_dict["psf_shape_2d"] = psf_shape_2d
 info_dict["source_pixels"] = len(fit.inversion.reconstruction)

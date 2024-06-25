@@ -146,7 +146,7 @@ galaxy = ag.Galaxy(
     ),
 )
 
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 
 plane_plotter = aplt.GalaxiesPlotter(
     plane=plane,
@@ -245,7 +245,7 @@ galaxy = ag.Galaxy(
     ),
 )
 
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 
 fit_bad = ag.FitImaging(dataset=dataset, plane=plane)
 

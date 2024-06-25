@@ -150,7 +150,7 @@ for gaussian_index in range(len(centre_x_list)):
 
     gaussian_list.append(gaussian)
 
-basis = ag.lp_basis.Basis(light_profile_list=gaussian_list)
+basis = ag.lp_basis.Basis(profile_list=gaussian_list)
 
 galaxy = ag.Galaxy(redshift=0.5, bulge=basis)
 
@@ -199,11 +199,11 @@ __Numba Caching__
 
 Call FitImaging once to get all numba functions initialized.
 """
-plane = ag.Plane(galaxies=[galaxy])
+galaxies = ag.Galaxies(galaxies=[galaxy])
 
 fit = ag.FitImaging(
     dataset=masked_dataset,
-    plane=plane,
+    galaxies=galaxies,
     settings_inversion=ag.SettingsInversion(use_w_tilde=False),
 )
 print(fit.figure_of_merit)
@@ -217,7 +217,7 @@ start = time.time()
 for i in range(repeats):
     fit = ag.FitImaging(
         dataset=masked_dataset,
-        plane=plane,
+        galaxies=galaxies,
         settings_inversion=ag.SettingsInversion(use_w_tilde=False),
     )
     fit.log_evidence
@@ -232,11 +232,11 @@ Apply mask, settings and profiling dict to fit, such that timings of every indiv
 """
 run_time_dict = {}
 
-plane = ag.Plane(galaxies=[galaxy], run_time_dict=run_time_dict)
+galaxies = ag.Galaxies(galaxies=[galaxy], run_time_dict=run_time_dict)
 
 fit = ag.FitImaging(
     dataset=masked_dataset,
-    plane=plane,
+    galaxies=galaxies,
     settings_inversion=ag.SettingsInversion(use_w_tilde=False),
     run_time_dict=run_time_dict,
 )
