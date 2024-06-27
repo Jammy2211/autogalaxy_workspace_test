@@ -8,10 +8,10 @@ to support JAX.
 This is a good way to learn some of the basics of JAX, as well as how to interact with the source code and put up a
 a pull request to have code merged into the main branch.
 
-I will start with a function which computes a 2D mask, explaining it in detial, and then point you to
+I will start with a function which computes a 2D mask, explaining it in detail, and then point you to
 a few more functions which it would be useful to have converted.
 
-Once familair with this from this tutorial we can move on to something more interesting!
+Once familiar with this from this tutorial we can move on to something more interesting!
 """
 # %matplotlib inline
 # from pyprojroot import here
@@ -165,7 +165,7 @@ We can immediately see that this function will be quite slow in native Python, b
 For the current source code implementation, it would not be slow, because it uses `numba` via the 
 `@numba_util.jit()` decorator I have commented out above.
 
-If we try and use `jax.np` apply the JAX function `grad` on the above function we get an error:
+If we try and use `jax.np` apply the JAX function `jit` on the above function we get an error:
 """
 
 from jax import numpy as np
@@ -256,9 +256,8 @@ def mask_2d_circular_from(
 
     return mask_2d
 
-gradded = grad(mask_2d_circular_from, argnums=(0, 1, 2, 3))
-gradded = jax.jit(gradded)
-gradded((100, 100), (0.1, 0.1), 3.0, (0.0, 0.0))
+jitted = jax.jit(mask_2d_circular_from)
+jitted(shape_native=(100, 100), pixel_scales=(0.1, 0.1), radius=3.0, centre=(0.0, 0.0))
 
 
 """
