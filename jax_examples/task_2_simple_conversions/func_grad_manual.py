@@ -256,9 +256,9 @@ def mask_2d_circular_from(
 
     return mask_2d
 
-
-grad = jax.jit(grad(mask_2d_circular_from))
-grad(shape_native=(100, 100), pixel_scales=(0.1, 0.1), radius=3.0)
+gradded = grad(mask_2d_circular_from, argnums=(0, 1, 2, 3))
+gradded = jax.jit(gradded)
+gradded((100, 100), (0.1, 0.1), 3.0, (0.0, 0.0))
 
 
 """
