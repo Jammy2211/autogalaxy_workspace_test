@@ -305,7 +305,7 @@ and after the w_tilde matrix multiplication above.
 
 These all need to be JAX-ified and profiled to understand how they scale with JAX.
 
-Aris will update this script with these functions and provide you with the updated script to profile.
+They look simple to JAX-ify -- they just use `np.multiply` and `np.dot` which are natively supported by JAX.
 """
 
 # NOTE:
@@ -323,3 +323,30 @@ chi_squared_term_2 = - np.multiply(
     2.0,
     np.dot(mapping_matrix, d)
 )
+
+"""
+Basically you just need to put your JAX implementation of the functions above into the functions below
+and then make sure they run correctly after jit.
+"""
+def chi_squared_term_1():
+    pass
+
+def chi_squared_term_2():
+    pass
+
+try:
+    jitted = jax.jit(chi_squared_term_1)
+    jitted()
+except ImportError:
+    pass
+
+try:
+    jitted = jax.jit(chi_squared_term_1)
+    jitted()
+except ImportError:
+    pass
+
+
+"""
+Once all functions are jitted we should chat and begin to put them together into a single jitted function.
+"""
