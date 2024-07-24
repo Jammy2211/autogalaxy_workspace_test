@@ -68,6 +68,11 @@ mask_2d = ag.Mask2D.circular(
 
 dataset = dataset.apply_mask(mask=mask_2d)
 
+dataset = dataset.apply_over_sampling(
+    over_sampling=ag.OverSamplingUniform(sub_size=1)
+)
+
+
 """
 __Model__
 
@@ -79,7 +84,7 @@ example we fit a model where:
 
 The number of free parameters and therefore the dimensionality of non-linear parameter space is N=11.
 """
-bulge = af.Model(ag.lp_operated.Sersic)
+bulge = af.Model(ag.lp.Sersic)
 
 bulge.centre = (0.0, 0.0)
 bulge.ell_comps = (0.0, 0.0)

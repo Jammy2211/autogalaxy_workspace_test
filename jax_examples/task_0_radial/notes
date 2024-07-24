@@ -1,0 +1,45 @@
+I attempted to implement the radial relocation solution where the whole grid is shifted by a small value of 1.0e-10
+but encounted the following issues:
+
+1) A value this small is not enough to prevent nans in all calculations. For an NFW, I had to increase it to
+1.0e-6 to prevent nans. This is becoming large enough that I would be concerned about the effect this has on the
+whole calculation, as in shifting the grid by 1.0e-6 away from the centre will produce a noticeable effect on the
+calculation that will confuse users.  In the current implementation values as large as 1.0e-6 are ok, as only the
+central pixel (y,x) values are moved, which typically compute values near 0 (e.g. deflection angles of 0.0) and
+have no impact on the overall calculation anyway.
+
+2) Shifting the whole grid actually does not have anything meaningful benefit when performing model-fitting,
+because if the model picks a centre where `x = -1.0e-10` and `y = -1.0e-10` it will just shift it to 0.0 and therefore
+the issue crops up anyway.
+
+At this point, I realised that grid relocation is probably not that important for model-fitting, as the the odds of
+this edge case occuring during a lens model fit are vanishly small (you typically need x < 1.0e-8 and y < 1.0e-8.
+And if it does occur, it will be caught by the autofit exception handler. However, for high resolution imaging data
+(with high levels of sub grid resolution) this could be more common.
+
+Our options to proceed are as follows:
+
+1) Get the existing radial relocation to work for JAX.
+
+2) Disable the relocation when model-fitting is performed, but retain it for normal function calls.
+
+3) Implement specific functionality in each profile's function to handle the edge case of x = 0.0 and y = 0.0.
+
+
+If the solution continues to use the config zeroing, we should implement unit tests to ensure that the zeroing
+is handled correctly for each profile and that the config file values are the smallest possible that prevent nans.
+
+
+
+XiaoYue
+  5:11 PM
+
+The following figure is my another implementation for the SIE model. The idea is similar to James described---
+relocated the (0,0) pixel might generate NaN value to something like (1e-8, 0) etc. We can use jnp.clip to avoid
+using if-statements.
+
+
+
+SLACK:
+
+I should probably check if, due to the softening, cored proviles dont need to relocation and disable it for them

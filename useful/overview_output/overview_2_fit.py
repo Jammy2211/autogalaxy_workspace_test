@@ -7,7 +7,7 @@ Overview: Fit
 We now use these objects to fit `Imaging` data of a galaxy.
 
 The `autogalaxy_workspace` comes distributed with simulated images of galaxies (an example of how these simulations
-are made can be found in the `simulate.py` example, with all simulator scripts located in `autogalaxy_workspac/simulators`.
+are made can be found in the `simulate.py` example, with all simulator scripts located in `autogalaxy_workspace/simulators`.
 """
 # %matplotlib inline
 # from pyprojroot import here

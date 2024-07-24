@@ -167,7 +167,7 @@ def log_likelihood_function(instance):
         
     This object basically sets over sampling to only use a `sub_size` of 1.    
     """
-    grid = np.array(dataset.blurring_grid)
+    grid = np.array(dataset.grids.blurring)
 
     shifted_grid_2d = np.subtract(grid, np.array(bulge.centre))
 
