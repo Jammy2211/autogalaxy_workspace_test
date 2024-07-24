@@ -2,10 +2,17 @@
 Func Grad 3: Interferometer
 ===========================
 
-One of the biggest bottlenecks is the multiplication of 3 matrices, with a central matrix of size exceeding
-10000 x 10000. This matrix is especially important for interferometer data, because it is fully dense.
+One of the biggest bottlenecks is the multiplication of 3 matrices, with a central matrix of size N x N,
+which is multiplied by a matrix of size M x N and its transpose.
 
-This task profile and speed up the matrix multiplication using JAX.
+For a typical use case, N = 10000 (or more) and M = 1000 (or more), which is a huge matrix multiplication.
+Both matrices are fully dense, meaning the matrix multiplication is computationally expensive.
+
+The matrix is especially important for interferometer datasets, with this task being about JAX-ifying
+the whole likelihood calculation for an interferometer dataset.
+
+This task profile and speed up the matrix multiplication using JAX, and then JAX-ify's other functions which
+make up the likelihood calculation.
 """
 # %matplotlib inline
 # from pyprojroot import here
@@ -88,8 +95,10 @@ be fast.
 
 Furthermore, the function is quite computationally expensive and currently is only fast when it is decorated with
 numba. Because your enviroment is running JAX, `numba` is disabled, meaning this function could take hours to run.
-I have therefore used the module `w_tilde_preload.py` to compute the matrix and saved it as a `.npy` file, which
-is loaded below.
+
+
+I have therefore instead computed w_tilde using `np.random`. Whilst this is not the correct `w_tilde` matrix, it
+will allow us to profile the matrix multiplication below without having to wait hours for the function to run.
 
 It is worth inspecting the function below though, because converting it to JAX will, in the long term, be a task
 we will want to do. This is because in the long term the goal is to drop numba support and have all functions
@@ -153,7 +162,7 @@ def w_tilde_curvature_interferometer_from(
     return w_tilde
 
 """
-Here is how the function above is called, although it is commented out because we are loading the matrix from a `.npy`
+Here is how the function above is called, although it is commented out because we instead use `np.random`.
 """
 # w_tilde = w_tilde_curvature_interferometer_from(
 #     noise_map_real=dataset.noise_map,
@@ -161,10 +170,28 @@ Here is how the function above is called, although it is commented out because w
 #     grid_radians_slim=dataset.grid.in_radians
 # )
 
+"""
+We now use `np.random` to create a random `w_tilde` matrix, which will allow us to profile the matrix multiplication.
 
-w_tilde = np.load(file="w_tilde_16132.npy")
+We define N, which is the number of image pixels in the `real_space_mask`, which for the starting dataset is 16132.
+
+Note that the JAX numpy wrapper does not support `np.random`, so we use normal numpy to create the random matrix
+and then convert it to a JAX array.
+"""
+N = real_space_mask.pixels_in_mask
+
+import numpy as np_not_jax
+
+w_tilde = np_not_jax.random.normal(size=(N, N))
+
+w_tilde = np.array(w_tilde)
 
 print(w_tilde)
+
+"""
+Printing the shape of `w_tilde` confirms it is a 2D matrix of shape [N, N].
+"""
+print(w_tilde.shape)
 
 """
 __Light Profile__
