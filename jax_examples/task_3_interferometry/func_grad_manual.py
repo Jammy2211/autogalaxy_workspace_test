@@ -46,11 +46,11 @@ real_space_mask = ag.Mask2D.circular(
 """
 __Dataset__
 
-Load and plot the galaxy `Interferometer` dataset `simple__sersic` from .fits files, which we will fit 
+Load and plot the galaxy `Interferometer` dataset `simple__sersic` from .fits files, which we will fit
 with the model.
 
-This includes the method used to Fourier transform the real-space image of the galaxy to the uv-plane and compare 
-directly to the visibilities. We use a non-uniform fast Fourier transform, which is the most efficient method for 
+This includes the method used to Fourier transform the real-space image of the galaxy to the uv-plane and compare
+directly to the visibilities. We use a non-uniform fast Fourier transform, which is the most efficient method for
 interferometer datasets containing ~1-10 million visibilities. We will discuss how the calculation of the likelihood
 function changes for different methods of Fourier transforming in this guide.
 """
@@ -196,7 +196,7 @@ print(w_tilde.shape)
 """
 __Light Profile__
 
-The above matrix is multiplied either side by the Sersic light profile evaluated using the real-space grid. 
+The above matrix is multiplied either side by the Sersic light profile evaluated using the real-space grid.
 """
 light = ag.lp.Sersic(
     centre=(0.0, 0.0),
@@ -211,13 +211,13 @@ image = light.image_2d_from(grid=dataset.grid)
 """
 __linear Algebra__
 
-Below, I rename the `image` to `mapping_matrix`, which seems like a strange name given the `image` is not a 
+Below, I rename the `image` to `mapping_matrix`, which seems like a strange name given the `image` is not a
 `matrix` and it is not mapping anything.
 
 The reason for this name change is because when `w_tilde` is used in the context of the full linear algebra
-calculation, it is multiplied by the `mapping_matrix` (which is the image of the light profile). 
+calculation, it is multiplied by the `mapping_matrix` (which is the image of the light profile).
 
-I have so far written the examples so far to avoid making the linear algebra calculation explicit, as it is 
+I have so far written the examples so far to avoid making the linear algebra calculation explicit, as it is
 conceptually complex and will be introduced once you are more familiar with the code base.
 
 However, I use `mapping_matrix` below to make it clear that when you begin using the linear algebra calculation
@@ -307,3 +307,19 @@ These all need to be JAX-ified and profiled to understand how they scale with JA
 
 Aris will update this script with these functions and provide you with the updated script to profile.
 """
+
+# NOTE:
+chi_squared_term_1 = np.linalg.multi_dot([
+    mapping_matrix, # NOTE: shape = (N, )
+    w_tilde, # NOTE: shape = (N, N)
+    mapping_matrix,
+])
+
+# NOTE: This array is pre-computed and then loaded. Use np.random for now
+d = np_not_jax.random.normal(size=(N, ))
+
+# NOTE:
+chi_squared_term_2 = - np.multiply(
+    2.0,
+    np.dot(mapping_matrix, d)
+)
