@@ -157,7 +157,7 @@ plotter = aplt.NestPlotter(
 plotter.corner_cornerpy()
 
 """
-The result also contains the maximum log likelihood `Plane` and `FitImaging` objects which can easily be plotted.
+The result also contains the maximum log likelihood `Galaxies` and `FitImaging` objects which can easily be plotted.
 """
 plane_plotter = aplt.GalaxiesPlotter(
     galaxies=result.max_log_likelihood_galaxies, grid=dataset.grid

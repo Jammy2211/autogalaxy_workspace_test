@@ -64,7 +64,7 @@ The number of free parameters and therefore the dimensionality of non-linear par
 
 NOTE: 
 
-**PyAutoGalaxy** assumes that the galaxy centre is near the coordinates (0.0", 0.0"). 
+The model fitting default settings assume that the galaxy centre is near the coordinates (0.0", 0.0"). 
 
 If for your dataset the galaxy is not centred at (0.0", 0.0"), we recommend that you either: 
 
