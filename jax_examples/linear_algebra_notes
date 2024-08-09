@@ -1,0 +1,125 @@
+__Pixelization Only__
+
+There are three ways to perform a linear algebra inversion:
+
+- `mapping_matrix`: creates a matrix with dimensions [image_pixes, source_pixels], performs PSF convolution on every
+column, builds the curvature matrix, and inverts it.
+
+- `w_tilde (1)`: Stores a large matrix of size [image_pixels, image_pixels] where this matrix allows us to go
+directly to the curvature matrix via `mapping_matrix.T * w_tilde * mapping matrix`.
+
+- `w_tilde (2)`: Uses sparsity in `w_tilde` to store a reduced memory version of the matrix, and perform
+bespoke matrix multiplication to go directly to the curvature matrix.
+
+For a pixelization only inversion (e.g. no linear light profile) the `w_tilde (2)` method is faster by a factor of 4
+or more, which is why the code uses this method.
+
+However, it is likely extremely difficult to convert to JAX, as the bespoke matrix multiplication is not a standard
+operation and would need to be written from scratch. Furthermore, when linear light profiles (see below) are included,
+things get even more complicated.
+
+
+__What is W Tilde?__
+
+The `w_tilde` matrix is built by essentially precomputing the 2D convolution of each noise-map value in the image
+with every other noise-map value via the PSF.
+
+There are three downsides to the `w_tilde` method:
+
+- The `w_tilde` matrix is computed once, which can be slow (e.g. 5-10 seconds), but then stored in memory for a
+lens model fit (e.g. no repeated computation). This is still annoying for a user who is investigating many different
+results, as they have to wait for the `w_tilde` matrix to be recomputed every time they run a new lens model-fit.
+The `mapping_matrix` method does not have this overhead.
+
+- The `w_tilde` matrix is built assuming that the PSF convolution is defined entirely within the mask. For a pixelization,
+we do not account for flux outside the mask which blurs into the mask, as this cannot be done in a sensible way
+for something like a Voronoi mesh. However, this becomes a problem for linear light profiles (see below), where
+accounting for flux outside the mask is important.
+
+- If the non compressed `w_tilde` matrix is stored in memory, it can be large for an ordinary HST where
+the number of pixels in the mask could be exceed 50,000, meaning that the matrix is 50,000 x 50,000 = 2.5 x 10^9,
+so 2.5 GB of memory. For 100,000 image pixels we quickly pass 10s of GB of memory. This form of the `w_tilde` matrix
+is required to do `mapping_matrix.T * w_tilde * mapping matrix`.
+
+
+__Linear Light Profiles Only__
+
+For a lienar light profile, which is fully dense, the `w_tilde (2)` method is very slow and cannot be used.
+
+The `w_tilde (1)` method is probably still slower than the `mapping_matrix` method, as it breaks down the PSF
+convolution into a 2D convolution of every pixel with every other pixel. This is a lot of repeated computations,
+which are grouped together into single convolution operations in the `mapping_matrix` method.
+
+Furthermore, the `w_tilde` matrix is built assuming that the PSF convolution is defined entirely within the mask
+anyway, so is not valid for linear light profiles.
+
+A linear light profile only analysis therefore uses the `mapping_matrix` method and it runs pretty quick.
+
+
+__Where Things Get Complicated__
+
+It when a pixelization and linear light profile are used in the same analysis that things get complicated. One
+now enters a regime where they will want to use the `w_tilde (2)` method for the pixelization and the `mapping_matrix`
+method for the linear light profile.
+
+This is feasible, but there are diagonal terms in the `curvature_matrix` that account for the covariance between
+the pixelization and linear light profile that need to be computed. Nevertheless, this is what the source code
+does and it gave fast results., but the code is quite complex and no doubt a nightmare to convert to JAX.
+
+Whatsmore, this was only efficient when the linear light profile images (before the `intensity`s are solved for)
+are fixed. This is actually quite common in lens modeling, as you basically just fit the lens mass model and source
+pixelization, with the lens light parameters fixed. Nevertheless, this is another complexity that will make
+JAX conversion difficult.
+
+
+__What Are The Options?__
+
+The simplest implementation would be to use the `mapping_matrix` method for everything:
+
+- The code will be simple.
+- Memory use is minimal.
+- Users dont wait for `w_tilde` to be recomputed.
+- It naturally lends itself to JAX.
+
+The reason the code does not do this now is because the `w_tilde (2)` method is so much faster that it was too
+prohibitive not to use it. However, with JAX, the `mapping_matrix` method will probably be fast enough that it
+does not matter.
+
+We should therefore implement the `mapping_matrix` method for everything in JAX, and profile to assess the speed. If we
+feels its too slow, we can consider whether we can adapt the `w_tilde` method to JAX, but this will be a lot of work.
+
+For low memory use, the `w_tilde (1)` can likely be used for combined pixelizations and linear light profiles
+and still be relatively simple to implement in JAX. The only challenge will be extending the `w_tilde` matrix to
+account for flux outside the mask, but this is tractable. Of course, low memory use cases are probably those
+which are so fast that the `mapping_matrix` method is sufficient anyway.
+
+
+__Interferometry__
+
+There are two key differences with interferometry:
+
+- To go from the `mapping_matrix` to the curvature matrix, a Non Uniform Fast Fourier Transform (NUFFT) is used,
+which is extremely slow and not available in JAX.
+
+- This NUFFT does not move flux from outside the mask into the mask, and therefore the issues with linear light
+profiles faced for PSF convolution are not faced for interferometry.
+
+We must therefore base our interferometry around the `w_tilde (1)` method, noting that the construction of the
+`w_tilde` matrix is different for interferometry than it is for imaging (it is based on the Fourier transform of
+the visibilities as opposed to the PSF).
+
+The `w_tilde (1)` method should not be difficult to implement in JAX, as it is just a matrix multiplication. This
+is the way forward for interferometry.
+
+The main downside of this method is that for high resolution interferometry data, the number of image pixels in the masked
+can quicky exceed 50,000, meaning we hit memory issues. We must thereofre investigate if we can reduce the memory
+use for the `w_tilde` matrix in interferometry.
+
+We do actually have an implementation of the `w_tilde (2)` method in interferometry, which exploits the sparsity of
+the NUFFT matrix. This is actually the current method used in PyAutoLens. I suspect this method would be
+difficult to implement in JAX, but we should investigate this.
+
+Computing `w_tilde` is slow, extremely slow, I suspect it could be minutes or hours even on a GPU depending on the
+data. There is a use case for the `mapping_matrix` method in interferometry, basically when a user has few visibilities
+but a lot of image pixels in the mask. We should therefore implement the `mapping_matrix` method in JAX for
+this use case, but it is not priority.
