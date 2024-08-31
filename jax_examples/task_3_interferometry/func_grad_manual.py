@@ -39,7 +39,7 @@ We define the ‘real_space_mask’ which defines the grid the image the galaxy 
 """
 real_space_mask = ag.Mask2D.circular(
     shape_native=(128, 128),
-    pixel_scales= (0.03625, 0.03625),
+    pixel_scales=(0.03625, 0.03625),
     radius=3.0,
 )
 
@@ -63,7 +63,7 @@ dataset = ag.Interferometer.from_fits(
     uv_wavelengths_path=path.join(dataset_path, "uv_wavelengths.fits"),
     real_space_mask=real_space_mask,
     transformer_class=ag.TransformerDFT,
-    over_sampling=ag.OverSamplingDataset(uniform=ag.OverSamplingUniform(sub_size=1))
+    over_sampling=ag.OverSamplingDataset(uniform=ag.OverSamplingUniform(sub_size=1)),
 )
 
 """
@@ -104,6 +104,8 @@ It is worth inspecting the function below though, because converting it to JAX w
 we will want to do. This is because in the long term the goal is to drop numba support and have all functions
 support JAX.
 """
+
+
 def w_tilde_curvature_interferometer_from(
     noise_map_real: np.ndarray,
     uv_wavelengths: np.ndarray,
@@ -160,6 +162,7 @@ def w_tilde_curvature_interferometer_from(
             w_tilde[j, i] = w_tilde[i, j]
 
     return w_tilde
+
 
 """
 Here is how the function above is called, although it is commented out because we instead use `np.random`.
@@ -254,8 +257,10 @@ Again, keep in mind how if N and M are large this is a very computationally expe
 mapping_matrix = np.array(mapping_matrix.array)
 w_tilde = np.array(w_tilde)
 
+
 def matrix_multiplication(matrix, w_tilde):
     return np.dot(matrix.T, np.dot(w_tilde, matrix))
+
 
 curvature_matrix = matrix_multiplication(mapping_matrix, w_tilde)
 
@@ -309,30 +314,33 @@ They look simple to JAX-ify -- they just use `np.multiply` and `np.dot` which ar
 """
 
 # NOTE:
-chi_squared_term_1 = np.linalg.multi_dot([
-    mapping_matrix, # NOTE: shape = (N, )
-    w_tilde, # NOTE: shape = (N, N)
-    mapping_matrix,
-])
+chi_squared_term_1 = np.linalg.multi_dot(
+    [
+        mapping_matrix,  # NOTE: shape = (N, )
+        w_tilde,  # NOTE: shape = (N, N)
+        mapping_matrix,
+    ]
+)
 
 # NOTE: This array is pre-computed and then loaded. Use np.random for now
-d = np_not_jax.random.normal(size=(N, ))
+d = np_not_jax.random.normal(size=(N,))
 
 # NOTE:
-chi_squared_term_2 = - np.multiply(
-    2.0,
-    np.dot(mapping_matrix, d)
-)
+chi_squared_term_2 = -np.multiply(2.0, np.dot(mapping_matrix, d))
 
 """
 Basically you just need to put your JAX implementation of the functions above into the functions below
 and then make sure they run correctly after jit.
 """
+
+
 def chi_squared_term_1():
     pass
 
+
 def chi_squared_term_2():
     pass
+
 
 try:
     jitted = jax.jit(chi_squared_term_1)

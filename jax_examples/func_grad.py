@@ -68,9 +68,7 @@ mask_2d = ag.Mask2D.circular(
 
 dataset = dataset.apply_mask(mask=mask_2d)
 
-dataset = dataset.apply_over_sampling(
-    over_sampling=ag.OverSamplingUniform(sub_size=1)
-)
+dataset = dataset.apply_over_sampling(over_sampling=ag.OverSamplingUniform(sub_size=1))
 
 
 """

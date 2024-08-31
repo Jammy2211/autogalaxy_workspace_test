@@ -73,6 +73,7 @@ from typing import Tuple
 
 from autoarray import type as ty
 
+
 # @numba_util.jit()
 def mask_2d_centres_from(
     shape_native: Tuple[int, int],
@@ -106,6 +107,7 @@ def mask_2d_centres_from(
     x_centre_scaled = (float(shape_native[1] - 1) / 2) + (centre[1] / pixel_scales[1])
 
     return (y_centre_scaled, x_centre_scaled)
+
 
 # @numba_util.jit()
 def mask_2d_circular_from(
@@ -158,6 +160,7 @@ def mask_2d_circular_from(
                 mask_2d[y, x] = False
 
     return mask_2d
+
 
 """
 We can immediately see that this function will be quite slow in native Python, because it uses a double for loop.
@@ -170,6 +173,7 @@ If we try and use `jax.np` apply the JAX function `jit` on the above function we
 
 from jax import numpy as np
 
+
 # @numba_util.jit()
 def mask_2d_centres_from(
     shape_native: Tuple[int, int],
@@ -203,6 +207,7 @@ def mask_2d_centres_from(
     x_centre_scaled = (float(shape_native[1] - 1) / 2) + (centre[1] / pixel_scales[1])
 
     return (y_centre_scaled, x_centre_scaled)
+
 
 # @numba_util.jit()
 def mask_2d_circular_from(
@@ -255,6 +260,7 @@ def mask_2d_circular_from(
                 mask_2d[y, x] = False
 
     return mask_2d
+
 
 jitted = jax.jit(mask_2d_circular_from)
 jitted(shape_native=(100, 100), pixel_scales=(0.1, 0.1), radius=3.0, centre=(0.0, 0.0))

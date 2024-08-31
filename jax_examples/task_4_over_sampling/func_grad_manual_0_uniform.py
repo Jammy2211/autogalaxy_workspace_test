@@ -102,7 +102,6 @@ from jax import numpy as np
 
 
 def log_likelihood_function(instance):
-
     """
     Create the uniform over sampling object, which is used to create the over sampled grid on which the light profile
     is evaluated.
@@ -117,7 +116,6 @@ def log_likelihood_function(instance):
 
     over_sampled_grid = over_sampler.over_sampled_grid
 
-
     galaxies = analysis.galaxies_via_instance_from(instance=instance)
     bulge = galaxies[0].bulge
     grid = np.array(over_sampled_grid)
@@ -127,7 +125,7 @@ def log_likelihood_function(instance):
     """
     shifted_grid_2d = np.subtract(grid, np.array(bulge.centre))
 
-    radius = np.sqrt(np.sum(shifted_grid_2d ** 2.0, 1))
+    radius = np.sqrt(np.sum(shifted_grid_2d**2.0, 1))
     theta_coordinate_to_profile = np.arctan2(
         shifted_grid_2d[:, 0], shifted_grid_2d[:, 1]
     ) - np.radians(bulge.angle)
@@ -180,7 +178,7 @@ def log_likelihood_function(instance):
 
     shifted_grid_2d = np.subtract(grid, np.array(bulge.centre))
 
-    radius = np.sqrt(np.sum(shifted_grid_2d ** 2.0, 1))
+    radius = np.sqrt(np.sum(shifted_grid_2d**2.0, 1))
     theta_coordinate_to_profile = np.arctan2(
         shifted_grid_2d[:, 0], shifted_grid_2d[:, 1]
     ) - np.radians(bulge.angle)

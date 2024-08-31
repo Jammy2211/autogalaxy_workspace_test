@@ -23,7 +23,7 @@ We define the ‘real_space_mask’ which defines the grid the image the galaxy 
 """
 real_space_mask = ag.Mask2D.circular(
     shape_native=(128, 128),
-    pixel_scales= (0.03625, 0.03625),
+    pixel_scales=(0.03625, 0.03625),
     radius=3.0,
 )
 
@@ -65,6 +65,7 @@ mask_2d = ag.Mask2D.circular(
 )
 
 from autoarray import numba_util
+
 
 @numba_util.jit()
 def w_tilde_curvature_interferometer_from(
@@ -128,7 +129,7 @@ def w_tilde_curvature_interferometer_from(
 w_tilde = w_tilde_curvature_interferometer_from(
     noise_map_real=np.array(dataset.noise_map.real),
     uv_wavelengths=dataset.uv_wavelengths,
-    grid_radians_slim=np.array(dataset.grid.in_radians)
+    grid_radians_slim=np.array(dataset.grid.in_radians),
 )
 
 np.save(file=f"w_tilde_{w_tilde.shape[0]}", arr=w_tilde)

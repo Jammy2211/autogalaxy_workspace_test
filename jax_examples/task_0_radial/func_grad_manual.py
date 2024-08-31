@@ -96,6 +96,7 @@ The log likelihood function below has been adapted from the `start` example to i
 """
 from jax import numpy as np
 
+
 def log_likelihood_function(instance):
     """
     All Code illustrated in the `start` example:
@@ -109,9 +110,9 @@ def log_likelihood_function(instance):
     """
     obj = bulge
 
-    grid_radial_minimum = conf.instance["grids"]["radial_minimum"][
-        "radial_minimum"
-    ][obj.__class__.__name__]
+    grid_radial_minimum = conf.instance["grids"]["radial_minimum"]["radial_minimum"][
+        obj.__class__.__name__
+    ]
 
     grid_radii = obj.radial_grid_from(grid=grid)
 

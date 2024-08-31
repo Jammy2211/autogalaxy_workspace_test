@@ -122,4 +122,16 @@ difficult to implement in JAX, but we should investigate this.
 Computing `w_tilde` is slow, extremely slow, I suspect it could be minutes or hours even on a GPU depending on the
 data. There is a use case for the `mapping_matrix` method in interferometry, basically when a user has few visibilities
 but a lot of image pixels in the mask. We should therefore implement the `mapping_matrix` method in JAX for
-this use case, but it is not priority.
+this use case, but it is not priority. However, this may again be one of those thigns where because they have so
+little data, the `w_tilde` method is not actually that slow anyway.
+
+We will need to think carefully about how we persis the `w_tilde` matrix so that when a user inspects results
+after a HPC job, they do not have to wait for the `w_tilde` matrix to be recomputed.
+
+
+__Single Implementation__
+
+The dream is for both methods to have a single implementation even if that means imaging uses the `mapping_matrix`
+and interferometry uses the `w_tilde (1)` method. This will make the code simpler and easier to maintain.
+
+So, lets aim for that :D, and see if any perculiar use-cases or slow down require us to do otherwise.

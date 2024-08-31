@@ -103,6 +103,7 @@ The log likelihood function below has been adapted from the `start` example to i
 """
 from jax import numpy as np
 
+
 def log_likelihood_function(instance):
     """
     All Code illustrated in the `start` example:

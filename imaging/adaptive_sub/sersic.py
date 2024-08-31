@@ -41,17 +41,11 @@ galaxy = ag.Galaxy(
 """
 __Images__
 """
-grid = ag.Grid2D.uniform(
-    shape_native=(100, 100),
-    pixel_scales=0.01,
-    sub_size=4
-)
+grid = ag.Grid2D.uniform(shape_native=(100, 100), pixel_scales=0.01, sub_size=4)
 
 time_normal = time.time()
 
-image = galaxy.image_2d_from(
-    grid=grid
-).binned
+image = galaxy.image_2d_from(grid=grid).binned
 
 time_normal = time.time() - time_normal
 
@@ -64,9 +58,7 @@ grid = ag.Grid2DIterate.uniform(
     sub_steps=[2, 4, 8, 16],
 )
 
-image_adapt = galaxy.image_2d_from(
-    grid=grid
-)
+image_adapt = galaxy.image_2d_from(grid=grid)
 
 time_adapt = time.time() - time_normal
 
@@ -79,13 +71,19 @@ print(f"Residual Relative Max = {np.max(residuals_relative)}")
 
 plotter = aplt.Array2DPlotter(
     array=residuals,
-    mat_plot_2d=aplt.MatPlot2D(output=aplt.Output(filename="residuals", path=dataset_path, format="png")),
+    mat_plot_2d=aplt.MatPlot2D(
+        output=aplt.Output(filename="residuals", path=dataset_path, format="png")
+    ),
 )
 plotter.figure_2d()
 
 plotter = aplt.Array2DPlotter(
     array=residuals_relative,
-    mat_plot_2d=aplt.MatPlot2D(output=aplt.Output(filename="residuals_relative", path=dataset_path, format="png")),
+    mat_plot_2d=aplt.MatPlot2D(
+        output=aplt.Output(
+            filename="residuals_relative", path=dataset_path, format="png"
+        )
+    ),
 )
 plotter.figure_2d()
 

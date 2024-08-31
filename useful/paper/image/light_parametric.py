@@ -179,7 +179,7 @@ The search returns a result object, which includes:
 print(result.max_log_likelihood_instance)
 
 plane_plotter = aplt.GalaxiesPlotter(
-    galaxies=result.max_log_likelihood_galaxies, grid=result.grid
+    galaxies=result.max_log_likelihood_galaxies, grid=result.grids.uniform
 )
 plane_plotter.subplot()
 

@@ -63,9 +63,7 @@ dataset = ag.Imaging.from_fits(
     pixel_scales=0.1,
 )
 
-dataset = dataset.apply_over_sampling(
-    over_sampling=ag.OverSamplingUniform(sub_size=1)
-)
+dataset = dataset.apply_over_sampling(over_sampling=ag.OverSamplingUniform(sub_size=1))
 
 """
 Use an `ImagingPlotter` the plot the data, including: 
@@ -265,7 +263,7 @@ search = af.DynestyStatic(
     # n_live=1200,
     number_of_cores=1,
     iterations_per_update=10000,
-    force_x1_cpu=True
+    force_x1_cpu=True,
 )
 
 """
@@ -397,7 +395,7 @@ The `Result` object also contains:
 print(result.max_log_likelihood_instance)
 
 galaxies_plotter = aplt.GalaxiesPlotter(
-    galaxies=result.max_log_likelihood_galaxies, grid=result.grid
+    galaxies=result.max_log_likelihood_galaxies, grid=result.grids.uniform
 )
 galaxies_plotter.subplot()
 

@@ -112,7 +112,7 @@ search = af.DynestyStatic(
     nlive=100,
     iterations_per_update=25000,
     number_of_cores=1,
-    use_gradient=True
+    use_gradient=True,
 )
 
 """
@@ -150,7 +150,7 @@ The `Result` object also contains:
 print(result.max_log_likelihood_instance)
 
 plane_plotter = aplt.GalaxiesPlotter(
-    galaxies=result.max_log_likelihood_galaxies, grid=result.grid
+    galaxies=result.max_log_likelihood_galaxies, grid=result.grids.uniform
 )
 plane_plotter.subplot()
 
