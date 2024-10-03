@@ -63,8 +63,6 @@ dataset = ag.Imaging.from_fits(
     pixel_scales=0.1,
 )
 
-dataset = dataset.apply_over_sampling(over_sampling=ag.OverSamplingUniform(sub_size=1))
-
 """
 Use an `ImagingPlotter` the plot the data, including: 
 
@@ -88,6 +86,10 @@ mask = ag.Mask2D.circular(
 )
 
 dataset = dataset.apply_mask(mask=mask)
+
+dataset = dataset.apply_over_sampling(
+    over_sampling=ag.OverSamplingDataset(uniform=ag.OverSamplingUniform(sub_size=1))
+)
 
 """
 If we plot the masked data, the mask removes the exterior regions of the image where there is no emission from the 
@@ -252,7 +254,7 @@ so not slow down the overall speed of the model-fit.
 #     unique_tag=dataset_name,
 #     n_live=1200,
 #     number_of_cores=1,
-#     iterations_per_update=10000,
+#     iterations_per_update=100000,
 # )
 
 search = af.DynestyStatic(
@@ -262,7 +264,7 @@ search = af.DynestyStatic(
     use_gradient=True,
     # n_live=1200,
     number_of_cores=1,
-    iterations_per_update=10000,
+    iterations_per_update=100000,
     force_x1_cpu=True,
 )
 
