@@ -33,7 +33,8 @@ given by:
 
 The `curvature_matrix` is given by:
 
-`curvature_matrix = np.dot(blurred_mapping_matrix.T, blurred_mapping_matrix / noise_map ** 2.0)`
+array = blurred_mapping_matrix / noise_map[:, None]
+curvature_reg_matrix = np.dot(array.T, array)
 
 Using the NumPy arithmetic operations above is slower than the source code's current implementation, which uses a
 different sequence of linear algebra operations. I am hoping we can remove this method as its complex, and
@@ -95,6 +96,7 @@ https://github.com/Jammy2211/autogalaxy_workspace/blob/main/notebooks/imaging/ad
 # %cd $workspace_path
 # print(f"Working Directory has been set to `{workspace_path}`")
 
+import numpy as np
 import jax
 from jax import grad
 from os import path
@@ -142,6 +144,38 @@ bulge.centre.centre_1 = 0.1
 bulge.ell_comps.ell_comps_0 = 0.1
 bulge.ell_comps.ell_comps_1 = 0.2
 
+"""
+The Multi-Gaussian Expansion (MGE) method is below, which you can uncomment to use instead of the linear light profile
+and test the JAX conversion on a more complex problem.
+"""
+# total_gaussians = 180
+#
+# # The sigma values of the Gaussians will be fixed to values spanning 0.01 to the mask radius, 3.0".
+#
+# mask_radius = 3.0
+# log10_sigma_list = np.linspace(-2, np.log10(mask_radius), total_gaussians)
+#
+# # A list of linear light profile Gaussians will be input here, which will then be used to fit the data.
+#
+# basis_gaussian_list = []
+#
+# # Iterate over every Gaussian and create it, with it centered at (0.0", 0.0") and assuming spherical symmetry.
+#
+# for i in range(total_gaussians):
+#     gaussian = al.lp_linear.Gaussian(
+#         centre=(0.0, 0.0),
+#         ell_comps=(0.052, 0.0),
+#         sigma=10 ** log10_sigma_list[i],
+#     )
+#
+#     basis_gaussian_list.append(gaussian)
+#
+# basis = ag.lp_basis.Basis(profile_list=basis_gaussian_list)
+
+
+"""
+Put the final model together.
+"""
 galaxy = af.Model(ag.Galaxy, redshift=0.5, bulge=bulge)
 
 model = af.Collection(galaxies=af.Collection(galaxy=galaxy))
