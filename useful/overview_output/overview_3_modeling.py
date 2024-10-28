@@ -186,8 +186,8 @@ galaxy_model = af.Model(
     bulge=ag.lp.DevVaucouleurs,
     disk=ag.lp.Sersic,
     bar=ag.lp.Gaussian,
-    clump_0=ag.lp.ElsonFreeFall,
-    clump_1=ag.lp.ElsonFreeFall,
+    extra_galaxy_0=ag.lp.ElsonFreeFall,
+    extra_galaxy_1=ag.lp.ElsonFreeFall,
 )
 
 """

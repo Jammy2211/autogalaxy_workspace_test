@@ -12,7 +12,32 @@ A step-by-step guide of the likelihood function of a linear light profile is giv
 
 https://github.com/Jammy2211/autogalaxy_workspace/blob/main/notebooks/imaging/advanced/log_likelihood_function/linear_light_profile/log_likelihood_function.ipynb
 
+A step-by-step for the more involved Multi-Gaussian expansion, which uses 30+ linear light profiles, is given here:
+
+https://github.com/Jammy2211/autogalaxy_workspace/blob/main/notebooks/imaging/advanced/log_likelihood_function/multi_gaussian_expansion/log_likelihood_function.ipynb
+
 This task converts the linear light profile code to use JAX.
+
+__Matrix Construction__
+
+Thee examples above introduce two matrices, `data_vector` and `curvature_matrix`, which are used to perform the linear
+inversion. These matrices are constructed using the `blurred_mapping_matrix` and `noise_map` of the dataset.
+
+Currently, their construction is performed using for loops sped up via `numba`, which obviously cannot be used with
+JAX.
+
+However, both are simple matrix operations that can be performed using JAX's numpy functions. The `data_vector` is
+given by:
+
+`data_vector = np.dot(blurred_mapping_matrix.T, image / noise_map ** 2.0)`
+
+The `curvature_matrix` is given by:
+
+`curvature_matrix = np.dot(blurred_mapping_matrix.T, blurred_mapping_matrix / noise_map ** 2.0)`
+
+Using the NumPy arithmetic operations above is slower than the source code's current implementation, which uses a
+different sequence of linear algebra operations. I am hoping we can remove this method as its complex, and
+instead use the NumPy operations above.
 
 __Linear Solver__
 
@@ -46,6 +71,16 @@ This could be even more difficult to convert to JAX.
 This example is written assuming N linear light profiles are fitted, we should ensure our JAX
 implementation scales to the case of 300 linear light profiles, which is the maximum number of linear light profiles
 we realistically expect to fit in a model (e.g. an MGE).
+
+__Pixelized Source Reconstruction__
+
+Whilst we are not yet thinking directly about a pixelized source reconstruction, the fast non negative least squares
+method will ultimately be applied to linear inversions combining both many linear light profiles (e.g. MGE for
+lens light) and many source pixels (e.g. pixelized source reconstruction).
+
+In the script ?, I have included a script which loads matrices representing a standard linear inversion problem
+using both an MGE and source reconstruction. This is so you can test the run times of the JAX conversion on a
+realistic problem.
 
 Source code
 -----------
@@ -137,21 +172,52 @@ def log_likelihood_function(instance):
         regularization=None,
     )
 
-    # """
-    # Once the issue above is fixed, here is how the 2D convolution is performed:
-    # """
-    # model_data =
-    #
-    # """
-    # Here is where the 2D convolution is performed
-    # """
-    # residual_map = dataset.data - model_data
-    # chi_squared_map = (residual_map / dataset.noise_map) ** 2.0
-    # chi_squared = sum(chi_squared_map)
-    # # noise_normalization = np.sum(np.log(2 * np.pi * dataset.noise_map ** 2.0))
-    # log_likelihood = -0.5 * (chi_squared)
+    blurred_mapping_matrix = lp_linear_func.operated_mapping_matrix_override
 
-    # return log_likelihood
+    data_vector = ag.util.inversion_imaging.data_vector_via_blurred_mapping_matrix_from(
+        blurred_mapping_matrix=blurred_mapping_matrix,
+        image=np.array(dataset.data),
+        noise_map=np.array(dataset.noise_map),
+    )
+
+    curvature_matrix = ag.util.inversion.curvature_matrix_via_mapping_matrix_from(
+        mapping_matrix=blurred_mapping_matrix,
+        noise_map=dataset.noise_map,
+        add_to_curvature_diag=True,
+        no_regularization_index_list=list(len(lp_linear_func.light_profile_list)),
+    )
+
+    reconstruction = ag.util.inversion.reconstruction_positive_only_from(
+        data_vector=data_vector,
+        curvature_reg_matrix=curvature_matrix,  # ignore _reg_ tag in this guide
+    )
+
+    mapped_reconstructed_image_2d = (
+        ag.util.inversion.mapped_reconstructed_data_via_mapping_matrix_from(
+            mapping_matrix=blurred_mapping_matrix, reconstruction=reconstruction
+        )
+    )
+
+    mapped_reconstructed_image_2d = ag.Array2D(
+        values=mapped_reconstructed_image_2d, mask=dataset.mask
+    )
+
+    """
+    Once the issue above is fixed, here is how the 2D convolution is performed:
+    """
+    model_data = mapped_reconstructed_image_2d
+
+    """
+    Here is where the 2D convolution is performed
+    """
+    residual_map = dataset.data - model_data
+    chi_squared_map = (residual_map / dataset.noise_map) ** 2.0
+    chi_squared = sum(chi_squared_map)
+    noise_normalization = np.sum(np.log(2 * np.pi * dataset.noise_map ** 2.0))
+
+    figure_of_merit = float(-0.5 * (chi_squared + noise_normalization))
+
+    return figure_of_merit
 
 
 """

@@ -135,3 +135,24 @@ The dream is for both methods to have a single implementation even if that means
 and interferometry uses the `w_tilde (1)` method. This will make the code simpler and easier to maintain.
 
 So, lets aim for that :D, and see if any perculiar use-cases or slow down require us to do otherwise.
+
+
+
+__JAX Implementation Release Before Pixelization Development__
+
+We are likely to reach a point where we have JAX suuport for imaging and interferometry, but not for pixelizations.
+
+We will want to release the software with minimum disuption to the user, with full support for pixelizations.
+
+Run times are further hit now preloading is fully removed, as tasks like linear light profile convolutions are
+quite expensive to pair with source pixels.
+
+Basically, when we are ready to do a JAX release, we neeed to come up with a stop-gap solution for pixelization use.
+The best way to do this requires an assessment of what uses numba in the source coee, and what is the easiest way
+to remove all numba functions whilst ensuring pixelizations are still fast.
+
+This requires more thought cloer to the time when we understand the full extent of what our JAX code requires.
+
+The best stop-gap is probably one which uses JAX to speed up the low-hanging fruit (e.g. matrix multiplications)
+via `jax.jit` but does not support the full LH function and thus does not use `jax.grad` or yet provide optimal
+speed. This will likely remove w_tilde from imaging and only support `w_tilde (1)` for interferometry.

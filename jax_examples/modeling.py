@@ -32,7 +32,7 @@ The `Imaging` dataset fitted in this example confirms to a number of standard th
 **PyAutoGalaxy**.
 
 If you are intending to fit your own data, you will need to ensure it conforms to these standards, which are
-described in the script `autogalaxy_workspace/*/imaging/data_preparation/start_here.ipynb`.
+described in the script `autogalaxy_workspace/*/data_preparation/imaging/start_here.ipynb`.
 """
 # %matplotlib inline
 # from pyprojroot import here
@@ -71,8 +71,8 @@ Use an `ImagingPlotter` the plot the data, including:
  - `psf`: The point spread function of the image, which describes the blurring of the image by the telescope optics.
  - `signal_to_noise_map`: Quantifies the signal-to-noise in every pixel.
 """
-dataset_plotter = aplt.ImagingPlotter(dataset=dataset)
-dataset_plotter.subplot_dataset()
+# dataset_plotter = aplt.ImagingPlotter(dataset=dataset)
+# dataset_plotter.subplot_dataset()
 
 """
 __Mask__
@@ -98,8 +98,8 @@ galaxy.
 The mask used to fit the data can be customized, as described in 
 the script `autogalaxy_workspace/*/imaging/modeling/customize/custom_mask.py`
 """
-dataset_plotter = aplt.ImagingPlotter(dataset=dataset)
-dataset_plotter.subplot_dataset()
+# dataset_plotter = aplt.ImagingPlotter(dataset=dataset)
+# dataset_plotter.subplot_dataset()
 
 """
 __Over Sampling__
@@ -133,7 +133,7 @@ to the galaxy.
 
 __Model Cookbook__
 
-A full description of model composition, including model customization, is provided by the model cookbook: 
+A full description of model composition is provided by the model cookbook: 
 
 https://pyautogalaxy.readthedocs.io/en/latest/general/model_cookbook.html
 
@@ -446,7 +446,7 @@ sounds useful, but for most users you can get by without using these forms of cu
 __Data Preparation__
 
 If you are looking to fit your own CCD imaging data of a strong lens, checkout  
-the `autogalaxy_workspace/*/imaging/data_preparation/start_here.ipynb` script for an overview of how data should be 
+the `autogalaxy_workspace/*/data_preparation/imaging/start_here.ipynb` script for an overview of how data should be 
 prepared before being modeled.
 
 __HowToGalaxy__
