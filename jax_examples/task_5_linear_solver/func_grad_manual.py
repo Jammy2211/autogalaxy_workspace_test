@@ -10,11 +10,11 @@ the values of the `intensity` that best-fit the observed image.
 
 A step-by-step guide of the likelihood function of a linear light profile is given here:
 
-https://github.com/Jammy2211/autogalaxy_workspace/blob/main/notebooks/imaging/advanced/log_likelihood_function/linear_light_profile/log_likelihood_function.ipynb
+https://github.com/Jammy2211/autogalaxy_workspace/blob/main/notebooks/advanced/log_likelihood_function/imaging/linear_light_profile/log_likelihood_function.ipynb
 
 A step-by-step for the more involved Multi-Gaussian expansion, which uses 30+ linear light profiles, is given here:
 
-https://github.com/Jammy2211/autogalaxy_workspace/blob/main/notebooks/imaging/advanced/log_likelihood_function/multi_gaussian_expansion/log_likelihood_function.ipynb
+https://github.com/Jammy2211/autogalaxy_workspace/blob/main/notebooks/advanced/log_likelihood_function/imaging/multi_gaussian_expansion/log_likelihood_function.ipynb
 
 This task converts the linear light profile code to use JAX.
 
