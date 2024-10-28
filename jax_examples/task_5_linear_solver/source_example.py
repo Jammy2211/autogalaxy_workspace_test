@@ -2,7 +2,14 @@
 This example uses the fast non negative least squares method to solve for a linear system that includes
 both a Multi-Gaussian Expansion (MGE) and a pixelized source reconstruction.
 
-First, we
+It allows one to profile the run times for a realistic linear inversion, which fits both the lens light with an
+MGE and source with a pixelized source reconstruction. It allows you to do this without fully understanding
+the source pixelization calculation fully yet, which is complex and we'll get to later.
+
+You'll need to download the following .npy files for the linear matrices used in this example from the following
+Google Drive folder:
+
+https://drive.google.com/file/d/1UboXEakk3TX58VcX9CScswsZ7l-nyaQn/view?usp=sharing
 """
 import numpy as np
 import pathlib
