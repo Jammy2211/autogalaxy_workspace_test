@@ -51,7 +51,7 @@ sub-size of the grid is iteratively increased (in steps of 2, 4, 8, 16, 24) unti
 This ensures that the divergent and bright central regions of the galaxy are fully resolved when determining the
 total flux emitted within a pixel.
 """
-grid_2d = ag.Grid2DIterate.uniform(
+grid_2d = ag.Grid2DIterate.lp(
     shape_native=(150, 150),
     pixel_scales=0.05,
     fractional_accuracy=0.9999,
@@ -70,7 +70,7 @@ To simulate the `Imaging` dataset we first create a simulator, which defines the
 noise levels and psf of the dataset that is simulated.
 """
 simulator = ag.SimulatorImaging(
-    exposure_time=300.0, psf=psf, background_sky_level=0.1, add_poisson_noise=True
+    exposure_time=300.0, psf=psf, background_sky_level=0.1, add_poisson_noise_to_data=True
 )
 
 """

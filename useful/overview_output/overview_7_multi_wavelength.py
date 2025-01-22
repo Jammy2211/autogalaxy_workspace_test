@@ -221,7 +221,7 @@ for result, color in zip(result_list, color_list):
 
     galaxy_plotter = aplt.GalaxyPlotter(
         galaxy=result.max_log_likelihood_galaxies[0],
-        grid=result.grids.uniform,
+        grid=result.grids.lp,
         mat_plot_2d=mat_plot_2d,
     )
     galaxy_plotter.subplot_of_light_profiles(image=True)

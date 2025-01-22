@@ -79,7 +79,7 @@ Whereas before we have referred to this matrix as the `curvature_matrix`, we hav
 that it is the curvature matrix with regularization applied. This regularization is necessary to ensure the matrix is
 positive-definite and thus solvable.
 """
-#curvature_reg_matrix = np.load(matrices_path / "curvature_reg_matrix.npy")
+curvature_reg_matrix = np.load(matrices_path / "curvature_reg_matrix.npy")
 
 #print(curvature_reg_matrix.shape)
 
@@ -91,15 +91,15 @@ Note that this also requires us to load and apply the regularization matrix asso
 which we have not described in the other example scripts for simplicity. Basically, just ignore it for now
 but know it exists.
 """
-curvature_reg_matrix = al.util.inversion.curvature_matrix_via_mapping_matrix_from(
-    mapping_matrix=blurred_mapping_matrix,
-    noise_map=noise_map,
-    add_to_curvature_diag=True,
-    no_regularization_index_list=list(range(180)),
-)
+# curvature_reg_matrix = al.util.inversion.curvature_matrix_via_mapping_matrix_from(
+#     mapping_matrix=blurred_mapping_matrix,
+#     noise_map=noise_map,
+#     add_to_curvature_diag=True,
+#     no_regularization_index_list=list(range(180)),
+# )
 
-regularization_matrix = np.load(matrices_path / "regularization_matrix.npy")
-curvature_reg_matrix += regularization_matrix
+# regularization_matrix = np.load(matrices_path / "regularization_matrix.npy")
+# curvature_reg_matrix += regularization_matrix
 
 """
 We can optionally validate that the `curvature_reg_matrix` computed via the numpy artimetic is the same as the

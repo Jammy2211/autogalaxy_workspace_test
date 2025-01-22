@@ -150,7 +150,7 @@ The `Result` object also contains:
 print(result.max_log_likelihood_instance)
 
 plane_plotter = aplt.GalaxiesPlotter(
-    galaxies=result.max_log_likelihood_galaxies, grid=result.grids.uniform
+    galaxies=result.max_log_likelihood_galaxies, grid=result.grids.lp
 )
 plane_plotter.subplot()
 

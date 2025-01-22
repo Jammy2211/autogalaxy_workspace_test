@@ -56,7 +56,7 @@ and accounting for the background sky in the exposure which adds Poisson noise.
 psf = ag.Kernel2D.from_gaussian(shape_native=(11, 11), sigma=0.1, pixel_scales=0.05)
 
 simulator = ag.SimulatorImaging(
-    exposure_time=300.0, background_sky_level=1.0, psf=psf, add_poisson_noise=True
+    exposure_time=300.0, background_sky_level=1.0, psf=psf, add_poisson_noise_to_data=True
 )
 
 """

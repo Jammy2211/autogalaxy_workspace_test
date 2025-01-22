@@ -51,7 +51,7 @@ time_normal = time.time() - time_normal
 
 time_adapt = time.time()
 
-grid = ag.Grid2DIterate.uniform(
+grid = ag.Grid2DIterate.lp(
     shape_native=grid.shape_native,
     pixel_scales=grid.pixel_scales,
     fractional_accuracy=0.9999,

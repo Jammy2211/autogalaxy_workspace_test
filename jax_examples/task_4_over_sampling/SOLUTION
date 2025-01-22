@@ -1,0 +1,13 @@
+Only support single `sub_size` adaptive grid (e.g. all 4s or adaptive), BUT A USER HAS TO SET THIS UP, removing:
+
+- Automatic generation of adaptive grids via light model / profile centers.
+- Decorators in Tracer with crazy plane over sampling.
+- Remove complex config and just default to 32, 4, 1.
+
+Documentation in workspace should make it clear a user has to choose over sampling, especially for multi galaxy
+examples.
+
+Simulator scripts will need especially clear documentation and good methods for this, especially for strong lenses.
+
+
+Make adaptive one day.

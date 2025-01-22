@@ -106,7 +106,7 @@ def log_likelihood_function(instance):
     Create the uniform over sampling object, which is used to create the over sampled grid on which the light profile
     is evaluated.
     """
-    over_sampling = ag.OverSamplingUniform(sub_size=2)
+    over_sampling = ag.OverSampling(sub_size=2)
 
     over_sampler = over_sampling.over_sampler_from(mask=dataset.mask)
 

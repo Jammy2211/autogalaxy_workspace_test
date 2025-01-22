@@ -63,7 +63,7 @@ dataset = ag.Interferometer.from_fits(
     uv_wavelengths_path=path.join(dataset_path, "uv_wavelengths.fits"),
     real_space_mask=real_space_mask,
     transformer_class=ag.TransformerDFT,
-    over_sampling=ag.OverSamplingDataset(uniform=ag.OverSamplingUniform(sub_size=1)),
+    over_sample_size_lp=1,
 )
 
 """

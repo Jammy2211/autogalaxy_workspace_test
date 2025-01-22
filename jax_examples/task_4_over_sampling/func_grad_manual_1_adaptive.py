@@ -17,7 +17,7 @@ This is the code that is important:
         if isinstance(grid, Grid2D):
             if grid.over_sampling is None:
                 if grid.is_uniform:
-                    over_sampling = OverSamplingUniform.from_adaptive_scheme(
+                    over_sampling = OverSampling.over_sample_size_via_adaptive_scheme_from(
                         grid=grid,
                         name=obj.__class__.__name__,
                         centre=obj.centre,
@@ -30,7 +30,7 @@ This is the code that is important:
 Basically, if a user inputs a 2D grid, has not manually set the over sampling, and the grid is uniform, then adaptive
 over sampling is performed, which is the default behavior.
 
-The method `from_adaptive_scheme` uses the light profile centre and  config files to determine the level of over
+The method `over_sample_size_via_adaptive_scheme_from` uses the light profile centre and  config files to determine the level of over
 sampling that should be used for the light profile. Typically, inner 3 * pixels receive over sampling of 32 x 32,
 whereas the outer regions receive 4 x 4, and very outer regions receive no over sampling.
 
@@ -60,6 +60,38 @@ independently, which is a powerful feature. However, ensuring the array sizes do
 It is also a lot more difficult for a user to specify the over sampling of each galaxy manually.
 
 I am open to suggestions on how to handle this, but for now we'll just focus on the single galaxy case.
+
+Reasoning
+---------
+
+It got quite confusing why adaptive oversampling is required, so I wrote a summary:
+
+1) Adaptive Requirement: For extreme Sersic profiles, over sampling of 32 x 32 or more may be required (unless
+the central pixel is treated separately). Its slow and undesirable to use 32 x 32 over sampling in every pixel,
+therefore an adaptive scheme which uses 32 x 32 in the centre, 4 x 4 futher out, and 2 x2 everywhere else is used.
+Pixelized sources also require high over sampling in the lensed source's brightest regions, and this ends up slowing
+things like Voronoi calculations down, again benefitting from something adaptive.
+
+2) When non-linear sampling is not being performed and there is no lensing: a user should be able to
+evaluate Galaxies.image_2d_from() and be confident that all light profiles have been evaluated with a high degree of
+over sampling. Therefore, the code uses the centre of each light profile to create the 32 / 4 /2 adaptive over
+sampling grid, and evaluate each light profile accordingly. This is efficient and accuracy.
+
+3) When non linear sampling IS being performed with no lensing: the code currently just uses the implementation
+above, however this does not play nicely with JAX due to varying array sizes. I think the dictionary mapping light
+profile model components to adaptive over sampling grids, which are computed via the prior on the centre of each
+light profile, is required here.
+
+4) When non-linear sampling is not being performed and there IS lensing: a user should be able to
+evaluate Tracer.image_2d_from() and be confident all light profiles are evaluated accurately, including those which
+are lensed. I did not try and make an adaptive scheme for this (thank god) and just used cored Sersics in the source
+plane. I am worried that for extreme Sersics + high magnification over sampling above 32 x 32 may be required in each
+multiple image, motivating a robust adaptive scheme.
+
+5) Non linear sampling AND lensing: A user can input a fixed over sampling grid called non_uniform which they derive
+from a previous lens model, so it can have 32 x 32 over sampled pixels in each of the multiple images. If a dictionary
+mapping model components to adaptive over sampling were implemented, this non_uniform over sampling grid could instead
+be built into that.
 
 Lensing
 -------
@@ -144,7 +176,7 @@ def log_likelihood_function(instance):
     Create the uniform over sampling object, which is used to create the over sampled grid on which the light profile
     is evaluated.
     """
-    over_sampling = ag.OverSamplingUniform(sub_size=2)
+    over_sampling = ag.OverSampling(sub_size=2)
 
     over_sampler = over_sampling.over_sampler_from(mask=dataset.mask)
 
@@ -162,7 +194,7 @@ def log_likelihood_function(instance):
 
     grid = dataset.grid
 
-    over_sampling = ag.OverSamplingUniform.from_adaptive_scheme(
+    over_sampling = ag.OverSampling.over_sample_size_via_adaptive_scheme_from(
         grid=grid,
         name=bulge.__class__.__name__,
         centre=bulge.centre,

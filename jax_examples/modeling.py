@@ -88,7 +88,7 @@ mask = ag.Mask2D.circular(
 dataset = dataset.apply_mask(mask=mask)
 
 dataset = dataset.apply_over_sampling(
-    over_sampling=ag.OverSamplingDataset(uniform=ag.OverSamplingUniform(sub_size=1))
+    over_sample_size_lp=1
 )
 
 """
@@ -96,7 +96,7 @@ If we plot the masked data, the mask removes the exterior regions of the image w
 galaxy.
 
 The mask used to fit the data can be customized, as described in 
-the script `autogalaxy_workspace/*/imaging/modeling/customize/custom_mask.py`
+the script `autogalaxy_workspace/*/modeling/imaging/customize/custom_mask.py`
 """
 # dataset_plotter = aplt.ImagingPlotter(dataset=dataset)
 # dataset_plotter.subplot_dataset()
@@ -144,7 +144,7 @@ The model fitting default settings assume that the galaxy centre is near the coo
 If for your dataset the galaxy is not centred at (0.0", 0.0"), we recommend that you either: 
 
  - Reduce your data so that the centre is (`autogalaxy_workspace/*/preprocess`). 
- - Manually override the model priors (`autogalaxy_workspace/*/imaging/modeling/customize/priors.py`).
+ - Manually override the model priors (`autogalaxy_workspace/*/modeling/imaging/customize/priors.py`).
 """
 bulge = af.Model(ag.lp.Sersic)
 
@@ -231,7 +231,7 @@ correctly, requiring a Python script to be run, often from a command line termin
 
 To fix these issues, the Python script needs to be adapted to use an `if __name__ == "__main__":` API, as this allows
 the Python `multiprocessing` module to allocate threads and jobs correctly. An adaptation of this example script 
-is provided at `autolens_workspace/scripts/imaging/modeling/customize/parallel.py`, which will hopefully run 
+is provided at `autolens_workspace/scripts/modeling/imaging/customize/parallel.py`, which will hopefully run 
 successfully in parallel on your computer!
 
 Therefore if paralellization for this script doesn't work, check out the `parallel.py` example. You will need to update
@@ -397,7 +397,7 @@ The `Result` object also contains:
 print(result.max_log_likelihood_instance)
 
 galaxies_plotter = aplt.GalaxiesPlotter(
-    galaxies=result.max_log_likelihood_galaxies, grid=result.grids.uniform
+    galaxies=result.max_log_likelihood_galaxies, grid=result.grids.lp
 )
 galaxies_plotter.subplot()
 
@@ -439,7 +439,7 @@ We recommend you now checkout the following feature:
 All other features may be useful to specific users with specific datasets and scientific goals, but are not useful
 for general modeling.
 
-The folders `autogalaxy_workspace/*/imaging/modeling/searches` and `autogalaxy_workspace/*/imaging/modeling/customize`
+The folders `autogalaxy_workspace/*/imaging/modeling/searches` and `autogalaxy_workspace/*/modeling/imaging/customize`
 provide guides on how to customize many other aspects of the model-fit. Check them out to see if anything
 sounds useful, but for most users you can get by without using these forms of customization!
   

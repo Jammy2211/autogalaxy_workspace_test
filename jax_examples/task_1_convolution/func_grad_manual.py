@@ -164,7 +164,7 @@ def log_likelihood_function(instance):
         
         `blurring_grid` -> `blurring_grid_via_kernel_shape_from`
 
-    The grid is passed an `OverSamplingUniform` object, which JAX does not like.
+    The grid is passed an `OverSampling` object, which JAX does not like.
         
     This object basically sets over sampling to only use a `sub_size` of 1.    
     """

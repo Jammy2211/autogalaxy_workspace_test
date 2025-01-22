@@ -199,7 +199,7 @@ def log_likelihood_function(instance):
     Create the `LightProfileLinearObjFuncList` that is used to perform the linear inversion.
     """
     lp_linear_func = ag.LightProfileLinearObjFuncList(
-        grid=dataset.grids.uniform,
+        grid=dataset.grids.lp,
         blurring_grid=dataset.grids.blurring,
         convolver=dataset.convolver,
         light_profile_list=[bulge],
