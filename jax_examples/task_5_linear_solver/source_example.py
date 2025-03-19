@@ -98,7 +98,6 @@ but know it exists.
 #     no_regularization_index_list=list(range(180)),
 # )
 
-# regularization_matrix = np.load(matrices_path / "regularization_matrix.npy")
 # curvature_reg_matrix += regularization_matrix
 
 """
@@ -130,8 +129,9 @@ reconstruction = al.util.inversion.reconstruction_positive_only_from(
 print(reconstruction)
 
 """
-I compare this to the saved reconstruction from the source code, which is loaded below, in order to make sure
-the same solution is being computed.
+__Reconstruction__
+
+Compuare to the reconstruction computed via the source code.
 """
 reconstruction_truth = np.load(matrices_path / "reconstruction.npy")
 
@@ -139,3 +139,53 @@ print(reconstruction_truth)
 
 print(np.max(np.abs(reconstruction - reconstruction_truth)))
 
+
+"""
+__Likelihood__
+
+The following code computes the likelihood of the model data given the reconstruction, which is the overall
+figure-of-merit the `fnnls` is trying to maximize.
+
+It is composed of three terms:
+
+- `chi_squared` is the difference between the model data and the data, which is weighted by the noise-map.
+
+- `noise_normalization` is the overall normalization term for the noise in the data.
+
+- `regularization_term` is the regularization term that is applied to the solution to prevent over-fitting, which is
+  the sum of the difference between fluxes of all source-pixels.
+"""
+# Chi Squared
+
+mapped_reconstructed_image_2d = (
+    al.util.inversion.mapped_reconstructed_data_via_mapping_matrix_from(
+        mapping_matrix=blurred_mapping_matrix, reconstruction=reconstruction
+    )
+)
+
+model_image = mapped_reconstructed_image_2d
+
+residual_map = data - model_image
+normalized_residual_map = residual_map / noise_map
+chi_squared_map = normalized_residual_map**2.0
+
+chi_squared = np.sum(chi_squared_map)
+
+# Regularization
+
+regularization_matrix = np.load(matrices_path / "regularization_matrix.npy")
+
+regularization_term = np.matmul(
+    reconstruction.T, np.matmul(regularization_matrix, reconstruction)
+)
+
+# Noise Normalization
+
+noise_normalization = float(np.sum(np.log(2 * np.pi * noise_map**2.0)))
+
+# Overall vluoe of the likelihood
+
+log_likelihood = -0.5 * (chi_squared + regularization_term + noise_normalization)
+
+
+print(log_likelihood)

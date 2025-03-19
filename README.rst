@@ -23,4 +23,4 @@ You can run an integration test as follows:
 Workspace Version
 =================
 
-This version of the workspace are built and tested for using **PyAutoGalaxy v2024.11.6.1**.
+This version of the workspace are built and tested for using **PyAutoGalaxy v2025.1.18.7**.
